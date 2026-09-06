@@ -6,10 +6,9 @@
 
 <title>AI Incident Analyzer | Jessica Monteiro</title>
 
-<meta name="description" content="AI Incident Analyzer - Inteligência para análise e classificação de incidentes.">
+<meta name="description" content="AI Incident Analyzer - análise inteligente de incidentes.">
 
 <style>
-
 *{
     margin:0;
     padding:0;
@@ -28,7 +27,6 @@
     --green:#22c55e;
     --yellow:#f59e0b;
     --red:#ef4444;
-    --purple:#a855f7;
 }
 
 body{
@@ -58,7 +56,6 @@ button{
     background:#080d15;
     border-right:1px solid var(--border);
     padding:25px 18px;
-    z-index:10;
 }
 
 .logo{
@@ -76,7 +73,7 @@ button{
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:21px;
+    font-size:20px;
     font-weight:800;
     color:#041019;
 }
@@ -148,7 +145,6 @@ button{
     justify-content:space-between;
     padding:0 34px;
     background:rgba(7,11,18,.92);
-    backdrop-filter:blur(12px);
 }
 
 .topbar-title{
@@ -279,7 +275,6 @@ textarea{
     outline:none;
     font-size:14px;
     line-height:1.7;
-    transition:.2s;
 }
 
 textarea:focus{
@@ -313,7 +308,6 @@ textarea::placeholder{
 
 .btn-primary:hover{
     transform:translateY(-1px);
-    box-shadow:0 8px 25px rgba(34,211,238,.18);
 }
 
 .btn-secondary{
@@ -324,7 +318,6 @@ textarea::placeholder{
 
 .btn-secondary:hover{
     color:#fff;
-    border-color:#33465d;
 }
 
 /* RESULTS */
@@ -447,7 +440,6 @@ textarea::placeholder{
     color:white;
     font-weight:800;
     font-size:12px;
-    letter-spacing:.3px;
     transition:.2s;
 }
 
@@ -630,8 +622,6 @@ textarea::placeholder{
 
 <body>
 
-<!-- SIDEBAR -->
-
 <aside class="sidebar">
 
     <div class="logo">
@@ -653,8 +643,8 @@ textarea::placeholder{
 
     <nav class="nav">
 
-        <!-- VOLTA PARA O INCIDENT MANAGER -->
-        <a href="../../">
+        <!-- LINK ABSOLUTO PARA O INCIDENT MANAGER -->
+        <a href="/incident-manager/">
             🖥️
             <span>Incident Manager</span>
         </a>
@@ -686,8 +676,6 @@ textarea::placeholder{
 
 </aside>
 
-
-<!-- MAIN -->
 
 <main class="main">
 
@@ -737,8 +725,6 @@ textarea::placeholder{
 
         <div class="grid">
 
-            <!-- ANALYZER -->
-
             <div class="card">
 
                 <div class="card-header">
@@ -782,8 +768,6 @@ O servidor principal está indisponível e todos os usuários estão sem acesso 
 
                 </div>
 
-
-                <!-- RESULTS -->
 
                 <div class="results">
 
@@ -853,8 +837,6 @@ O servidor principal está indisponível e todos os usuários estão sem acesso 
                 </div>
 
 
-                <!-- CONFIDENCE -->
-
                 <div class="confidence">
 
                     <div class="confidence-top">
@@ -881,8 +863,6 @@ O servidor principal está indisponível e todos os usuários estão sem acesso 
                 </div>
 
 
-                <!-- RECOMMENDATION -->
-
                 <div class="recommendation">
 
                     <div class="recommendation-title">
@@ -899,8 +879,6 @@ O servidor principal está indisponível e todos os usuários estão sem acesso 
                 </div>
 
 
-                <!-- CREATE INCIDENT -->
-
                 <div class="create-area">
 
                     <button
@@ -914,8 +892,6 @@ O servidor principal está indisponível e todos os usuários estão sem acesso 
 
             </div>
 
-
-            <!-- RIGHT SIDE -->
 
             <div>
 
@@ -1043,8 +1019,6 @@ O servidor principal está indisponível e todos os usuários estão sem acesso 
                 </div>
 
 
-                <!-- HISTORY -->
-
                 <div
                     class="card history"
                     id="history"
@@ -1102,19 +1076,10 @@ O servidor principal está indisponível e todos os usuários estão sem acesso 
 
 <script>
 
-/* =========================================================
-   CONFIGURAÇÃO
-========================================================= */
-
 const QUEUE_KEY = "incidentManagerAIQueue";
 const HISTORY_KEY = "incidentAnalyzerHistory";
 
 let lastAnalysis = null;
-
-
-/* =========================================================
-   ELEMENTOS
-========================================================= */
 
 const descriptionInput =
     document.getElementById("incidentDescription");
@@ -1144,10 +1109,6 @@ const historyList =
     document.getElementById("historyList");
 
 
-/* =========================================================
-   ANALISAR INCIDENTE
-========================================================= */
-
 function analyzeIncident(){
 
     const description =
@@ -1164,17 +1125,11 @@ function analyzeIncident(){
         return;
     }
 
-
     const text =
         description.toLowerCase();
 
 
-    /* =========================
-       CATEGORIA
-    ========================= */
-
-    let category =
-        "Aplicação";
+    let category = "Aplicação";
 
 
     if(
@@ -1186,8 +1141,7 @@ function analyzeIncident(){
         text.includes("indisponivel")
     ){
 
-        category =
-            "Infraestrutura";
+        category = "Infraestrutura";
 
     }
 
@@ -1198,8 +1152,7 @@ function analyzeIncident(){
         text.includes("query")
     ){
 
-        category =
-            "Banco de Dados";
+        category = "Banco de Dados";
 
     }
 
@@ -1208,12 +1161,10 @@ function analyzeIncident(){
         text.includes("login") ||
         text.includes("autenticação") ||
         text.includes("autenticacao") ||
-        text.includes("acesso não autorizado") ||
         text.includes("segurança")
     ){
 
-        category =
-            "Segurança";
+        category = "Segurança";
 
     }
 
@@ -1227,8 +1178,7 @@ function analyzeIncident(){
         text.includes("wifi")
     ){
 
-        category =
-            "Rede";
+        category = "Rede";
 
     }
 
@@ -1236,23 +1186,15 @@ function analyzeIncident(){
         text.includes("integração") ||
         text.includes("integracao") ||
         text.includes("api") ||
-        text.includes("webhook") ||
-        text.includes("serviço externo") ||
-        text.includes("servico externo")
+        text.includes("webhook")
     ){
 
-        category =
-            "Integração";
+        category = "Integração";
 
     }
 
 
-    /* =========================
-       PRIORIDADE
-    ========================= */
-
-    let priority =
-        "Baixo";
+    let priority = "Baixo";
 
 
     if(
@@ -1268,8 +1210,7 @@ function analyzeIncident(){
         text.includes("urgente")
     ){
 
-        priority =
-            "Crítico";
+        priority = "Crítico";
 
     }
 
@@ -1282,8 +1223,7 @@ function analyzeIncident(){
         text.includes("indisponibilidade")
     ){
 
-        priority =
-            "Alto";
+        priority = "Alto";
 
     }
 
@@ -1295,18 +1235,12 @@ function analyzeIncident(){
         text.includes("problema")
     ){
 
-        priority =
-            "Médio";
+        priority = "Médio";
 
     }
 
 
-    /* =========================
-       IMPACTO
-    ========================= */
-
-    let impact =
-        "Baixo";
+    let impact = "Baixo";
 
 
     if(
@@ -1315,8 +1249,7 @@ function analyzeIncident(){
         text.includes("todos os usuarios")
     ){
 
-        impact =
-            "Alto";
+        impact = "Alto";
 
     }
 
@@ -1325,18 +1258,12 @@ function analyzeIncident(){
         priority === "Médio"
     ){
 
-        impact =
-            "Médio";
+        impact = "Médio";
 
     }
 
 
-    /* =========================
-       CONFIANÇA
-    ========================= */
-
-    let confidence =
-        76;
+    let confidence = 76;
 
 
     if(
@@ -1344,8 +1271,7 @@ function analyzeIncident(){
         priority === "Crítico"
     ){
 
-        confidence =
-            96;
+        confidence = 96;
 
     }
 
@@ -1353,8 +1279,7 @@ function analyzeIncident(){
         category === "Infraestrutura"
     ){
 
-        confidence =
-            91;
+        confidence = 91;
 
     }
 
@@ -1363,8 +1288,7 @@ function analyzeIncident(){
         category === "Segurança"
     ){
 
-        confidence =
-            89;
+        confidence = 89;
 
     }
 
@@ -1373,15 +1297,10 @@ function analyzeIncident(){
         category === "Integração"
     ){
 
-        confidence =
-            86;
+        confidence = 86;
 
     }
 
-
-    /* =========================
-       RECOMENDAÇÃO
-    ========================= */
 
     let recommendation =
         "Investigue o incidente, valide os logs e registre todas as ações realizadas.";
@@ -1431,33 +1350,18 @@ function analyzeIncident(){
     }
 
 
-    /* =========================
-       SALVAR RESULTADO
-    ========================= */
-
     lastAnalysis = {
 
         description,
-
         category,
-
         priority,
-
         impact,
-
         confidence,
-
         recommendation,
-
-        analyzedAt:
-            new Date().toISOString()
+        analyzedAt: new Date().toISOString()
 
     };
 
-
-    /* =========================
-       ATUALIZAR INTERFACE
-    ========================= */
 
     categoryElement.textContent =
         category;
@@ -1480,11 +1384,9 @@ function analyzeIncident(){
     recommendationElement.textContent =
         recommendation;
 
-
     priorityElement.className =
         "metric-value " +
         getPriorityClass(priority);
-
 
     saveHistory(lastAnalysis);
 
@@ -1496,10 +1398,6 @@ function analyzeIncident(){
 
 }
 
-
-/* =========================================================
-   CLASSE DE PRIORIDADE
-========================================================= */
 
 function getPriorityClass(priority){
 
@@ -1516,10 +1414,6 @@ function getPriorityClass(priority){
 
 }
 
-
-/* =========================================================
-   CRIAR INCIDENTE
-========================================================= */
 
 function createIncident(){
 
@@ -1540,46 +1434,44 @@ function createIncident(){
 
 
     const aiId =
-        "AI-" +
-        Date.now();
+        "AI-" + Date.now();
 
 
-    const incident =
-        {
+    const incident = {
 
-            aiId,
+        aiId,
 
-            title:
-                createTitle(lastAnalysis.description),
+        title:
+            createTitle(lastAnalysis.description),
 
-            description:
-                lastAnalysis.description,
+        description:
+            lastAnalysis.description,
 
-            category:
-                lastAnalysis.category,
+        category:
+            lastAnalysis.category,
 
-            priority:
-                lastAnalysis.priority,
+        priority:
+            lastAnalysis.priority,
 
-            impact:
-                lastAnalysis.impact,
+        impact:
+            lastAnalysis.impact,
 
-            confidence:
-                lastAnalysis.confidence,
+        confidence:
+            lastAnalysis.confidence,
 
-            status:
-                "Aberto",
+        status:
+            "Aberto",
 
-            responsible:
-                "JM",
+        responsible:
+            "JM",
 
-            source:
-                "AI Incident Analyzer",
+        source:
+            "AI Incident Analyzer",
 
-            createdAt:
-                new Date().toISOString()
+        createdAt:
+            new Date().toISOString()
 
-        };
+    };
 
 
     queue.push(incident);
@@ -1598,17 +1490,18 @@ function createIncident(){
 
     setTimeout(function(){
 
+        /*
+         * CAMINHO ABSOLUTO
+         * Volta diretamente para:
+         * https://jessicamchagas.github.io/incident-manager/
+         */
         window.location.href =
-            "../../";
+            "/incident-manager/";
 
     },900);
 
 }
 
-
-/* =========================================================
-   GERAR TÍTULO
-========================================================= */
 
 function createTitle(description){
 
@@ -1674,10 +1567,6 @@ function createTitle(description){
 }
 
 
-/* =========================================================
-   HISTÓRICO
-========================================================= */
-
 function saveHistory(analysis){
 
     const history =
@@ -1686,26 +1575,16 @@ function saveHistory(analysis){
         );
 
 
-    history.unshift(
-        analysis
-    );
-
-
-    const limited =
-        history.slice(0,10);
+    history.unshift(analysis);
 
 
     localStorage.setItem(
         HISTORY_KEY,
-        JSON.stringify(limited)
+        JSON.stringify(history.slice(0,10))
     );
 
 }
 
-
-/* =========================================================
-   RENDER HISTÓRICO
-========================================================= */
 
 function renderHistory(){
 
@@ -1740,13 +1619,11 @@ function renderHistory(){
                     </div>
 
                     <div class="history-meta">
-
                         ${escapeHTML(item.category)}
                         •
                         ${escapeHTML(item.priority)}
                         •
                         ${item.confidence}% confiança
-
                     </div>
 
                 </div>
@@ -1758,32 +1635,21 @@ function renderHistory(){
 }
 
 
-/* =========================================================
-   LIMPAR
-========================================================= */
-
 function clearAnalyzer(){
 
-    descriptionInput.value =
-        "";
+    descriptionInput.value = "";
 
-    categoryElement.textContent =
-        "—";
+    categoryElement.textContent = "—";
 
-    priorityElement.textContent =
-        "—";
+    priorityElement.textContent = "—";
 
-    impactElement.textContent =
-        "—";
+    impactElement.textContent = "—";
 
-    statusElement.textContent =
-        "Aguardando";
+    statusElement.textContent = "Aguardando";
 
-    confidenceElement.textContent =
-        "0%";
+    confidenceElement.textContent = "0%";
 
-    confidenceBar.style.width =
-        "0%";
+    confidenceBar.style.width = "0%";
 
     recommendationElement.textContent =
         "Aguardando análise do incidente.";
@@ -1791,28 +1657,20 @@ function clearAnalyzer(){
     priorityElement.className =
         "metric-value";
 
-    lastAnalysis =
-        null;
+    lastAnalysis = null;
 
 }
 
-
-/* =========================================================
-   TOAST
-========================================================= */
 
 function showToast(message){
 
     const toast =
         document.getElementById("toast");
 
-
     toast.textContent =
         message;
 
-
     toast.classList.add("show");
-
 
     setTimeout(function(){
 
@@ -1822,10 +1680,6 @@ function showToast(message){
 
 }
 
-
-/* =========================================================
-   SEGURANÇA BÁSICA PARA HISTÓRICO
-========================================================= */
 
 function escapeHTML(text){
 
@@ -1839,16 +1693,8 @@ function escapeHTML(text){
 }
 
 
-/* =========================================================
-   INICIALIZAÇÃO
-========================================================= */
-
 renderHistory();
 
-
-/* =========================================================
-   ENTER NO TEXTAREA
-========================================================= */
 
 descriptionInput.addEventListener(
     "keydown",
