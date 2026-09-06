@@ -13,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
+
 * {
     margin: 0;
     padding: 0;
@@ -25,6 +26,7 @@
     --card: #0a1018;
     --card2: #0e1620;
     --border: #172433;
+
     --text: #f2f8ff;
     --muted: #7f91a5;
     --muted2: #526477;
@@ -92,6 +94,7 @@ button {
     width: 40px;
     height: 40px;
     border-radius: 11px;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -108,9 +111,6 @@ button {
     box-shadow:
         0 8px 30px rgba(0,217,255,.28),
         0 0 18px rgba(0,217,255,.12);
-
-    position: relative;
-    overflow: hidden;
 }
 
 .brand-text h1 {
@@ -127,9 +127,12 @@ button {
 .menu-label {
     padding: 0 10px;
     margin: 10px 0 9px;
+
     color: var(--muted2);
+
     font-size: 9px;
     font-weight: 700;
+
     text-transform: uppercase;
     letter-spacing: 1.2px;
 }
@@ -144,15 +147,23 @@ button {
     display: flex;
     align-items: center;
     gap: 12px;
+
     width: 100%;
+
     padding: 11px 12px;
+
     border: 0;
     border-radius: 9px;
+
     background: transparent;
+
     color: var(--muted);
+
     text-decoration: none;
+
     font-size: 13px;
     text-align: left;
+
     transition: .2s;
 }
 
@@ -216,22 +227,31 @@ button {
 
 .topbar {
     height: 72px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     padding: 0 32px;
+
     border-bottom: 1px solid var(--border);
+
     background: rgba(5,8,13,.92);
+
     backdrop-filter: blur(14px);
+
     position: sticky;
     top: 0;
+
     z-index: 40;
 }
 
 .breadcrumb {
     display: flex;
     gap: 8px;
+
     color: var(--muted);
+
     font-size: 12px;
 }
 
@@ -249,14 +269,18 @@ button {
     display: flex;
     align-items: center;
     gap: 7px;
+
     color: #8194a8;
+
     font-size: 10px;
 }
 
 .status-dot {
     width: 7px;
     height: 7px;
+
     border-radius: 50%;
+
     background: var(--success);
 
     box-shadow:
@@ -267,14 +291,20 @@ button {
 .notification {
     width: 34px;
     height: 34px;
+
     border: 1px solid var(--border);
     border-radius: 8px;
+
     background: #0a1018;
+
     color: var(--muted);
+
     display: flex;
     justify-content: center;
     align-items: center;
+
     position: relative;
+
     transition: .2s;
 }
 
@@ -287,12 +317,17 @@ button {
     position: absolute;
     top: -5px;
     right: -5px;
+
     background: var(--danger);
     color: white;
+
     width: 15px;
     height: 15px;
+
     border-radius: 50%;
+
     font-size: 8px;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -301,6 +336,7 @@ button {
 .profile {
     width: 34px;
     height: 34px;
+
     border-radius: 50%;
 
     background: linear-gradient(
@@ -314,14 +350,12 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+
     font-size: 10px;
     font-weight: 800;
 
     box-shadow:
         0 0 18px rgba(0,217,255,.18);
-
-    position: relative;
-    overflow: hidden;
 }
 
 /* =========================================================
@@ -330,7 +364,9 @@ button {
 
 .content {
     padding: 32px;
+
     max-width: 1600px;
+
     margin: auto;
 }
 
@@ -346,6 +382,7 @@ button {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
+
     margin-bottom: 28px;
 }
 
@@ -356,13 +393,16 @@ button {
 
 .page-heading p {
     margin-top: 7px;
+
     color: var(--muted);
+
     font-size: 12px;
 }
 
 .primary-button {
     border: 0;
     border-radius: 9px;
+
     padding: 11px 16px;
 
     background: linear-gradient(
@@ -372,6 +412,7 @@ button {
     );
 
     color: #021017;
+
     font-size: 12px;
     font-weight: 800;
 
@@ -379,19 +420,10 @@ button {
         0 8px 25px rgba(0,217,255,.20);
 
     transition: .2s;
-
-    position: relative;
-    overflow: hidden;
 }
 
 .primary-button:hover {
     transform: translateY(-1px);
-
-    background: linear-gradient(
-        135deg,
-        #38e8ff,
-        #1595ff
-    );
 
     box-shadow:
         0 10px 30px rgba(0,217,255,.28);
@@ -404,21 +436,29 @@ button {
 .metrics {
     display: grid;
     grid-template-columns: repeat(4,1fr);
+
     gap: 16px;
+
     margin-bottom: 18px;
 }
 
 .metric-card {
     background: var(--card);
+
     border: 1px solid var(--border);
+
     border-radius: var(--radius);
+
     padding: 20px;
+
     transition: .2s;
 }
 
 .metric-card:hover {
     background: var(--card2);
+
     border-color: rgba(0,217,255,.20);
+
     box-shadow:
         0 0 25px rgba(0,217,255,.04);
 }
@@ -427,6 +467,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     margin-bottom: 18px;
 }
 
@@ -438,9 +479,11 @@ button {
 .metric-icon {
     width: 32px;
     height: 32px;
+
     border-radius: 8px;
 
     background: rgba(0,217,255,.07);
+
     border: 1px solid rgba(0,217,255,.08);
 
     color: var(--accent2);
@@ -452,7 +495,9 @@ button {
 
 .metric-value {
     font-size: 27px;
+
     font-weight: 800;
+
     letter-spacing: -1px;
 }
 
@@ -479,16 +524,23 @@ button {
 
 .dashboard-grid {
     display: grid;
+
     grid-template-columns: 1.7fr 1fr;
+
     gap: 18px;
+
     margin-bottom: 18px;
 }
 
 .panel {
     background: var(--card);
+
     border: 1px solid var(--border);
+
     border-radius: var(--radius);
+
     overflow: hidden;
+
     transition: .2s;
 }
 
@@ -498,9 +550,11 @@ button {
 
 .panel-header {
     padding: 18px 20px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     border-bottom: 1px solid var(--border);
 }
 
@@ -511,23 +565,24 @@ button {
 
 .panel-subtitle {
     color: var(--muted);
+
     font-size: 10px;
+
     margin-top: 4px;
 }
 
 .period {
     color: var(--muted);
-    font-size: 10px;
-    border: 1px solid var(--border);
-    background: #080e15;
-    padding: 6px 9px;
-    border-radius: 6px;
-    transition: .2s;
-}
 
-.period:hover {
-    border-color: rgba(0,217,255,.25);
-    color: var(--accent2);
+    font-size: 10px;
+
+    border: 1px solid var(--border);
+
+    background: #080e15;
+
+    padding: 6px 9px;
+
+    border-radius: 6px;
 }
 
 /* =========================================================
@@ -536,47 +591,66 @@ button {
 
 .chart {
     height: 240px;
+
     padding: 20px;
+
     display: flex;
     align-items: flex-end;
+
     gap: 10px;
+
     position: relative;
 }
 
 .chart-grid {
     position: absolute;
+
     inset: 20px;
+
     display: flex;
+
     flex-direction: column;
+
     justify-content: space-between;
 }
 
 .grid-line {
     height: 1px;
     width: 100%;
+
     background: #14202c;
 }
 
 .bars {
     width: 100%;
     height: 100%;
+
     display: flex;
+
     align-items: flex-end;
+
     justify-content: space-around;
+
     z-index: 2;
 }
 
 .bar-wrapper {
     height: 100%;
+
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
     justify-content: flex-end;
+
     gap: 8px;
 }
 
 .bar {
     width: 25px;
+
     border-radius: 5px 5px 2px 2px;
 
     background: linear-gradient(
@@ -589,6 +663,7 @@ button {
         0 0 12px rgba(0,217,255,.15);
 
     min-height: 4px;
+
     transition: .4s;
 }
 
@@ -612,40 +687,42 @@ button {
 .donut-area {
     display: flex;
     justify-content: center;
+
     padding: 10px 0 24px;
 }
 
 .donut {
     width: 145px;
     height: 145px;
+
     border-radius: 50%;
+
     display: flex;
+
     justify-content: center;
     align-items: center;
+
     position: relative;
 
-    background: conic-gradient(
-        var(--danger) 0 18%,
-        var(--warning) 18% 43%,
-        var(--info) 43% 68%,
-        var(--success) 68% 100%
-    );
-
-    box-shadow:
-        0 0 25px rgba(0,217,255,.05);
+    background: #172433;
 }
 
 .donut::after {
     content: "";
+
     width: 92px;
     height: 92px;
+
     border-radius: 50%;
+
     background: var(--card);
+
     position: absolute;
 }
 
 .donut-center {
     z-index: 2;
+
     text-align: center;
 }
 
@@ -661,27 +738,35 @@ button {
 
 .legend {
     display: flex;
+
     flex-direction: column;
+
     gap: 11px;
 }
 
 .legend-item {
     display: flex;
+
     align-items: center;
     justify-content: space-between;
+
     font-size: 11px;
 }
 
 .legend-left {
     display: flex;
+
     align-items: center;
+
     gap: 8px;
+
     color: var(--muted);
 }
 
 .legend-dot {
     width: 7px;
     height: 7px;
+
     border-radius: 50%;
 }
 
@@ -703,23 +788,33 @@ button {
 
 table {
     width: 100%;
+
     border-collapse: collapse;
 }
 
 th {
     text-align: left;
+
     padding: 13px 20px;
+
     color: var(--muted2);
+
     font-size: 9px;
+
     text-transform: uppercase;
+
     letter-spacing: .8px;
+
     background: #080e15;
 }
 
 td {
     padding: 14px 20px;
+
     border-top: 1px solid #14202c;
+
     font-size: 11px;
+
     white-space: nowrap;
 }
 
@@ -729,7 +824,9 @@ tbody tr:hover {
 
 .incident-id {
     color: var(--accent2);
+
     font-family: "JetBrains Mono", monospace;
+
     font-size: 10px;
 }
 
@@ -744,9 +841,13 @@ tbody tr:hover {
 .priority,
 .status {
     display: inline-flex;
+
     padding: 5px 8px;
+
     border-radius: 5px;
+
     font-size: 8px;
+
     font-weight: 700;
 }
 
@@ -788,12 +889,18 @@ tbody tr:hover {
 .avatar {
     width: 26px;
     height: 26px;
+
     display: inline-flex;
+
     justify-content: center;
     align-items: center;
+
     border-radius: 50%;
+
     background: #182534;
+
     font-size: 8px;
+
     font-weight: 700;
 }
 
@@ -809,16 +916,23 @@ tbody tr:hover {
 .action-btn {
     width: 28px;
     height: 28px;
+
     border: 1px solid var(--border);
+
     border-radius: 6px;
+
     background: #080e15;
+
     color: var(--muted);
+
     transition: .2s;
 }
 
 .action-btn:hover {
     color: var(--accent2);
+
     border-color: var(--accent);
+
     box-shadow:
         0 0 10px rgba(0,217,255,.10);
 }
@@ -834,7 +948,9 @@ tbody tr:hover {
 
 .bottom-grid {
     display: grid;
+
     grid-template-columns: 1.4fr 1fr;
+
     gap: 18px;
 }
 
@@ -844,9 +960,13 @@ tbody tr:hover {
 
 .activity-item {
     display: flex;
+
     gap: 13px;
+
     padding-bottom: 18px;
+
     margin-bottom: 18px;
+
     border-bottom: 1px solid #14202c;
 }
 
@@ -859,13 +979,18 @@ tbody tr:hover {
 .activity-icon {
     width: 28px;
     height: 28px;
+
     flex-shrink: 0;
+
     display: flex;
+
     justify-content: center;
     align-items: center;
+
     border-radius: 7px;
 
     background: rgba(0,217,255,.07);
+
     color: var(--accent2);
 
     border: 1px solid rgba(0,217,255,.08);
@@ -875,6 +1000,7 @@ tbody tr:hover {
 
 .activity-text {
     font-size: 11px;
+
     line-height: 1.6;
 }
 
@@ -884,7 +1010,9 @@ tbody tr:hover {
 
 .activity-time {
     display: block;
+
     color: var(--muted2);
+
     font-size: 9px;
 }
 
@@ -894,9 +1022,13 @@ tbody tr:hover {
 
 .info-row {
     display: flex;
+
     justify-content: space-between;
+
     padding: 13px 0;
+
     border-bottom: 1px solid #14202c;
+
     font-size: 11px;
 }
 
@@ -910,6 +1042,7 @@ tbody tr:hover {
 
 .info-value {
     font-family: "JetBrains Mono", monospace;
+
     font-size: 10px;
 }
 
@@ -918,29 +1051,72 @@ tbody tr:hover {
 }
 
 /* =========================================================
+   AI SOURCE BADGE
+========================================================= */
+
+.ai-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    margin-left: 7px;
+
+    padding: 4px 7px;
+
+    border-radius: 5px;
+
+    background: rgba(0,217,255,.08);
+
+    border: 1px solid rgba(0,217,255,.14);
+
+    color: var(--accent2);
+
+    font-size: 7px;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-weight: 700;
+
+    letter-spacing: .4px;
+}
+
+/* =========================================================
    INCIDENTS VIEW
 ========================================================= */
 
 .toolbar {
     display: flex;
+
     gap: 10px;
+
     margin-bottom: 18px;
+
     flex-wrap: wrap;
 }
 
 .search-box {
     flex: 1;
+
     min-width: 220px;
+
     position: relative;
 }
 
 .search-box input {
     width: 100%;
+
     padding: 11px 14px;
+
     border-radius: 9px;
+
     border: 1px solid var(--border);
+
     background: var(--card);
+
     color: white;
+
     outline: none;
 }
 
@@ -954,10 +1130,15 @@ tbody tr:hover {
 
 .filter {
     padding: 11px 12px;
+
     border-radius: 9px;
+
     border: 1px solid var(--border);
+
     background: var(--card);
+
     color: var(--muted);
+
     outline: none;
 }
 
@@ -975,16 +1156,23 @@ tbody tr:hover {
 
 .report-grid {
     display: grid;
+
     grid-template-columns: repeat(3,1fr);
+
     gap: 18px;
+
     margin-bottom: 18px;
 }
 
 .report-card {
     background: var(--card);
+
     border: 1px solid var(--border);
+
     border-radius: var(--radius);
+
     padding: 22px;
+
     transition: .2s;
 }
 
@@ -994,17 +1182,21 @@ tbody tr:hover {
 
 .report-card h3 {
     font-size: 12px;
+
     margin-bottom: 8px;
 }
 
 .report-card p {
     color: var(--muted);
+
     font-size: 10px;
 }
 
 .big-number {
     font-size: 30px;
+
     font-weight: 800;
+
     margin: 12px 0 5px;
 }
 
@@ -1014,22 +1206,31 @@ tbody tr:hover {
 
 .report-row {
     display: flex;
+
     justify-content: space-between;
+
     padding: 12px 0;
+
     border-bottom: 1px solid #14202c;
+
     font-size: 11px;
 }
 
 .progress {
     height: 6px;
+
     background: #14202c;
+
     border-radius: 10px;
+
     margin-top: 7px;
+
     overflow: hidden;
 }
 
 .progress span {
     display: block;
+
     height: 100%;
 
     background: linear-gradient(
@@ -1048,13 +1249,20 @@ tbody tr:hover {
 
 .modal-overlay {
     position: fixed;
+
     inset: 0;
+
     background: rgba(0,0,0,.72);
+
     backdrop-filter: blur(5px);
+
     display: none;
+
     justify-content: center;
     align-items: center;
+
     z-index: 100;
+
     padding: 20px;
 }
 
@@ -1064,9 +1272,13 @@ tbody tr:hover {
 
 .modal {
     width: 100%;
+
     max-width: 580px;
+
     background: #090f16;
+
     border: 1px solid var(--border);
+
     border-radius: 16px;
 
     box-shadow:
@@ -1074,13 +1286,17 @@ tbody tr:hover {
         0 0 40px rgba(0,217,255,.035);
 
     max-height: 90vh;
+
     overflow-y: auto;
 }
 
 .modal-header {
     padding: 20px;
+
     border-bottom: 1px solid var(--border);
+
     display: flex;
+
     justify-content: space-between;
     align-items: center;
 }
@@ -1092,15 +1308,21 @@ tbody tr:hover {
 .close-modal {
     width: 32px;
     height: 32px;
+
     border: 1px solid var(--border);
+
     border-radius: 7px;
+
     background: transparent;
+
     color: var(--muted);
+
     transition: .2s;
 }
 
 .close-modal:hover {
     color: var(--accent2);
+
     border-color: var(--accent);
 }
 
@@ -1114,54 +1336,79 @@ tbody tr:hover {
 
 .form-label {
     display: block;
+
     margin-bottom: 7px;
+
     color: var(--muted);
+
     font-size: 10px;
+
     font-weight: 600;
 }
 
 .form-control {
     width: 100%;
+
     border: 1px solid var(--border);
+
     background: #060a10;
+
     color: white;
+
     border-radius: 8px;
+
     padding: 11px 12px;
+
     outline: none;
+
     font-size: 11px;
 }
 
 textarea.form-control {
     min-height: 100px;
+
     resize: vertical;
 }
 
 .form-grid {
     display: grid;
+
     grid-template-columns: 1fr 1fr;
+
     gap: 14px;
 }
 
 .modal-footer {
     display: flex;
+
     justify-content: flex-end;
+
     gap: 9px;
+
     padding: 18px 20px;
+
     border-top: 1px solid var(--border);
 }
 
 .secondary-button {
     border: 1px solid var(--border);
+
     border-radius: 8px;
+
     padding: 10px 15px;
+
     background: transparent;
+
     color: var(--muted);
+
     font-size: 11px;
+
     transition: .2s;
 }
 
 .secondary-button:hover {
     color: var(--accent2);
+
     border-color: rgba(0,217,255,.25);
 }
 
@@ -1171,23 +1418,38 @@ textarea.form-control {
 
 .toast-container {
     position: fixed;
+
     right: 22px;
+
     bottom: 22px;
+
     z-index: 200;
+
     display: flex;
+
     flex-direction: column;
+
     gap: 10px;
 }
 
 .toast {
     min-width: 280px;
+
     padding: 14px 16px;
+
     background: #091019;
+
     border: 1px solid var(--border);
+
     border-left: 3px solid var(--success);
+
     border-radius: 9px;
-    box-shadow: 0 15px 40px rgba(0,0,0,.4);
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.4);
+
     font-size: 11px;
+
     animation: slideIn .25s ease;
 }
 
@@ -1196,6 +1458,7 @@ textarea.form-control {
 }
 
 @keyframes slideIn {
+
     from {
         opacity: 0;
         transform: translateX(30px);
@@ -1205,6 +1468,7 @@ textarea.form-control {
         opacity: 1;
         transform: translateX(0);
     }
+
 }
 
 /* =========================================================
@@ -1213,13 +1477,17 @@ textarea.form-control {
 
 .empty {
     text-align: center;
+
     padding: 45px 20px;
+
     color: var(--muted);
 }
 
 .empty-icon {
     font-size: 30px;
+
     margin-bottom: 10px;
+
     color: var(--accent2);
 }
 
@@ -1229,9 +1497,13 @@ textarea.form-control {
 
 .footer {
     padding: 28px 0 8px;
+
     display: flex;
+
     justify-content: space-between;
+
     color: var(--muted2);
+
     font-size: 9px;
 }
 
@@ -1250,6 +1522,7 @@ textarea.form-control {
 
 ::-webkit-scrollbar-thumb {
     background: #173247;
+
     border-radius: 10px;
 }
 
@@ -1259,6 +1532,7 @@ textarea.form-control {
 
 ::selection {
     background: rgba(0,217,255,.25);
+
     color: white;
 }
 
@@ -1280,17 +1554,20 @@ textarea.form-control {
     .report-grid {
         grid-template-columns: 1fr;
     }
+
 }
 
 @media(max-width:760px) {
 
     .sidebar {
         width: 70px;
+
         padding: 20px 10px;
     }
 
     .brand {
         justify-content: center;
+
         padding: 4px 0 28px;
     }
 
@@ -1303,6 +1580,7 @@ textarea.form-control {
 
     .nav-item {
         justify-content: center;
+
         padding: 12px;
     }
 
@@ -1312,6 +1590,7 @@ textarea.form-control {
 
     .main {
         width: calc(100% - 70px);
+
         margin-left: 70px;
     }
 
@@ -1329,7 +1608,9 @@ textarea.form-control {
 
     .page-heading {
         align-items: flex-start;
+
         flex-direction: column;
+
         gap: 16px;
     }
 
@@ -1343,15 +1624,22 @@ textarea.form-control {
 
     .footer {
         flex-direction: column;
+
         gap: 8px;
     }
+
 }
+
 </style>
 </head>
 
 <body>
 
 <div class="app">
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
 
 <aside class="sidebar">
 
@@ -1362,43 +1650,97 @@ textarea.form-control {
         </div>
 
         <div class="brand-text">
-            <h1>Incident Manager</h1>
-            <span>v2.0.0 • SYSTEM</span>
+
+            <h1>
+                Incident Manager
+            </h1>
+
+            <span>
+                v2.1.0 • AI SYSTEM
+            </span>
+
         </div>
 
     </div>
+
 
     <div class="menu-label">
         Workspace
     </div>
 
+
     <nav class="nav">
 
-        <button class="nav-item active" data-view="dashboard">
-            <div class="nav-icon">▦</div>
-            <span>Dashboard</span>
+        <button
+            class="nav-item active"
+            data-view="dashboard"
+        >
+
+            <div class="nav-icon">
+                ▦
+            </div>
+
+            <span>
+                Dashboard
+            </span>
+
         </button>
 
-        <button class="nav-item" data-view="incidents">
-            <div class="nav-icon">⚠</div>
-            <span>Incidentes</span>
+
+        <button
+            class="nav-item"
+            data-view="incidents"
+        >
+
+            <div class="nav-icon">
+                ⚠
+            </div>
+
+            <span>
+                Incidentes
+            </span>
+
         </button>
 
-        <button class="nav-item" data-view="reports">
-            <div class="nav-icon">◫</div>
-            <span>Relatórios</span>
+
+        <button
+            class="nav-item"
+            data-view="reports"
+        >
+
+            <div class="nav-icon">
+                ◫
+            </div>
+
+            <span>
+                Relatórios
+            </span>
+
         </button>
 
-        <button class="nav-item" data-view="monitoring">
-            <div class="nav-icon">◉</div>
-            <span>Monitoramento</span>
+
+        <button
+            class="nav-item"
+            data-view="monitoring"
+        >
+
+            <div class="nav-icon">
+                ◉
+            </div>
+
+            <span>
+                Monitoramento
+            </span>
+
         </button>
 
     </nav>
 
+
     <div class="menu-label">
         Sistema
     </div>
+
 
     <nav class="nav">
 
@@ -1406,19 +1748,35 @@ textarea.form-control {
             class="nav-item"
             onclick="showToast('Configurações disponíveis na próxima versão.')"
         >
-            <div class="nav-icon">⚙</div>
-            <span>Configurações</span>
+
+            <div class="nav-icon">
+                ⚙
+            </div>
+
+            <span>
+                Configurações
+            </span>
+
         </button>
+
 
         <button
             class="nav-item"
             onclick="showToast('Documentação do projeto em construção.')"
         >
-            <div class="nav-icon">?</div>
-            <span>Documentação</span>
+
+            <div class="nav-icon">
+                ?
+            </div>
+
+            <span>
+                Documentação
+            </span>
+
         </button>
 
     </nav>
+
 
     <div class="sidebar-bottom">
 
@@ -1443,6 +1801,10 @@ textarea.form-control {
 </aside>
 
 
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
 <main class="main">
 
 <header class="topbar">
@@ -1459,6 +1821,7 @@ textarea.form-control {
 
     </div>
 
+
     <div class="top-actions">
 
         <div class="system-status">
@@ -1468,6 +1831,7 @@ textarea.form-control {
             Sistema operacional
 
         </div>
+
 
         <div class="notification">
 
@@ -1482,6 +1846,7 @@ textarea.form-control {
 
         </div>
 
+
         <div class="profile">
             JM
         </div>
@@ -1493,12 +1858,14 @@ textarea.form-control {
 
 <section class="content">
 
-
 <!-- =====================================================
      DASHBOARD
 ===================================================== -->
 
-<div id="dashboard" class="view active">
+<div
+    id="dashboard"
+    class="view active"
+>
 
     <div class="page-heading">
 
@@ -1513,6 +1880,7 @@ textarea.form-control {
             </p>
 
         </div>
+
 
         <button
             class="primary-button"
@@ -1540,12 +1908,14 @@ textarea.form-control {
 
             </div>
 
+
             <div
                 class="metric-value"
                 id="totalIncidents"
             >
                 0
             </div>
+
 
             <div class="metric-footer neutral">
                 registros no sistema
@@ -1568,12 +1938,14 @@ textarea.form-control {
 
             </div>
 
+
             <div
                 class="metric-value"
                 id="openIncidents"
             >
                 0
             </div>
+
 
             <div class="metric-footer negative">
                 requer atenção
@@ -1596,12 +1968,14 @@ textarea.form-control {
 
             </div>
 
+
             <div
                 class="metric-value"
                 id="resolvedIncidents"
             >
                 0
             </div>
+
 
             <div class="metric-footer positive">
                 finalizados
@@ -1624,9 +1998,11 @@ textarea.form-control {
 
             </div>
 
+
             <div class="metric-value">
                 2h 18m
             </div>
+
 
             <div class="metric-footer positive">
                 tempo de resolução
@@ -1655,11 +2031,13 @@ textarea.form-control {
 
                 </div>
 
+
                 <div class="period">
                     Últimos 7 dias
                 </div>
 
             </div>
+
 
             <div class="chart">
 
@@ -1672,6 +2050,7 @@ textarea.form-control {
                     <div class="grid-line"></div>
 
                 </div>
+
 
                 <div
                     class="bars"
@@ -1701,6 +2080,7 @@ textarea.form-control {
 
             </div>
 
+
             <div class="distribution">
 
                 <div class="donut-area">
@@ -1729,6 +2109,7 @@ textarea.form-control {
 
                 </div>
 
+
                 <div class="legend">
 
                     <div class="legend-item">
@@ -1743,6 +2124,7 @@ textarea.form-control {
                             Crítico
 
                         </div>
+
 
                         <span
                             class="legend-value"
@@ -1767,6 +2149,7 @@ textarea.form-control {
 
                         </div>
 
+
                         <span
                             class="legend-value"
                             id="highCount"
@@ -1790,6 +2173,7 @@ textarea.form-control {
 
                         </div>
 
+
                         <span
                             class="legend-value"
                             id="mediumCount"
@@ -1812,6 +2196,7 @@ textarea.form-control {
                             Baixo
 
                         </div>
+
 
                         <span
                             class="legend-value"
@@ -1847,6 +2232,7 @@ textarea.form-control {
 
             </div>
 
+
             <button
                 class="secondary-button"
                 onclick="changeView('incidents')"
@@ -1855,6 +2241,7 @@ textarea.form-control {
             </button>
 
         </div>
+
 
         <div class="table-wrapper">
 
@@ -1872,6 +2259,7 @@ textarea.form-control {
                     </tr>
 
                 </thead>
+
 
                 <tbody id="recentTable"></tbody>
 
@@ -1902,6 +2290,7 @@ textarea.form-control {
 
             </div>
 
+
             <div
                 class="activity"
                 id="activityList"
@@ -1927,6 +2316,7 @@ textarea.form-control {
                 </div>
 
             </div>
+
 
             <div class="quick-info">
 
@@ -1972,6 +2362,19 @@ textarea.form-control {
                 <div class="info-row">
 
                     <span class="info-label">
+                        AI Analyzer
+                    </span>
+
+                    <span class="info-value positive">
+                        CONNECTED
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
                         Uptime
                     </span>
 
@@ -1989,7 +2392,7 @@ textarea.form-control {
                     </span>
 
                     <span class="info-value">
-                        2.0.0
+                        2.1.0
                     </span>
 
                 </div>
@@ -2007,7 +2410,10 @@ textarea.form-control {
      INCIDENTES
 ===================================================== -->
 
-<div id="incidents" class="view">
+<div
+    id="incidents"
+    class="view"
+>
 
     <div class="page-heading">
 
@@ -2022,6 +2428,7 @@ textarea.form-control {
             </p>
 
         </div>
+
 
         <button
             class="primary-button"
@@ -2125,6 +2532,7 @@ textarea.form-control {
 
                 </thead>
 
+
                 <tbody id="incidentTable"></tbody>
 
             </table>
@@ -2140,7 +2548,10 @@ textarea.form-control {
      RELATÓRIOS
 ===================================================== -->
 
-<div id="reports" class="view">
+<div
+    id="reports"
+    class="view"
+>
 
     <div class="page-heading">
 
@@ -2155,6 +2566,7 @@ textarea.form-control {
             </p>
 
         </div>
+
 
         <button
             class="primary-button"
@@ -2248,6 +2660,7 @@ textarea.form-control {
 
         </div>
 
+
         <div
             class="quick-info"
             id="reportPriority"
@@ -2259,10 +2672,13 @@ textarea.form-control {
 
 
 <!-- =====================================================
-     MONITORING
+     MONITORAMENTO
 ===================================================== -->
 
-<div id="monitoring" class="view">
+<div
+    id="monitoring"
+    class="view"
+>
 
     <div class="page-heading">
 
@@ -2335,6 +2751,86 @@ textarea.form-control {
 
     </div>
 
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
+
+                <div class="panel-title">
+                    Integração de Inteligência Artificial
+                </div>
+
+                <div class="panel-subtitle">
+                    Comunicação com o AI Incident Analyzer
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="quick-info">
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    AI Incident Analyzer
+                </span>
+
+                <span class="info-value positive">
+                    CONNECTED
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Shared Storage
+                </span>
+
+                <span class="info-value positive">
+                    ONLINE
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Incident Queue
+                </span>
+
+                <span
+                    class="info-value"
+                    id="aiQueueStatus"
+                >
+                    0 PENDING
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Classification
+                </span>
+
+                <span class="info-value positive">
+                    ENABLED
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
 
@@ -2374,6 +2870,7 @@ textarea.form-control {
                 Novo incidente
             </h3>
 
+
             <button
                 class="close-modal"
                 onclick="closeModal()"
@@ -2387,6 +2884,7 @@ textarea.form-control {
         <form
             class="form"
             id="incidentForm"
+            onsubmit="event.preventDefault(); saveIncident();"
         >
 
             <input
@@ -2539,6 +3037,7 @@ textarea.form-control {
                 Cancelar
             </button>
 
+
             <button
                 class="primary-button"
                 onclick="saveIncident()"
@@ -2553,6 +3052,10 @@ textarea.form-control {
 </div>
 
 
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
 <div
     class="toast-container"
     id="toastContainer"
@@ -2562,7 +3065,7 @@ textarea.form-control {
 <script>
 
 /* =========================================================
-   DATABASE LOCAL
+   DATABASE
 ========================================================= */
 
 const defaultIncidents = [
@@ -2619,57 +3122,87 @@ const defaultIncidents = [
 
 ];
 
-let incidents = JSON.parse(
-    localStorage.getItem("incidentManagerData")
-) || defaultIncidents;
 
+/* =========================================================
+   STORAGE KEYS
+========================================================= */
 
-let activities = JSON.parse(
-    localStorage.getItem("incidentManagerActivities")
-) || [
+const INCIDENT_STORAGE_KEY =
+    "incidentManagerData";
 
-    {
-        icon: "+",
-        text: "Sistema inicializado",
-        detail: "— Incident Manager pronto para operação.",
-        time: "agora"
-    },
+const ACTIVITY_STORAGE_KEY =
+    "incidentManagerActivities";
 
-    {
-        icon: "AI",
-        text: "AI Engine preparado",
-        detail: "— Classificação automática disponível.",
-        time: "agora"
-    },
-
-    {
-        icon: "✓",
-        text: "Database conectado",
-        detail: "— Armazenamento local operacional.",
-        time: "agora"
-    }
-
-];
+const AI_QUEUE_KEY =
+    "incidentManagerAIQueue";
 
 
 /* =========================================================
-   HELPERS
+   LOAD DATABASE
+========================================================= */
+
+let incidents =
+    JSON.parse(
+        localStorage.getItem(
+            INCIDENT_STORAGE_KEY
+        )
+    ) || defaultIncidents;
+
+
+let activities =
+    JSON.parse(
+        localStorage.getItem(
+            ACTIVITY_STORAGE_KEY
+        )
+    ) || [
+
+        {
+            icon: "+",
+            text: "Sistema inicializado",
+            detail: "— Incident Manager pronto para operação.",
+            time: "agora"
+        },
+
+        {
+            icon: "AI",
+            text: "AI Engine preparado",
+            detail: "— Classificação automática disponível.",
+            time: "agora"
+        },
+
+        {
+            icon: "✓",
+            text: "Database conectado",
+            detail: "— Armazenamento local operacional.",
+            time: "agora"
+        }
+
+    ];
+
+
+/* =========================================================
+   SAVE DATABASE
 ========================================================= */
 
 function saveDatabase() {
 
     localStorage.setItem(
-        "incidentManagerData",
+        INCIDENT_STORAGE_KEY,
         JSON.stringify(incidents)
     );
 
+
     localStorage.setItem(
-        "incidentManagerActivities",
+        ACTIVITY_STORAGE_KEY,
         JSON.stringify(activities)
     );
 
 }
 
+
+/* =========================================================
+   HTML SECURITY
+========================================================= */
 
 function escapeHTML(text) {
 
@@ -2683,6 +3216,10 @@ function escapeHTML(text) {
 
 }
 
+
+/* =========================================================
+   RESPONSIBLE
+========================================================= */
 
 function getResponsibleName(code) {
 
@@ -2700,6 +3237,10 @@ function getResponsibleName(code) {
 }
 
 
+/* =========================================================
+   PRIORITY
+========================================================= */
+
 function getPriorityClass(priority) {
 
     const classes = {
@@ -2715,6 +3256,10 @@ function getPriorityClass(priority) {
 
 }
 
+
+/* =========================================================
+   STATUS
+========================================================= */
 
 function getStatusClass(status) {
 
@@ -2732,20 +3277,356 @@ function getStatusClass(status) {
 
 
 /* =========================================================
+   GENERATE UNIQUE INCIDENT ID
+========================================================= */
+
+function generateIncidentId() {
+
+    let highest =
+        0;
+
+
+    incidents.forEach(item => {
+
+        const match =
+            String(item.id || "")
+                .match(/INC-(\d+)/i);
+
+
+        if (match) {
+
+            const number =
+                parseInt(
+                    match[1],
+                    10
+                );
+
+
+            if (number > highest) {
+                highest = number;
+            }
+
+        }
+
+    });
+
+
+    return (
+        "INC-" +
+        String(highest + 1)
+            .padStart(5,"0")
+    );
+
+}
+
+
+/* =========================================================
+   AI INCIDENT ANALYZER INTEGRATION
+========================================================= */
+
+function importAIIncidents() {
+
+    let queue = [];
+
+
+    try {
+
+        queue =
+            JSON.parse(
+                localStorage.getItem(
+                    AI_QUEUE_KEY
+                )
+            ) || [];
+
+    } catch(error) {
+
+        console.error(
+            "Erro ao ler fila da IA:",
+            error
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !Array.isArray(queue) ||
+        !queue.length
+    ) {
+
+        updateAIQueueStatus();
+
+        return;
+
+    }
+
+
+    let imported = 0;
+
+
+    queue.forEach(aiIncident => {
+
+        if (!aiIncident) {
+            return;
+        }
+
+
+        /*
+           Evita duplicação.
+        */
+
+        const alreadyExists =
+            incidents.some(
+                item =>
+                    item.aiId &&
+                    aiIncident.aiId &&
+                    item.aiId ===
+                    aiIncident.aiId
+            );
+
+
+        if (alreadyExists) {
+            return;
+        }
+
+
+        const id =
+            generateIncidentId();
+
+
+        const now =
+            new Date();
+
+
+        const date =
+            now.toLocaleDateString(
+                "pt-BR"
+            )
+            +
+            " • "
+            +
+            now.toLocaleTimeString(
+                "pt-BR",
+                {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                }
+            );
+
+
+        const newIncident = {
+
+            id,
+
+            title:
+                aiIncident.title ||
+                "Incidente analisado pela IA",
+
+            description:
+                aiIncident.description ||
+                "",
+
+            priority:
+                aiIncident.priority ||
+                "Médio",
+
+            status:
+                aiIncident.status ||
+                "Aberto",
+
+            responsible:
+                aiIncident.responsible ||
+                "JM",
+
+            date,
+
+            category:
+                aiIncident.category ||
+                "Não classificado",
+
+            impact:
+                aiIncident.impact ||
+                "Médio",
+
+            confidence:
+                Number(
+                    aiIncident.confidence
+                ) || 0,
+
+            source:
+                aiIncident.source ||
+                "AI Incident Analyzer",
+
+            aiId:
+                aiIncident.aiId ||
+                (
+                    "AI-" +
+                    Date.now() +
+                    "-" +
+                    Math.random()
+                        .toString(36)
+                        .slice(2,8)
+                ),
+
+            createdAt:
+                aiIncident.createdAt ||
+                now.toISOString()
+
+        };
+
+
+        incidents.unshift(
+            newIncident
+        );
+
+
+        activities.unshift({
+
+            icon: "AI",
+
+            text:
+                "Incidente criado pela IA",
+
+            detail:
+                `— ${id} analisado pelo AI Incident Analyzer.`,
+
+            time:
+                "agora"
+
+        });
+
+
+        imported++;
+
+    });
+
+
+    /*
+       Limpa a fila após a importação.
+    */
+
+    localStorage.removeItem(
+        AI_QUEUE_KEY
+    );
+
+
+    updateAIQueueStatus();
+
+
+    if (!imported) {
+        return;
+    }
+
+
+    activities =
+        activities.slice(0,6);
+
+
+    saveDatabase();
+
+
+    updateDashboard();
+
+    renderIncidents();
+
+    renderReports();
+
+
+    showToast(
+        imported === 1
+            ?
+            "1 incidente importado pelo AI Incident Analyzer."
+            :
+            `${imported} incidentes importados pelo AI Incident Analyzer.`
+    );
+
+}
+
+
+/* =========================================================
+   AI QUEUE STATUS
+========================================================= */
+
+function updateAIQueueStatus() {
+
+    const element =
+        document.getElementById(
+            "aiQueueStatus"
+        );
+
+
+    if (!element) {
+        return;
+    }
+
+
+    let queue = [];
+
+
+    try {
+
+        queue =
+            JSON.parse(
+                localStorage.getItem(
+                    AI_QUEUE_KEY
+                )
+            ) || [];
+
+    } catch(error) {
+
+        queue = [];
+
+    }
+
+
+    element.textContent =
+        `${queue.length} PENDING`;
+
+}
+
+
+/* =========================================================
+   LISTEN FOR AI ANALYZER
+========================================================= */
+
+window.addEventListener(
+    "storage",
+    function(event) {
+
+        if (
+            event.key ===
+            AI_QUEUE_KEY
+        ) {
+
+            importAIIncidents();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
    NAVIGATION
 ========================================================= */
 
 document
-    .querySelectorAll(".nav-item[data-view]")
+    .querySelectorAll(
+        ".nav-item[data-view]"
+    )
     .forEach(button => {
 
-        button.addEventListener("click", () => {
+        button.addEventListener(
+            "click",
+            () => {
 
-            changeView(
-                button.dataset.view
-            );
+                changeView(
+                    button.dataset.view
+                );
 
-        });
+            }
+        );
 
     });
 
@@ -2756,33 +3637,47 @@ function changeView(view) {
         .querySelectorAll(".view")
         .forEach(item => {
 
-            item.classList.remove("active");
+            item.classList.remove(
+                "active"
+            );
 
         });
 
 
     const target =
-        document.getElementById(view);
+        document.getElementById(
+            view
+        );
 
 
     if (target) {
 
-        target.classList.add("active");
+        target.classList.add(
+            "active"
+        );
 
     }
 
 
     document
-        .querySelectorAll(".nav-item[data-view]")
+        .querySelectorAll(
+            ".nav-item[data-view]"
+        )
         .forEach(item => {
 
-            item.classList.remove("active");
+            item.classList.remove(
+                "active"
+            );
+
 
             if (
-                item.dataset.view === view
+                item.dataset.view ===
+                view
             ) {
 
-                item.classList.add("active");
+                item.classList.add(
+                    "active"
+                );
 
             }
 
@@ -2800,21 +3695,37 @@ function changeView(view) {
 
 
     document
-        .getElementById("breadcrumb")
+        .getElementById(
+            "breadcrumb"
+        )
         .textContent =
-        names[view] || "Dashboard";
+        names[view] ||
+        "Dashboard";
 
 
-    if (view === "incidents") {
+    if (
+        view === "incidents"
+    ) {
 
         renderIncidents();
 
     }
 
 
-    if (view === "reports") {
+    if (
+        view === "reports"
+    ) {
 
         renderReports();
+
+    }
+
+
+    if (
+        view === "monitoring"
+    ) {
+
+        updateAIQueueStatus();
 
     }
 
@@ -2833,36 +3744,48 @@ function updateDashboard() {
 
     const open =
         incidents.filter(
-            item => item.status !== "Resolvido"
+            item =>
+                item.status !==
+                "Resolvido"
         ).length;
 
 
     const resolved =
         incidents.filter(
-            item => item.status === "Resolvido"
+            item =>
+                item.status ===
+                "Resolvido"
         ).length;
 
 
     document
-        .getElementById("totalIncidents")
+        .getElementById(
+            "totalIncidents"
+        )
         .textContent =
         total;
 
 
     document
-        .getElementById("openIncidents")
+        .getElementById(
+            "openIncidents"
+        )
         .textContent =
         open;
 
 
     document
-        .getElementById("resolvedIncidents")
+        .getElementById(
+            "resolvedIncidents"
+        )
         .textContent =
         resolved;
 
 
     document
-        .getElementById("donutNumber")
+        .getElementById(
+            "donutNumber"
+        )
         .textContent =
         total;
 
@@ -2879,31 +3802,46 @@ function updateDashboard() {
 
     incidents.forEach(item => {
 
-        priorities[item.priority]++;
+        if (
+            priorities[item.priority] !==
+            undefined
+        ) {
+
+            priorities[item.priority]++;
+
+        }
 
     });
 
 
     document
-        .getElementById("criticalCount")
+        .getElementById(
+            "criticalCount"
+        )
         .textContent =
         priorities["Crítico"];
 
 
     document
-        .getElementById("highCount")
+        .getElementById(
+            "highCount"
+        )
         .textContent =
         priorities["Alto"];
 
 
     document
-        .getElementById("mediumCount")
+        .getElementById(
+            "mediumCount"
+        )
         .textContent =
         priorities["Médio"];
 
 
     document
-        .getElementById("lowCount")
+        .getElementById(
+            "lowCount"
+        )
         .textContent =
         priorities["Baixo"];
 
@@ -2922,9 +3860,14 @@ function updateDashboard() {
 
 
     document
-        .getElementById("notificationCount")
+        .getElementById(
+            "notificationCount"
+        )
         .textContent =
         open;
+
+
+    updateAIQueueStatus();
 
 }
 
@@ -2933,12 +3876,17 @@ function updateDashboard() {
    DONUT
 ========================================================= */
 
-function updateDonut(data,total) {
+function updateDonut(
+    data,
+    total
+) {
 
     if (!total) {
 
         document
-            .getElementById("donut")
+            .getElementById(
+                "donut"
+            )
             .style.background =
             "#172433";
 
@@ -2978,7 +3926,9 @@ function updateDonut(data,total) {
 
 
     document
-        .getElementById("donut")
+        .getElementById(
+            "donut"
+        )
         .style.background =
 
         `conic-gradient(
@@ -2998,7 +3948,9 @@ function updateDonut(data,total) {
 function renderBars() {
 
     const container =
-        document.getElementById("bars");
+        document.getElementById(
+            "bars"
+        );
 
 
     const values =
@@ -3018,7 +3970,8 @@ function renderBars() {
     ];
 
 
-    container.innerHTML = "";
+    container.innerHTML =
+        "";
 
 
     const max =
@@ -3066,10 +4019,13 @@ function renderBars() {
 function renderRecentTable() {
 
     const tbody =
-        document.getElementById("recentTable");
+        document.getElementById(
+            "recentTable"
+        );
 
 
-    tbody.innerHTML = "";
+    tbody.innerHTML =
+        "";
 
 
     const recent =
@@ -3101,6 +4057,19 @@ function renderRecentTable() {
 
     recent.forEach(item => {
 
+        const aiBadge =
+            item.source ===
+            "AI Incident Analyzer"
+
+                ?
+
+            `<span class="ai-badge">AI</span>`
+
+                :
+
+            "";
+
+
         tbody.innerHTML += `
 
             <tr>
@@ -3123,6 +4092,8 @@ function renderRecentTable() {
                         ${escapeHTML(item.title)}
 
                     </span>
+
+                    ${aiBadge}
 
                 </td>
 
@@ -3205,13 +4176,17 @@ function renderRecentTable() {
 function renderIncidents() {
 
     const tbody =
-        document.getElementById("incidentTable");
+        document.getElementById(
+            "incidentTable"
+        );
 
 
     const search =
         (
             document
-                .getElementById("searchInput")
+                .getElementById(
+                    "searchInput"
+                )
                 ?.value ||
             ""
         ).toLowerCase();
@@ -3219,14 +4194,18 @@ function renderIncidents() {
 
     const priority =
         document
-            .getElementById("priorityFilter")
+            .getElementById(
+                "priorityFilter"
+            )
             ?.value ||
         "";
 
 
     const status =
         document
-            .getElementById("statusFilter")
+            .getElementById(
+                "statusFilter"
+            )
             ?.value ||
         "";
 
@@ -3234,33 +4213,47 @@ function renderIncidents() {
     const filtered =
         incidents.filter(item => {
 
+            const title =
+                String(
+                    item.title || ""
+                ).toLowerCase();
+
+
+            const id =
+                String(
+                    item.id || ""
+                ).toLowerCase();
+
+
+            const description =
+                String(
+                    item.description || ""
+                ).toLowerCase();
+
+
             const matchesSearch =
 
-                item.title
-                    .toLowerCase()
-                    .includes(search)
+                title.includes(search)
 
                 ||
 
-                item.id
-                    .toLowerCase()
-                    .includes(search)
+                id.includes(search)
 
                 ||
 
-                item.description
-                    .toLowerCase()
-                    .includes(search);
+                description.includes(search);
 
 
             const matchesPriority =
                 !priority ||
-                item.priority === priority;
+                item.priority ===
+                priority;
 
 
             const matchesStatus =
                 !status ||
-                item.status === status;
+                item.status ===
+                status;
 
 
             return (
@@ -3272,7 +4265,8 @@ function renderIncidents() {
         });
 
 
-    tbody.innerHTML = "";
+    tbody.innerHTML =
+        "";
 
 
     if (!filtered.length) {
@@ -3306,6 +4300,19 @@ function renderIncidents() {
 
     filtered.forEach(item => {
 
+        const aiBadge =
+            item.source ===
+            "AI Incident Analyzer"
+
+                ?
+
+            `<span class="ai-badge">AI</span>`
+
+                :
+
+            "";
+
+
         tbody.innerHTML += `
 
             <tr>
@@ -3333,6 +4340,8 @@ function renderIncidents() {
                         ${escapeHTML(item.title)}
 
                     </span>
+
+                    ${aiBadge}
 
                 </td>
 
@@ -3407,23 +4416,25 @@ function renderIncidents() {
                         <button
                             class="action-btn"
                             title="Editar"
-                            onclick="editIncident('${item.id}')"
+                            onclick="editIncident('${escapeHTML(item.id)}')"
                         >
                             ✎
                         </button>
 
+
                         <button
                             class="action-btn"
                             title="Alterar status"
-                            onclick="cycleStatus('${item.id}')"
+                            onclick="cycleStatus('${escapeHTML(item.id)}')"
                         >
                             ↻
                         </button>
 
+
                         <button
                             class="action-btn delete"
                             title="Excluir"
-                            onclick="deleteIncident('${item.id}')"
+                            onclick="deleteIncident('${escapeHTML(item.id)}')"
                         >
                             ×
                         </button>
@@ -3445,26 +4456,37 @@ function renderIncidents() {
    MODAL
 ========================================================= */
 
-function openModal(id = null) {
+function openModal(
+    id = null
+) {
 
     const modal =
-        document.getElementById("modal");
+        document.getElementById(
+            "modal"
+        );
 
 
     const form =
-        document.getElementById("incidentForm");
+        document.getElementById(
+            "incidentForm"
+        );
 
 
     form.reset();
 
 
     document
-        .getElementById("editId")
-        .value = "";
+        .getElementById(
+            "editId"
+        )
+        .value =
+        "";
 
 
     document
-        .getElementById("modalTitle")
+        .getElementById(
+            "modalTitle"
+        )
         .textContent =
         "Novo incidente";
 
@@ -3474,64 +4496,85 @@ function openModal(id = null) {
         const item =
             incidents.find(
                 incident =>
-                    incident.id === id
+                    incident.id ===
+                    id
             );
 
 
-        if (!item) return;
+        if (!item) {
+            return;
+        }
 
 
         document
-            .getElementById("editId")
+            .getElementById(
+                "editId"
+            )
             .value =
             item.id;
 
 
         document
-            .getElementById("title")
+            .getElementById(
+                "title"
+            )
             .value =
             item.title;
 
 
         document
-            .getElementById("description")
+            .getElementById(
+                "description"
+            )
             .value =
             item.description;
 
 
         document
-            .getElementById("priority")
+            .getElementById(
+                "priority"
+            )
             .value =
             item.priority;
 
 
         document
-            .getElementById("status")
+            .getElementById(
+                "status"
+            )
             .value =
             item.status;
 
 
         document
-            .getElementById("responsible")
+            .getElementById(
+                "responsible"
+            )
             .value =
             item.responsible;
 
 
         document
-            .getElementById("modalTitle")
+            .getElementById(
+                "modalTitle"
+            )
             .textContent =
             "Editar incidente";
 
     }
 
 
-    modal.classList.add("active");
+    modal.classList.add(
+        "active"
+    );
 
 
     setTimeout(() => {
 
         document
-            .getElementById("title")
+            .getElementById(
+                "title"
+            )
             .focus();
 
     },100);
@@ -3542,20 +4585,27 @@ function openModal(id = null) {
 function closeModal() {
 
     document
-        .getElementById("modal")
-        .classList.remove("active");
+        .getElementById(
+            "modal"
+        )
+        .classList.remove(
+            "active"
+        );
 
 }
 
 
 document
-    .getElementById("modal")
+    .getElementById(
+        "modal"
+    )
     .addEventListener(
         "click",
         function(event) {
 
             if (
-                event.target === this
+                event.target ===
+                this
             ) {
 
                 closeModal();
@@ -3567,46 +4617,58 @@ document
 
 
 /* =========================================================
-   SAVE
+   SAVE INCIDENT
 ========================================================= */
 
 function saveIncident() {
 
     const title =
         document
-            .getElementById("title")
+            .getElementById(
+                "title"
+            )
             .value
             .trim();
 
 
     const description =
         document
-            .getElementById("description")
+            .getElementById(
+                "description"
+            )
             .value
             .trim();
 
 
     const priority =
         document
-            .getElementById("priority")
+            .getElementById(
+                "priority"
+            )
             .value;
 
 
     const status =
         document
-            .getElementById("status")
+            .getElementById(
+                "status"
+            )
             .value;
 
 
     const responsible =
         document
-            .getElementById("responsible")
+            .getElementById(
+                "responsible"
+            )
             .value;
 
 
     const editId =
         document
-            .getElementById("editId")
+            .getElementById(
+                "editId"
+            )
             .value;
 
 
@@ -3622,25 +4684,36 @@ function saveIncident() {
     }
 
 
+    /* =====================================================
+       EDIT
+    ===================================================== */
+
     if (editId) {
 
         const index =
             incidents.findIndex(
                 item =>
-                    item.id === editId
+                    item.id ===
+                    editId
             );
 
 
-        if (index !== -1) {
+        if (
+            index !== -1
+        ) {
 
             incidents[index] = {
 
                 ...incidents[index],
 
                 title,
+
                 description,
+
                 priority,
+
                 status,
+
                 responsible
 
             };
@@ -3668,16 +4741,16 @@ function saveIncident() {
 
         }
 
-    } else {
+    }
 
-        const number =
-            incidents.length + 129;
+    /* =====================================================
+       CREATE
+    ===================================================== */
 
+    else {
 
         const id =
-            "INC-" +
-            String(number)
-                .padStart(5,"0");
+            generateIncidentId();
 
 
         const now =
@@ -3694,8 +4767,8 @@ function saveIncident() {
             now.toLocaleTimeString(
                 "pt-BR",
                 {
-                    hour:"2-digit",
-                    minute:"2-digit"
+                    hour: "2-digit",
+                    minute: "2-digit"
                 }
             );
 
@@ -3703,12 +4776,24 @@ function saveIncident() {
         incidents.unshift({
 
             id,
+
             title,
+
             description,
+
             priority,
+
             status,
+
             responsible,
-            date
+
+            date,
+
+            source:
+                "Incident Manager",
+
+            createdAt:
+                now.toISOString()
 
         });
 
@@ -3739,7 +4824,10 @@ function saveIncident() {
 
 
     activities =
-        activities.slice(0,6);
+        activities.slice(
+            0,
+            6
+        );
 
 
     saveDatabase();
@@ -3773,11 +4861,14 @@ function deleteIncident(id) {
     const item =
         incidents.find(
             incident =>
-                incident.id === id
+                incident.id ===
+                id
         );
 
 
-    if (!item) return;
+    if (!item) {
+        return;
+    }
 
 
     const confirmed =
@@ -3786,13 +4877,16 @@ function deleteIncident(id) {
         );
 
 
-    if (!confirmed) return;
+    if (!confirmed) {
+        return;
+    }
 
 
     incidents =
         incidents.filter(
             incident =>
-                incident.id !== id
+                incident.id !==
+                id
         );
 
 
@@ -3813,7 +4907,10 @@ function deleteIncident(id) {
 
 
     activities =
-        activities.slice(0,6);
+        activities.slice(
+            0,
+            6
+        );
 
 
     saveDatabase();
@@ -3824,8 +4921,7 @@ function deleteIncident(id) {
 
 
     showToast(
-        "Incidente excluído.",
-        false
+        "Incidente excluído."
     );
 
 }
@@ -3840,11 +4936,14 @@ function cycleStatus(id) {
     const item =
         incidents.find(
             incident =>
-                incident.id === id
+                incident.id ===
+                id
         );
 
 
-    if (!item) return;
+    if (!item) {
+        return;
+    }
 
 
     const statuses = [
@@ -3863,7 +4962,9 @@ function cycleStatus(id) {
 
 
     const next =
-        (current + 1) %
+        (
+            current + 1
+        ) %
         statuses.length;
 
 
@@ -3888,7 +4989,10 @@ function cycleStatus(id) {
 
 
     activities =
-        activities.slice(0,6);
+        activities.slice(
+            0,
+            6
+        );
 
 
     saveDatabase();
@@ -3917,7 +5021,8 @@ function renderActivities() {
         );
 
 
-    container.innerHTML = "";
+    container.innerHTML =
+        "";
 
 
     activities
@@ -3989,57 +5094,67 @@ function renderReports() {
     const resolved =
         incidents.filter(
             item =>
-                item.status === "Resolvido"
+                item.status ===
+                "Resolvido"
         ).length;
 
 
     const critical =
         incidents.filter(
             item =>
-                item.priority === "Crítico"
+                item.priority ===
+                "Crítico"
         ).length;
 
 
     const resolutionRate =
         total
-        ?
+            ?
         Math.round(
             resolved /
             total *
             100
         )
-        :
+            :
         0;
 
 
     const criticalRate =
         total
-        ?
+            ?
         Math.round(
             critical /
             total *
             100
         )
-        :
+            :
         0;
 
 
     document
-        .getElementById("reportTotal")
+        .getElementById(
+            "reportTotal"
+        )
         .textContent =
         total;
 
 
     document
-        .getElementById("resolutionRate")
+        .getElementById(
+            "resolutionRate"
+        )
         .textContent =
-        resolutionRate + "%";
+        resolutionRate +
+        "%";
 
 
     document
-        .getElementById("criticalRate")
+        .getElementById(
+            "criticalRate"
+        )
         .textContent =
-        criticalRate + "%";
+        criticalRate +
+        "%";
 
 
     const priorities = [
@@ -4058,60 +5173,64 @@ function renderReports() {
         );
 
 
-    container.innerHTML = "";
+    container.innerHTML =
+        "";
 
 
-    priorities.forEach(priority => {
+    priorities.forEach(
+        priority => {
 
-        const count =
-            incidents.filter(
-                item =>
-                    item.priority === priority
-            ).length;
-
-
-        const percentage =
-            total
-            ?
-            Math.round(
-                count /
-                total *
-                100
-            )
-            :
-            0;
+            const count =
+                incidents.filter(
+                    item =>
+                        item.priority ===
+                        priority
+                ).length;
 
 
-        container.innerHTML += `
+            const percentage =
+                total
+                    ?
+                Math.round(
+                    count /
+                    total *
+                    100
+                )
+                    :
+                0;
 
-            <div class="report-row">
 
-                <div style="width:65%">
+            container.innerHTML += `
 
-                    <strong>
-                        ${priority}
-                    </strong>
+                <div class="report-row">
 
-                    <div class="progress">
+                    <div style="width:65%">
 
-                        <span
-                            style="width:${percentage}%"
-                        ></span>
+                        <strong>
+                            ${priority}
+                        </strong>
+
+                        <div class="progress">
+
+                            <span
+                                style="width:${percentage}%"
+                            ></span>
+
+                        </div>
 
                     </div>
 
+
+                    <strong>
+                        ${count}
+                    </strong>
+
                 </div>
 
+            `;
 
-                <strong>
-                    ${count}
-                </strong>
-
-            </div>
-
-        `;
-
-    });
+        }
+    );
 
 }
 
@@ -4135,7 +5254,7 @@ function exportCSV() {
 
 
     let csv =
-        "ID,Título,Descrição,Prioridade,Status,Responsável,Data\n";
+        "ID,Título,Descrição,Prioridade,Status,Responsável,Categoria,Impacto,Confiança IA,Origem,Data\n";
 
 
     incidents.forEach(item => {
@@ -4143,20 +5262,43 @@ function exportCSV() {
         const row = [
 
             item.id,
+
             item.title,
+
             item.description,
+
             item.priority,
+
             item.status,
+
             getResponsibleName(
                 item.responsible
             ),
+
+            item.category ||
+                "",
+
+            item.impact ||
+                "",
+
+            item.confidence ||
+                "",
+
+            item.source ||
+                "",
+
             item.date
 
         ]
         .map(
             value =>
-                `"${String(value || "")
-                    .replace(/"/g,'""')}"`
+                `"${String(
+                    value || ""
+                )
+                .replace(
+                    /"/g,
+                    '""'
+                )}"`
         )
         .join(",");
 
@@ -4201,7 +5343,15 @@ function exportCSV() {
         "incident-manager-relatorio.csv";
 
 
+    document.body.appendChild(
+        link
+    );
+
+
     link.click();
+
+
+    link.remove();
 
 
     URL.revokeObjectURL(
@@ -4241,9 +5391,9 @@ function showToast(
         "toast" +
         (
             error
-            ?
+                ?
             " error"
-            :
+                :
             ""
         );
 
@@ -4270,11 +5420,25 @@ function showToast(
    INITIALIZATION
 ========================================================= */
 
+/*
+   Primeiro verifica se existe
+   algum incidente enviado pela IA.
+*/
+
+importAIIncidents();
+
+
+/*
+   Depois renderiza o sistema.
+*/
+
 updateDashboard();
 
 renderIncidents();
 
 renderReports();
+
+updateAIQueueStatus();
 
 </script>
 
