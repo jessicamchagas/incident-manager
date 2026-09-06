@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -7,684 +6,605 @@
 
 <title>AI Incident Analyzer | Jessica Monteiro</title>
 
+<meta name="description" content="AI Incident Analyzer - Inteligência para análise e classificação de incidentes.">
+
 <style>
-:root{
-    --bg:#05080d;
-    --panel:#09111a;
-    --panel2:#0d1722;
-    --border:#182838;
-    --text:#f2f8ff;
-    --muted:#7f91a5;
-    --accent:#00d9ff;
-    --accent2:#38e8ff;
-    --danger:#ff5d73;
-    --warning:#f5b84b;
-    --success:#45d483;
-    --info:#168bff;
-    --shadow:0 20px 60px rgba(0,0,0,.35);
-}
 
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#070b12;
+    --panel:#0d131d;
+    --panel2:#111a26;
+    --border:#1d2a3a;
+    --text:#f1f5f9;
+    --muted:#7f8da3;
+    --cyan:#22d3ee;
+    --blue:#3b82f6;
+    --green:#22c55e;
+    --yellow:#f59e0b;
+    --red:#ef4444;
+    --purple:#a855f7;
 }
 
 body{
     font-family:Inter,Segoe UI,Arial,sans-serif;
-    background:
-        radial-gradient(circle at 80% 10%,rgba(0,217,255,.08),transparent 28%),
-        radial-gradient(circle at 20% 80%,rgba(22,139,255,.06),transparent 30%),
-        var(--bg);
+    background:var(--bg);
     color:var(--text);
     min-height:100vh;
 }
 
 button,
 textarea{
-    font:inherit;
+    font-family:inherit;
 }
 
 button{
     cursor:pointer;
 }
 
-/* =========================
-   APP
-========================= */
-
-.app{
-    display:flex;
-    min-height:100vh;
-}
-
-/* =========================
-   SIDEBAR
-========================= */
+/* SIDEBAR */
 
 .sidebar{
-    width:250px;
-    background:rgba(7,11,17,.96);
-    border-right:1px solid var(--border);
-    padding:24px 18px;
     position:fixed;
     left:0;
     top:0;
     bottom:0;
-    z-index:20;
+    width:250px;
+    background:#080d15;
+    border-right:1px solid var(--border);
+    padding:25px 18px;
+    z-index:10;
 }
 
 .logo{
     display:flex;
     align-items:center;
     gap:12px;
-    margin-bottom:35px;
+    margin-bottom:40px;
 }
 
 .logo-icon{
     width:42px;
     height:42px;
-    border:1px solid rgba(0,217,255,.4);
     border-radius:12px;
+    background:linear-gradient(135deg,var(--cyan),var(--blue));
     display:flex;
     align-items:center;
     justify-content:center;
-    color:var(--accent);
-    background:rgba(0,217,255,.06);
-    font-size:20px;
-    box-shadow:0 0 25px rgba(0,217,255,.08);
+    font-size:21px;
+    font-weight:800;
+    color:#041019;
 }
 
-.logo-text strong{
+.logo strong{
     display:block;
-    font-size:14px;
-    letter-spacing:.8px;
+    font-size:15px;
 }
 
-.logo-text span{
+.logo span{
+    display:block;
     color:var(--muted);
     font-size:11px;
+    margin-top:3px;
 }
 
 .nav-title{
-    color:#4e6276;
+    color:#4f6075;
     font-size:10px;
-    text-transform:uppercase;
+    font-weight:700;
     letter-spacing:1.5px;
-    margin:20px 12px 10px;
+    margin:20px 10px 10px;
+    text-transform:uppercase;
 }
 
-.nav-item{
+.nav{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+.nav a{
+    text-decoration:none;
+    color:#8b9ab0;
+    padding:12px 13px;
+    border-radius:9px;
     display:flex;
     align-items:center;
-    gap:12px;
-    padding:12px 13px;
-    margin-bottom:5px;
-    color:var(--muted);
-    border-radius:10px;
-    text-decoration:none;
+    gap:11px;
     font-size:13px;
     transition:.2s;
 }
 
-.nav-item:hover{
-    color:var(--text);
-    background:rgba(255,255,255,.03);
+.nav a:hover{
+    background:#101925;
+    color:#fff;
 }
 
-.nav-item.active{
-    color:var(--accent);
-    background:rgba(0,217,255,.08);
-    border:1px solid rgba(0,217,255,.12);
+.nav a.active{
+    background:rgba(34,211,238,.10);
+    color:var(--cyan);
+    border:1px solid rgba(34,211,238,.15);
 }
 
-.status-box{
-    position:absolute;
-    bottom:22px;
-    left:18px;
-    right:18px;
-    border:1px solid var(--border);
-    background:var(--panel);
-    padding:15px;
-    border-radius:12px;
+/* MAIN */
+
+.main{
+    margin-left:250px;
+    min-height:100vh;
 }
 
-.status-line{
+/* TOPBAR */
+
+.topbar{
+    height:72px;
+    border-bottom:1px solid var(--border);
     display:flex;
     align-items:center;
     justify-content:space-between;
-    font-size:11px;
-    margin-bottom:9px;
+    padding:0 34px;
+    background:rgba(7,11,18,.92);
+    backdrop-filter:blur(12px);
 }
 
-.status-line:last-child{
-    margin-bottom:0;
+.topbar-title{
+    font-size:14px;
+    color:#dce5ef;
+}
+
+.topbar-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    font-size:12px;
+    color:#8ea0b5;
 }
 
 .status-dot{
     width:7px;
     height:7px;
+    background:var(--green);
     border-radius:50%;
-    display:inline-block;
-    margin-right:6px;
-    background:var(--success);
-    box-shadow:0 0 10px rgba(69,212,131,.7);
-}
-
-/* =========================
-   MAIN
-========================= */
-
-.main{
-    margin-left:250px;
-    width:calc(100% - 250px);
-    min-height:100vh;
-}
-
-.topbar{
-    height:76px;
-    border-bottom:1px solid var(--border);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 35px;
-    background:rgba(5,8,13,.72);
-    backdrop-filter:blur(15px);
-    position:sticky;
-    top:0;
-    z-index:10;
-}
-
-.breadcrumb{
-    font-size:13px;
-    color:var(--muted);
-}
-
-.breadcrumb strong{
-    color:var(--text);
-}
-
-.user{
-    display:flex;
-    align-items:center;
-    gap:10px;
+    box-shadow:0 0 10px rgba(34,197,94,.8);
 }
 
 .avatar{
     width:35px;
     height:35px;
     border-radius:50%;
-    background:linear-gradient(135deg,#00d9ff,#168bff);
-    color:#001018;
+    background:linear-gradient(135deg,#26364a,#162334);
     display:flex;
     align-items:center;
     justify-content:center;
-    font-weight:800;
+    color:var(--cyan);
     font-size:12px;
+    font-weight:700;
+    border:1px solid var(--border);
 }
+
+/* CONTENT */
 
 .content{
-    padding:35px;
-    max-width:1400px;
-    margin:auto;
+    padding:34px;
+    max-width:1450px;
 }
 
-/* =========================
-   HERO
-========================= */
-
 .hero{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
     margin-bottom:28px;
 }
 
-.eyebrow{
-    color:var(--accent);
-    font-size:11px;
-    letter-spacing:2px;
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:6px 10px;
+    border:1px solid rgba(34,211,238,.2);
+    background:rgba(34,211,238,.07);
+    color:var(--cyan);
+    border-radius:999px;
+    font-size:10px;
     font-weight:700;
-    margin-bottom:10px;
+    letter-spacing:.8px;
+    margin-bottom:14px;
 }
 
-h1{
+.hero h1{
     font-size:32px;
+    margin-bottom:9px;
     letter-spacing:-1px;
-    margin-bottom:8px;
 }
 
-.subtitle{
+.hero p{
     color:var(--muted);
+    max-width:760px;
     font-size:14px;
-    max-width:720px;
     line-height:1.7;
 }
 
-.version{
-    border:1px solid var(--border);
-    background:var(--panel);
-    border-radius:9px;
-    padding:9px 12px;
-    font-size:11px;
-    color:var(--muted);
-}
-
-/* =========================
-   GRID
-========================= */
+/* GRID */
 
 .grid{
     display:grid;
-    grid-template-columns:1.2fr .8fr;
+    grid-template-columns:1.4fr .8fr;
     gap:20px;
 }
 
 .card{
-    background:linear-gradient(
-        180deg,
-        rgba(13,23,34,.95),
-        rgba(8,15,23,.95)
-    );
+    background:var(--panel);
     border:1px solid var(--border);
-    border-radius:16px;
-    box-shadow:var(--shadow);
-    overflow:hidden;
+    border-radius:14px;
+    padding:24px;
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
 }
 
 .card-header{
-    padding:19px 22px;
-    border-bottom:1px solid var(--border);
     display:flex;
-    align-items:center;
     justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
 }
 
 .card-title{
-    font-size:13px;
+    font-size:15px;
     font-weight:700;
 }
 
-.card-description{
+.card-subtitle{
     color:var(--muted);
     font-size:11px;
     margin-top:4px;
 }
 
-.card-body{
-    padding:22px;
-}
-
-/* =========================
-   INPUT
-========================= */
+/* INPUT */
 
 textarea{
     width:100%;
-    min-height:220px;
+    min-height:190px;
     resize:vertical;
-    background:#060b11;
+    background:#080e17;
+    color:#e7eef7;
     border:1px solid var(--border);
-    color:var(--text);
-    border-radius:12px;
+    border-radius:10px;
     padding:17px;
     outline:none;
-    line-height:1.6;
-    font-size:13px;
+    font-size:14px;
+    line-height:1.7;
     transition:.2s;
 }
 
 textarea:focus{
-    border-color:rgba(0,217,255,.55);
-    box-shadow:0 0 0 3px rgba(0,217,255,.07);
+    border-color:rgba(34,211,238,.55);
+    box-shadow:0 0 0 3px rgba(34,211,238,.07);
 }
 
 textarea::placeholder{
-    color:#526477;
+    color:#56667a;
 }
 
-.analyze-btn{
-    width:100%;
+.actions{
+    display:flex;
+    gap:10px;
     margin-top:14px;
-    padding:14px;
+}
+
+.btn{
     border:none;
-    border-radius:10px;
-    color:#001018;
-    background:linear-gradient(
-        135deg,
-        var(--accent),
-        var(--accent2)
-    );
-    font-weight:800;
-    font-size:13px;
-    box-shadow:0 8px 25px rgba(0,217,255,.16);
+    border-radius:9px;
+    padding:12px 17px;
+    font-weight:700;
+    font-size:12px;
     transition:.2s;
 }
 
-.analyze-btn:hover{
+.btn-primary{
+    color:#031018;
+    background:linear-gradient(135deg,var(--cyan),#38bdf8);
+}
+
+.btn-primary:hover{
     transform:translateY(-1px);
-    box-shadow:0 12px 35px rgba(0,217,255,.24);
+    box-shadow:0 8px 25px rgba(34,211,238,.18);
 }
 
-/* =========================
-   RESULT
-========================= */
-
-.result{
-    display:none;
+.btn-secondary{
+    background:#111a26;
+    border:1px solid var(--border);
+    color:#9aabc0;
 }
 
-.result.visible{
-    display:block;
+.btn-secondary:hover{
+    color:#fff;
+    border-color:#33465d;
 }
 
-.empty-state{
-    min-height:300px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    color:var(--muted);
-}
+/* RESULTS */
 
-.ai-orb{
-    width:74px;
-    height:74px;
-    border-radius:50%;
-    border:1px solid rgba(0,217,255,.3);
-    background:rgba(0,217,255,.04);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--accent);
-    font-size:28px;
-    margin:0 auto 15px;
-    box-shadow:
-        0 0 30px rgba(0,217,255,.08),
-        inset 0 0 25px rgba(0,217,255,.04);
-}
-
-.empty-state p{
-    font-size:12px;
-    max-width:300px;
-    line-height:1.6;
-}
-
-.analysis-grid{
+.results{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-    margin-bottom:18px;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-top:20px;
 }
 
 .metric{
+    background:#0a111b;
     border:1px solid var(--border);
-    background:#071019;
-    border-radius:11px;
-    padding:15px;
+    border-radius:10px;
+    padding:14px;
 }
 
 .metric-label{
-    color:var(--muted);
-    font-size:10px;
+    font-size:9px;
     text-transform:uppercase;
+    color:#687a90;
     letter-spacing:1px;
     margin-bottom:8px;
 }
 
 .metric-value{
-    font-size:17px;
-    font-weight:800;
+    font-size:14px;
+    font-weight:700;
+}
+
+.category{
+    color:var(--cyan);
 }
 
 .priority-critical{
-    color:var(--danger);
+    color:var(--red);
 }
 
 .priority-high{
-    color:var(--warning);
+    color:#fb7185;
 }
 
 .priority-medium{
-    color:#e4cf63;
+    color:var(--yellow);
 }
 
 .priority-low{
-    color:var(--success);
+    color:var(--green);
 }
 
+/* CONFIDENCE */
+
 .confidence{
-    margin-top:17px;
+    margin-top:18px;
 }
 
 .confidence-top{
     display:flex;
     justify-content:space-between;
-    color:var(--muted);
+    margin-bottom:8px;
     font-size:11px;
-    margin-bottom:7px;
+    color:#8a9aae;
 }
 
 .progress{
     height:7px;
-    background:#111d28;
+    background:#172231;
     border-radius:20px;
     overflow:hidden;
 }
 
-.progress span{
-    display:block;
+.progress-bar{
     height:100%;
-    width:0;
-    background:linear-gradient(
-        90deg,
-        var(--accent),
-        var(--accent2)
-    );
-    transition:1s;
+    width:0%;
+    background:linear-gradient(90deg,var(--blue),var(--cyan));
+    border-radius:20px;
+    transition:width .5s ease;
 }
 
+/* RECOMMENDATION */
+
 .recommendation{
-    margin-top:18px;
-    border:1px solid rgba(0,217,255,.13);
-    background:rgba(0,217,255,.035);
-    border-radius:12px;
+    margin-top:20px;
+    background:rgba(34,211,238,.045);
+    border:1px solid rgba(34,211,238,.13);
+    border-radius:10px;
     padding:16px;
 }
 
 .recommendation-title{
-    color:var(--accent);
+    color:var(--cyan);
     font-size:11px;
-    font-weight:800;
+    font-weight:700;
     text-transform:uppercase;
     letter-spacing:1px;
     margin-bottom:8px;
 }
 
-.recommendation p{
-    color:#c4d1dd;
+.recommendation-text{
+    color:#aab7c8;
     font-size:12px;
     line-height:1.7;
+}
+
+/* CREATE */
+
+.create-area{
+    margin-top:20px;
+    padding-top:20px;
+    border-top:1px solid var(--border);
 }
 
 .create-btn{
     width:100%;
     padding:14px;
-    border-radius:10px;
-    border:1px solid rgba(69,212,131,.35);
-    color:#7af0a9;
-    background:rgba(69,212,131,.07);
+    border:none;
+    border-radius:9px;
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
     font-weight:800;
-    margin-top:18px;
+    font-size:12px;
+    letter-spacing:.3px;
     transition:.2s;
 }
 
 .create-btn:hover{
-    background:rgba(69,212,131,.12);
+    transform:translateY(-1px);
+    box-shadow:0 10px 30px rgba(37,99,235,.22);
 }
 
-/* =========================
-   HISTORY
-========================= */
+/* SIDE */
+
+.flow{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.flow-item{
+    background:#0a111b;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:15px;
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.flow-number{
+    width:28px;
+    height:28px;
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#111d2c;
+    color:var(--cyan);
+    font-size:11px;
+    font-weight:800;
+}
+
+.flow-text strong{
+    display:block;
+    font-size:12px;
+    margin-bottom:3px;
+}
+
+.flow-text span{
+    display:block;
+    color:#65758a;
+    font-size:10px;
+}
+
+.arrow{
+    text-align:center;
+    color:#33475e;
+    font-size:15px;
+}
+
+/* HISTORY */
 
 .history{
     margin-top:20px;
 }
 
-.history-item{
-    padding:13px 0;
-    border-bottom:1px solid rgba(24,40,56,.7);
+.history-list{
     display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
+    flex-direction:column;
+    gap:8px;
 }
 
-.history-item:last-child{
-    border-bottom:0;
+.history-item{
+    background:#0a111b;
+    border:1px solid var(--border);
+    border-radius:9px;
+    padding:13px;
 }
 
 .history-title{
     font-size:12px;
+    font-weight:700;
+    margin-bottom:5px;
 }
 
-.history-date{
-    color:var(--muted);
-    font-size:10px;
-    margin-top:4px;
-}
-
-.badge{
-    padding:5px 8px;
-    border-radius:6px;
-    font-size:9px;
-    font-weight:800;
-    text-transform:uppercase;
-}
-
-.badge-ai{
-    color:var(--accent);
-    background:rgba(0,217,255,.08);
-    border:1px solid rgba(0,217,255,.12);
-}
-
-/* =========================
-   FLOW
-========================= */
-
-.flow{
-    margin-top:20px;
-    padding:20px;
-    border:1px solid var(--border);
-    border-radius:14px;
-    background:#070e15;
-}
-
-.flow-title{
-    color:var(--muted);
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:1.5px;
-    margin-bottom:16px;
-}
-
-.flow-row{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.flow-box{
-    padding:11px 14px;
-    border:1px solid var(--border);
-    border-radius:9px;
-    color:#b9c8d6;
-    background:#0b141e;
+.history-meta{
+    color:#687a90;
     font-size:10px;
 }
 
-.flow-box.active{
-    color:var(--accent);
-    border-color:rgba(0,217,255,.3);
+.empty{
+    color:#617188;
+    font-size:12px;
+    line-height:1.6;
 }
 
-.arrow{
-    color:#496174;
+/* FOOTER */
+
+.footer{
+    padding:30px 34px;
+    color:#536276;
+    font-size:10px;
+    text-align:center;
 }
 
-/* =========================
-   TOAST
-========================= */
+/* TOAST */
 
 .toast{
     position:fixed;
     right:25px;
     bottom:25px;
+    background:#111a26;
+    border:1px solid #26374b;
+    color:#e8eef6;
     padding:13px 17px;
-    background:#0d1722;
-    border:1px solid var(--border);
-    border-radius:10px;
-    color:var(--text);
+    border-radius:9px;
     font-size:12px;
-    box-shadow:var(--shadow);
-    transform:translateY(100px);
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
     opacity:0;
+    transform:translateY(15px);
     pointer-events:none;
-    transition:.3s;
+    transition:.25s;
     z-index:100;
 }
 
 .toast.show{
-    transform:translateY(0);
     opacity:1;
+    transform:translateY(0);
 }
 
-.toast.success{
-    border-color:rgba(69,212,131,.35);
-}
-
-.toast.error{
-    border-color:rgba(255,93,115,.35);
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
+/* RESPONSIVE */
 
 @media(max-width:1000px){
+
+    .sidebar{
+        width:210px;
+    }
+
+    .main{
+        margin-left:210px;
+    }
 
     .grid{
         grid-template-columns:1fr;
     }
+
 }
 
-@media(max-width:760px){
+@media(max-width:700px){
 
     .sidebar{
-        width:70px;
-        padding:20px 10px;
-    }
-
-    .logo-text,
-    .nav-title,
-    .nav-item span,
-    .status-box{
-        display:none;
-    }
-
-    .logo{
-        justify-content:center;
-    }
-
-    .nav-item{
-        justify-content:center;
+        position:relative;
+        width:100%;
+        height:auto;
+        border-right:none;
+        border-bottom:1px solid var(--border);
     }
 
     .main{
-        margin-left:70px;
-        width:calc(100% - 70px);
+        margin-left:0;
     }
 
     .topbar{
@@ -692,542 +612,486 @@ textarea::placeholder{
     }
 
     .content{
-        padding:22px 15px;
+        padding:22px 16px;
     }
 
-    h1{
+    .hero h1{
         font-size:25px;
     }
 
-    .hero{
-        gap:15px;
+    .results{
+        grid-template-columns:repeat(2,1fr);
     }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="app">
+<!-- SIDEBAR -->
 
-    <!-- SIDEBAR -->
+<aside class="sidebar">
 
-    <aside class="sidebar">
+    <div class="logo">
 
-        <div class="logo">
-
-            <div class="logo-icon">
-                ✦
-            </div>
-
-            <div class="logo-text">
-
-                <strong>
-                    AI SYSTEM
-                </strong>
-
-                <span>
-                    Incident Intelligence
-                </span>
-
-            </div>
-
+        <div class="logo-icon">
+            AI
         </div>
 
-
-        <div class="nav-title">
-            Analyzer
+        <div>
+            <strong>Incident AI</strong>
+            <span>Analyzer System</span>
         </div>
 
+    </div>
 
-        <a
-            class="nav-item active"
-            href="#"
-        >
-            <span>◈</span>
-            <span>AI Analyzer</span>
-        </a>
+    <div class="nav-title">
+        Navegação
+    </div>
 
+    <nav class="nav">
 
-        <!-- CORRIGIDO:
-             ../ = ai-incident-analyzer
-             ../../ = raiz do incident-manager
-        -->
-
-        <a
-            class="nav-item"
-            href="../../"
-        >
-            <span>▣</span>
+        <!-- VOLTA PARA O INCIDENT MANAGER -->
+        <a href="../../">
+            🖥️
             <span>Incident Manager</span>
         </a>
 
+        <a href="#" class="active">
+            ⚡
+            <span>AI Analyzer</span>
+        </a>
 
-        <div class="nav-title">
-            System
+    </nav>
+
+    <div class="nav-title">
+        Sistema
+    </div>
+
+    <nav class="nav">
+
+        <a href="#history">
+            🧠
+            <span>Histórico de análises</span>
+        </a>
+
+        <a href="#flow">
+            🔗
+            <span>Fluxo do sistema</span>
+        </a>
+
+    </nav>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+    <header class="topbar">
+
+        <div class="topbar-title">
+            AI Incident Analyzer
         </div>
 
+        <div class="topbar-right">
 
-        <a
-            class="nav-item"
-            href="#"
-            onclick="showArchitecture(); return false;"
-        >
-            <span>⌁</span>
-            <span>Arquitetura</span>
-        </a>
-
-
-        <a
-            class="nav-item"
-            href="#"
-            onclick="clearHistory(); return false;"
-        >
-            <span>↻</span>
-            <span>Limpar histórico</span>
-        </a>
-
-
-        <div class="status-box">
-
-            <div class="status-line">
-
-                <span>
-                    <i class="status-dot"></i>
-                    Analyzer
-                </span>
-
-                <strong style="color:#45d483">
-                    ONLINE
-                </strong>
-
+            <div class="status">
+                <span class="status-dot"></span>
+                AI Engine Online
             </div>
 
-
-            <div class="status-line">
-
-                <span>
-                    <i class="status-dot"></i>
-                    Queue
-                </span>
-
-                <strong
-                    id="queueCount"
-                    style="color:#45d483"
-                >
-                    0
-                </strong>
-
+            <div class="avatar">
+                JM
             </div>
 
         </div>
 
-    </aside>
+    </header>
 
 
-    <!-- MAIN -->
+    <section class="content">
 
-    <main class="main">
+        <div class="hero">
 
-        <header class="topbar">
-
-            <div class="breadcrumb">
-                SYSTEM /
-                <strong>
-                    AI INCIDENT ANALYZER
-                </strong>
+            <div class="badge">
+                ⚡ INTELLIGENT INCIDENT ANALYSIS
             </div>
 
+            <h1>
+                AI Incident Analyzer
+            </h1>
 
-            <div class="user">
+            <p>
+                Analise automaticamente uma descrição de incidente,
+                classifique sua categoria, prioridade e impacto,
+                receba uma recomendação e envie o resultado
+                diretamente para o Incident Manager.
+            </p>
 
-                <span
-                    style="
-                    color:var(--muted);
-                    font-size:11px;
-                    "
-                >
-                    Jessica Monteiro
-                </span>
+        </div>
 
 
-                <div class="avatar">
-                    JM
-                </div>
+        <div class="grid">
 
-            </div>
+            <!-- ANALYZER -->
 
-        </header>
-
-
-        <section class="content">
-
-            <!-- HERO -->
-
-            <div class="hero">
-
-                <div>
-
-                    <div class="eyebrow">
-                        ARTIFICIAL INTELLIGENCE
-                        •
-                        INCIDENT MANAGEMENT
-                    </div>
-
-
-                    <h1>
-                        AI Incident Analyzer
-                    </h1>
-
-
-                    <p class="subtitle">
-
-                        Analise automaticamente
-                        a descrição de um problema,
-                        identifique categoria,
-                        prioridade e impacto
-                        e gere recomendações
-                        para tratamento do incidente.
-
-                    </p>
-
-                </div>
-
-
-                <div class="version">
-                    v1.0.0 • AI ENGINE
-                </div>
-
-            </div>
-
-
-            <!-- GRID -->
-
-            <div class="grid">
-
-                <!-- INPUT -->
-
-                <section class="card">
-
-                    <div class="card-header">
-
-                        <div>
-
-                            <div class="card-title">
-                                Nova análise
-                            </div>
-
-                            <div class="card-description">
-                                Descreva o problema identificado
-                            </div>
-
-                        </div>
-
-                        <span
-                            style="color:var(--accent)"
-                        >
-                            ◉
-                        </span>
-
-                    </div>
-
-
-                    <div class="card-body">
-
-                        <textarea
-                            id="incidentInput"
-                            placeholder="Exemplo:
-
-O servidor principal está indisponível e todos os usuários estão sem acesso ao sistema desde 14h."
-                        ></textarea>
-
-
-                        <button
-                            class="analyze-btn"
-                            onclick="analyzeIncident()"
-                        >
-                            ⚡ ANALISAR INCIDENTE
-                        </button>
-
-                    </div>
-
-                </section>
-
-
-                <!-- RESULT -->
-
-                <section class="card">
-
-                    <div class="card-header">
-
-                        <div>
-
-                            <div class="card-title">
-                                Resultado da análise
-                            </div>
-
-                            <div class="card-description">
-                                Classificação inteligente do incidente
-                            </div>
-
-                        </div>
-
-                        <span
-                            style="color:var(--accent)"
-                        >
-                            AI
-                        </span>
-
-                    </div>
-
-
-                    <div class="card-body">
-
-                        <!-- EMPTY -->
-
-                        <div
-                            id="emptyState"
-                            class="empty-state"
-                        >
-
-                            <div>
-
-                                <div class="ai-orb">
-                                    ✦
-                                </div>
-
-
-                                <p>
-
-                                    Aguardando uma
-                                    descrição para iniciar
-                                    a análise do incidente.
-
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- RESULT -->
-
-                        <div
-                            id="result"
-                            class="result"
-                        >
-
-                            <div class="analysis-grid">
-
-                                <div class="metric">
-
-                                    <div class="metric-label">
-                                        Categoria
-                                    </div>
-
-                                    <div
-                                        id="resultCategory"
-                                        class="metric-value"
-                                    >
-                                        —
-                                    </div>
-
-                                </div>
-
-
-                                <div class="metric">
-
-                                    <div class="metric-label">
-                                        Prioridade
-                                    </div>
-
-                                    <div
-                                        id="resultPriority"
-                                        class="metric-value"
-                                    >
-                                        —
-                                    </div>
-
-                                </div>
-
-
-                                <div class="metric">
-
-                                    <div class="metric-label">
-                                        Impacto
-                                    </div>
-
-                                    <div
-                                        id="resultImpact"
-                                        class="metric-value"
-                                    >
-                                        —
-                                    </div>
-
-                                </div>
-
-
-                                <div class="metric">
-
-                                    <div class="metric-label">
-                                        Status
-                                    </div>
-
-                                    <div class="metric-value">
-                                        Aberto
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="confidence">
-
-                                <div class="confidence-top">
-
-                                    <span>
-                                        Confiança da análise
-                                    </span>
-
-                                    <strong
-                                        id="confidenceText"
-                                    >
-                                        0%
-                                    </strong>
-
-                                </div>
-
-
-                                <div class="progress">
-
-                                    <span
-                                        id="confidenceBar"
-                                    ></span>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="recommendation">
-
-                                <div class="recommendation-title">
-                                    Recomendação da IA
-                                </div>
-
-
-                                <p id="recommendation">
-                                    —
-                                </p>
-
-                            </div>
-
-
-                            <button
-                                class="create-btn"
-                                onclick="createIncident()"
-                            >
-                                ⚡ CRIAR INCIDENTE NO INCIDENT MANAGER
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-            </div>
-
-
-            <!-- HISTORY -->
-
-            <section class="card history">
+            <div class="card">
 
                 <div class="card-header">
 
                     <div>
-
                         <div class="card-title">
-                            Histórico de análises
+                            Analisar incidente
                         </div>
 
-                        <div class="card-description">
-                            Últimas análises realizadas neste navegador
+                        <div class="card-subtitle">
+                            Descreva o problema identificado no ambiente.
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <textarea
+                    id="incidentDescription"
+                    placeholder="Exemplo:
+
+O servidor principal está indisponível e todos os usuários estão sem acesso ao sistema desde 14h."
+                ></textarea>
+
+
+                <div class="actions">
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="analyzeIncident()"
+                    >
+                        ⚡ ANALISAR INCIDENTE
+                    </button>
+
+                    <button
+                        class="btn btn-secondary"
+                        onclick="clearAnalyzer()"
+                    >
+                        LIMPAR
+                    </button>
+
+                </div>
+
+
+                <!-- RESULTS -->
+
+                <div class="results">
+
+                    <div class="metric">
+
+                        <div class="metric-label">
+                            Categoria
+                        </div>
+
+                        <div
+                            id="category"
+                            class="metric-value category"
+                        >
+                            —
                         </div>
 
                     </div>
 
 
-                    <span
-                        id="historyCount"
-                        style="
-                        color:var(--muted);
-                        font-size:11px;
-                        "
-                    >
-                        0 análises
-                    </span>
+                    <div class="metric">
+
+                        <div class="metric-label">
+                            Prioridade
+                        </div>
+
+                        <div
+                            id="priority"
+                            class="metric-value"
+                        >
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="metric">
+
+                        <div class="metric-label">
+                            Impacto
+                        </div>
+
+                        <div
+                            id="impact"
+                            class="metric-value"
+                        >
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="metric">
+
+                        <div class="metric-label">
+                            Status
+                        </div>
+
+                        <div
+                            id="status"
+                            class="metric-value"
+                        >
+                            Aguardando
+                        </div>
+
+                    </div>
 
                 </div>
 
+
+                <!-- CONFIDENCE -->
+
+                <div class="confidence">
+
+                    <div class="confidence-top">
+
+                        <span>
+                            Confiança da análise
+                        </span>
+
+                        <strong id="confidence">
+                            0%
+                        </strong>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            id="confidenceBar"
+                            class="progress-bar"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RECOMMENDATION -->
+
+                <div class="recommendation">
+
+                    <div class="recommendation-title">
+                        Recomendação
+                    </div>
+
+                    <div
+                        id="recommendation"
+                        class="recommendation-text"
+                    >
+                        Aguardando análise do incidente.
+                    </div>
+
+                </div>
+
+
+                <!-- CREATE INCIDENT -->
+
+                <div class="create-area">
+
+                    <button
+                        class="create-btn"
+                        onclick="createIncident()"
+                    >
+                        ⚡ CRIAR INCIDENTE NO INCIDENT MANAGER
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+
+            <div>
+
+                <div class="card" id="flow">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <div class="card-title">
+                                Fluxo inteligente
+                            </div>
+
+                            <div class="card-subtitle">
+                                Pipeline de análise
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="flow">
+
+                        <div class="flow-item">
+
+                            <div class="flow-number">
+                                01
+                            </div>
+
+                            <div class="flow-text">
+
+                                <strong>
+                                    Entrada
+                                </strong>
+
+                                <span>
+                                    Descrição do incidente
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="arrow">
+                            ↓
+                        </div>
+
+
+                        <div class="flow-item">
+
+                            <div class="flow-number">
+                                02
+                            </div>
+
+                            <div class="flow-text">
+
+                                <strong>
+                                    Análise
+                                </strong>
+
+                                <span>
+                                    Classificação inteligente
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="arrow">
+                            ↓
+                        </div>
+
+
+                        <div class="flow-item">
+
+                            <div class="flow-number">
+                                03
+                            </div>
+
+                            <div class="flow-text">
+
+                                <strong>
+                                    Decisão
+                                </strong>
+
+                                <span>
+                                    Prioridade e impacto
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="arrow">
+                            ↓
+                        </div>
+
+
+                        <div class="flow-item">
+
+                            <div class="flow-number">
+                                04
+                            </div>
+
+                            <div class="flow-text">
+
+                                <strong>
+                                    Incident Manager
+                                </strong>
+
+                                <span>
+                                    Registro automático
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HISTORY -->
 
                 <div
-                    class="card-body"
-                    id="historyList"
-                ></div>
+                    class="card history"
+                    id="history"
+                >
 
-            </section>
+                    <div class="card-header">
 
+                        <div>
 
-            <!-- FLOW -->
+                            <div class="card-title">
+                                Histórico
+                            </div>
 
-            <section class="flow">
+                            <div class="card-subtitle">
+                                Últimas análises realizadas
+                            </div>
 
-                <div class="flow-title">
-                    Fluxo do sistema
-                </div>
+                        </div>
 
-
-                <div class="flow-row">
-
-                    <div class="flow-box active">
-                        DESCRIÇÃO
                     </div>
 
-                    <div class="arrow">
-                        →
-                    </div>
 
-                    <div class="flow-box active">
-                        AI ANALYZER
-                    </div>
+                    <div
+                        id="historyList"
+                        class="history-list"
+                    >
 
-                    <div class="arrow">
-                        →
-                    </div>
+                        <div class="empty">
+                            Nenhuma análise realizada ainda.
+                        </div>
 
-                    <div class="flow-box">
-                        CLASSIFICAÇÃO
-                    </div>
-
-                    <div class="arrow">
-                        →
-                    </div>
-
-                    <div class="flow-box">
-                        INCIDENT MANAGER
                     </div>
 
                 </div>
 
-            </section>
+            </div>
 
-        </section>
+        </div>
 
-    </main>
+    </section>
 
-</div>
+
+    <div class="footer">
+        AI Incident Analyzer • Jessica Monteiro • Technology & Automation
+    </div>
+
+</main>
 
 
 <div
@@ -1242,600 +1106,42 @@ O servidor principal está indisponível e todos os usuários estão sem acesso 
    CONFIGURAÇÃO
 ========================================================= */
 
-const AI_HISTORY_KEY =
-    "aiIncidentAnalyzerHistory";
+const QUEUE_KEY = "incidentManagerAIQueue";
+const HISTORY_KEY = "incidentAnalyzerHistory";
 
-const AI_QUEUE_KEY =
-    "incidentManagerAIQueue";
-
-
-let currentAnalysis = null;
+let lastAnalysis = null;
 
 
 /* =========================================================
    ELEMENTOS
 ========================================================= */
 
-const input =
-    document.getElementById(
-        "incidentInput"
-    );
+const descriptionInput =
+    document.getElementById("incidentDescription");
 
-const result =
-    document.getElementById(
-        "result"
-    );
+const categoryElement =
+    document.getElementById("category");
 
-const emptyState =
-    document.getElementById(
-        "emptyState"
-    );
+const priorityElement =
+    document.getElementById("priority");
+
+const impactElement =
+    document.getElementById("impact");
+
+const statusElement =
+    document.getElementById("status");
+
+const confidenceElement =
+    document.getElementById("confidence");
+
+const confidenceBar =
+    document.getElementById("confidenceBar");
+
+const recommendationElement =
+    document.getElementById("recommendation");
 
 const historyList =
-    document.getElementById(
-        "historyList"
-    );
-
-const historyCount =
-    document.getElementById(
-        "historyCount"
-    );
-
-const queueCount =
-    document.getElementById(
-        "queueCount"
-    );
-
-
-/* =========================================================
-   REGRAS DE CLASSIFICAÇÃO
-========================================================= */
-
-const rules = {
-
-    infrastructure: [
-
-        "servidor",
-        "server",
-        "infraestrutura",
-        "infra",
-        "switch",
-        "roteador",
-        "router",
-        "firewall",
-        "datacenter",
-        "data center",
-        "cpu",
-        "memória",
-        "ram",
-        "disco",
-        "storage",
-        "hardware"
-
-    ],
-
-
-    database: [
-
-        "banco",
-        "database",
-        "sql",
-        "postgres",
-        "mysql",
-        "oracle",
-        "tabela",
-        "query",
-        "consulta",
-        "conexão com banco"
-
-    ],
-
-
-    application: [
-
-        "sistema",
-        "aplicação",
-        "aplicativo",
-        "software",
-        "app",
-        "portal",
-        "site",
-        "erro",
-        "bug",
-        "falha",
-        "tela",
-        "página"
-
-    ],
-
-
-    security: [
-
-        "senha",
-        "login",
-        "autenticação",
-        "acesso não autorizado",
-        "hack",
-        "ataque",
-        "vírus",
-        "malware",
-        "phishing",
-        "segurança",
-        "credencial"
-
-    ],
-
-
-    network: [
-
-        "wifi",
-        "wi-fi",
-        "internet",
-        "vpn",
-        "conectividade",
-        "conexão",
-        "rede",
-        "latência",
-        "ping"
-
-    ],
-
-
-    integration: [
-
-        "integração",
-        "api",
-        "webhook",
-        "serviço externo",
-        "terceiro",
-        "integração externa"
-
-    ]
-
-};
-
-
-/* =========================================================
-   CONTAGEM
-========================================================= */
-
-function countMatches(
-    text,
-    keywords
-){
-
-    let score = 0;
-
-
-    keywords.forEach(
-        keyword => {
-
-            if(
-                text.includes(keyword)
-            ){
-
-                score++;
-
-            }
-
-        }
-    );
-
-
-    return score;
-}
-
-
-/* =========================================================
-   CATEGORIA
-========================================================= */
-
-function detectCategory(text){
-
-    const scores = {
-
-        "Infraestrutura":
-            countMatches(
-                text,
-                rules.infrastructure
-            ),
-
-        "Banco de Dados":
-            countMatches(
-                text,
-                rules.database
-            ),
-
-        "Aplicação":
-            countMatches(
-                text,
-                rules.application
-            ),
-
-        "Segurança":
-            countMatches(
-                text,
-                rules.security
-            ),
-
-        "Rede":
-            countMatches(
-                text,
-                rules.network
-            ),
-
-        "Integração":
-            countMatches(
-                text,
-                rules.integration
-            )
-
-    };
-
-
-    let bestCategory =
-        "Aplicação";
-
-
-    let bestScore = 0;
-
-
-    Object.entries(
-        scores
-    ).forEach(
-        ([category, score]) => {
-
-            if(
-                score > bestScore
-            ){
-
-                bestScore =
-                    score;
-
-                bestCategory =
-                    category;
-
-            }
-
-        }
-    );
-
-
-    return bestCategory;
-}
-
-
-/* =========================================================
-   PRIORIDADE
-========================================================= */
-
-function detectPriority(text){
-
-    const critical = [
-
-        "todos os usuários",
-        "todo mundo",
-        "sistema indisponível",
-        "servidor indisponível",
-        "serviço indisponível",
-        "fora do ar",
-        "produção parada",
-        "sem acesso",
-        "indisponível",
-        "queda total",
-        "todos estão sem acesso",
-        "impacto total"
-
-    ];
-
-
-    const high = [
-
-        "muitos usuários",
-        "grande parte",
-        "lentidão grave",
-        "erro grave",
-        "falha grave",
-        "produção",
-        "não consegue acessar",
-        "não conseguem acessar",
-        "intermitente",
-        "falha de autenticação"
-
-    ];
-
-
-    const medium = [
-
-        "lentidão",
-        "erro",
-        "falha",
-        "problema",
-        "demora",
-        "instabilidade"
-
-    ];
-
-
-    if(
-        critical.some(
-            word =>
-                text.includes(word)
-        )
-    ){
-
-        return "Crítico";
-
-    }
-
-
-    if(
-        high.some(
-            word =>
-                text.includes(word)
-        )
-    ){
-
-        return "Alto";
-
-    }
-
-
-    if(
-        medium.some(
-            word =>
-                text.includes(word)
-        )
-    ){
-
-        return "Médio";
-
-    }
-
-
-    return "Baixo";
-}
-
-
-/* =========================================================
-   IMPACTO
-========================================================= */
-
-function detectImpact(text){
-
-    const highImpact = [
-
-        "todos os usuários",
-        "todo mundo",
-        "produção parada",
-        "sistema indisponível",
-        "servidor indisponível",
-        "todos estão sem acesso",
-        "sem acesso",
-        "queda total"
-
-    ];
-
-
-    const mediumImpact = [
-
-        "muitos usuários",
-        "grande parte",
-        "produção",
-        "lentidão",
-        "intermitente",
-        "indisponível"
-
-    ];
-
-
-    if(
-        highImpact.some(
-            word =>
-                text.includes(word)
-        )
-    ){
-
-        return "Alto";
-
-    }
-
-
-    if(
-        mediumImpact.some(
-            word =>
-                text.includes(word)
-        )
-    ){
-
-        return "Médio";
-
-    }
-
-
-    return "Baixo";
-}
-
-
-/* =========================================================
-   CONFIANÇA
-========================================================= */
-
-function calculateConfidence(text){
-
-    let confidence = 70;
-
-
-    if(
-        text.length > 80
-    ){
-
-        confidence += 5;
-
-    }
-
-
-    if(
-        text.length > 150
-    ){
-
-        confidence += 5;
-
-    }
-
-
-    if(
-        text.includes("todos") ||
-        text.includes("indisponível") ||
-        text.includes("falha")
-    ){
-
-        confidence += 6;
-
-    }
-
-
-    return Math.min(
-        confidence,
-        96
-    );
-}
-
-
-/* =========================================================
-   RECOMENDAÇÃO
-========================================================= */
-
-function generateRecommendation(
-    category,
-    priority,
-    impact
-){
-
-    if(
-        priority === "Crítico"
-    ){
-
-        return `
-Incidente crítico identificado. Recomenda-se iniciar atendimento imediato,
-verificar disponibilidade dos serviços envolvidos, acionar o responsável
-técnico e comunicar os usuários afetados. Priorizar a restauração do
-serviço antes da análise detalhada da causa raiz.
-        `.trim();
-
-    }
-
-
-    if(
-        priority === "Alto"
-    ){
-
-        return `
-Incidente de alta prioridade. Recomenda-se iniciar investigação
-imediatamente, verificar logs e dependências do serviço e acompanhar
-o impacto até a normalização.
-        `.trim();
-
-    }
-
-
-    if(
-        category === "Segurança"
-    ){
-
-        return `
-Recomenda-se validar os registros de autenticação, verificar possíveis
-acessos indevidos, preservar evidências e seguir o procedimento de
-resposta a incidentes de segurança.
-        `.trim();
-
-    }
-
-
-    if(
-        category === "Banco de Dados"
-    ){
-
-        return `
-Recomenda-se verificar conectividade, disponibilidade do banco,
-logs, consultas com erro e consumo de recursos antes de aplicar
-qualquer alteração em produção.
-        `.trim();
-
-    }
-
-
-    if(
-        category === "Rede"
-    ){
-
-        return `
-Recomenda-se verificar conectividade, equipamentos de rede,
-latência, DNS, VPN e possíveis indisponibilidades nos serviços
-de infraestrutura relacionados.
-        `.trim();
-
-    }
-
-
-    return `
-Recomenda-se validar os logs da aplicação, reproduzir o problema,
-identificar o serviço afetado e acompanhar a resolução até a
-normalização do ambiente.
-    `.trim();
-}
-
-
-/* =========================================================
-   GERAR TÍTULO
-========================================================= */
-
-function generateTitle(
-    description
-){
-
-    const original =
-        description.trim();
-
-
-    if(
-        original.length <= 65
-    ){
-
-        return original;
-
-    }
-
-
-    const words =
-        original.split(/\s+/);
-
-
-    let title = "";
-
-
-    for(
-        const word of words
-    ){
-
-        if(
-            (title + " " + word).length > 62
-        ){
-
-            break;
-
-        }
-
-
-        title +=
-            (title ? " " : "") +
-            word;
-
-    }
-
-
-    return title + "...";
-}
+    document.getElementById("historyList");
 
 
 /* =========================================================
@@ -1845,76 +1151,293 @@ function generateTitle(
 function analyzeIncident(){
 
     const description =
-        input.value
-            .trim()
-            .toLowerCase();
+        descriptionInput.value.trim();
 
-
-    if(
-        !description
-    ){
+    if(!description){
 
         showToast(
-            "Digite uma descrição do incidente.",
-            "error"
+            "Digite uma descrição para analisar o incidente."
         );
 
-        input.focus();
+        descriptionInput.focus();
 
         return;
     }
 
 
-    const category =
-        detectCategory(
-            description
-        );
+    const text =
+        description.toLowerCase();
 
 
-    const priority =
-        detectPriority(
-            description
-        );
+    /* =========================
+       CATEGORIA
+    ========================= */
+
+    let category =
+        "Aplicação";
 
 
-    const impact =
-        detectImpact(
-            description
-        );
+    if(
+        text.includes("servidor") ||
+        text.includes("server") ||
+        text.includes("infraestrutura") ||
+        text.includes("máquina") ||
+        text.includes("indisponível") ||
+        text.includes("indisponivel")
+    ){
+
+        category =
+            "Infraestrutura";
+
+    }
+
+    else if(
+        text.includes("banco") ||
+        text.includes("database") ||
+        text.includes("sql") ||
+        text.includes("query")
+    ){
+
+        category =
+            "Banco de Dados";
+
+    }
+
+    else if(
+        text.includes("senha") ||
+        text.includes("login") ||
+        text.includes("autenticação") ||
+        text.includes("autenticacao") ||
+        text.includes("acesso não autorizado") ||
+        text.includes("segurança")
+    ){
+
+        category =
+            "Segurança";
+
+    }
+
+    else if(
+        text.includes("rede") ||
+        text.includes("internet") ||
+        text.includes("conexão") ||
+        text.includes("conexao") ||
+        text.includes("vpn") ||
+        text.includes("wi-fi") ||
+        text.includes("wifi")
+    ){
+
+        category =
+            "Rede";
+
+    }
+
+    else if(
+        text.includes("integração") ||
+        text.includes("integracao") ||
+        text.includes("api") ||
+        text.includes("webhook") ||
+        text.includes("serviço externo") ||
+        text.includes("servico externo")
+    ){
+
+        category =
+            "Integração";
+
+    }
 
 
-    const confidence =
-        calculateConfidence(
-            description
-        );
+    /* =========================
+       PRIORIDADE
+    ========================= */
+
+    let priority =
+        "Baixo";
 
 
-    const recommendation =
-        generateRecommendation(
-            category,
-            priority,
-            impact
-        );
+    if(
+        text.includes("todos os usuários") ||
+        text.includes("todos os usuarios") ||
+        text.includes("sistema indisponível") ||
+        text.includes("sistema indisponivel") ||
+        text.includes("servidor principal") ||
+        text.includes("produção parada") ||
+        text.includes("producao parada") ||
+        text.includes("crítico") ||
+        text.includes("critico") ||
+        text.includes("urgente")
+    ){
+
+        priority =
+            "Crítico";
+
+    }
+
+    else if(
+        text.includes("muitos usuários") ||
+        text.includes("muitos usuarios") ||
+        text.includes("erro grave") ||
+        text.includes("falha grave") ||
+        text.includes("impacto alto") ||
+        text.includes("indisponibilidade")
+    ){
+
+        priority =
+            "Alto";
+
+    }
+
+    else if(
+        text.includes("lentidão") ||
+        text.includes("lentidao") ||
+        text.includes("erro") ||
+        text.includes("falha") ||
+        text.includes("problema")
+    ){
+
+        priority =
+            "Médio";
+
+    }
 
 
-    currentAnalysis = {
+    /* =========================
+       IMPACTO
+    ========================= */
 
-        aiId:
-            "AI-" +
-            Date.now() +
-            "-" +
-            Math.random()
-                .toString(36)
-                .substring(2,7)
-                .toUpperCase(),
+    let impact =
+        "Baixo";
 
-        title:
-            generateTitle(
-                input.value.trim()
-            ),
 
-        description:
-            input.value.trim(),
+    if(
+        priority === "Crítico" ||
+        text.includes("todos os usuários") ||
+        text.includes("todos os usuarios")
+    ){
+
+        impact =
+            "Alto";
+
+    }
+
+    else if(
+        priority === "Alto" ||
+        priority === "Médio"
+    ){
+
+        impact =
+            "Médio";
+
+    }
+
+
+    /* =========================
+       CONFIANÇA
+    ========================= */
+
+    let confidence =
+        76;
+
+
+    if(
+        category === "Infraestrutura" &&
+        priority === "Crítico"
+    ){
+
+        confidence =
+            96;
+
+    }
+
+    else if(
+        category === "Infraestrutura"
+    ){
+
+        confidence =
+            91;
+
+    }
+
+    else if(
+        category === "Banco de Dados" ||
+        category === "Segurança"
+    ){
+
+        confidence =
+            89;
+
+    }
+
+    else if(
+        category === "Rede" ||
+        category === "Integração"
+    ){
+
+        confidence =
+            86;
+
+    }
+
+
+    /* =========================
+       RECOMENDAÇÃO
+    ========================= */
+
+    let recommendation =
+        "Investigue o incidente, valide os logs e registre todas as ações realizadas.";
+
+
+    if(category === "Infraestrutura"){
+
+        recommendation =
+            "Verifique disponibilidade dos servidores, CPU, memória, serviços ativos, logs do sistema e conectividade.";
+
+    }
+
+    else if(category === "Banco de Dados"){
+
+        recommendation =
+            "Verifique disponibilidade do banco, conexões, queries em execução, locks, capacidade e logs.";
+
+    }
+
+    else if(category === "Segurança"){
+
+        recommendation =
+            "Verifique logs de autenticação, permissões, tentativas de acesso e possíveis eventos de segurança.";
+
+    }
+
+    else if(category === "Rede"){
+
+        recommendation =
+            "Verifique conectividade, DNS, firewall, VPN, switches, roteadores e disponibilidade do serviço.";
+
+    }
+
+    else if(category === "Integração"){
+
+        recommendation =
+            "Verifique APIs, endpoints, autenticação, respostas HTTP, logs e disponibilidade do serviço externo.";
+
+    }
+
+
+    if(priority === "Crítico"){
+
+        recommendation +=
+            " Devido à prioridade crítica, recomenda-se atuação imediata e escalonamento da equipe responsável.";
+
+    }
+
+
+    /* =========================
+       SALVAR RESULTADO
+    ========================= */
+
+    lastAnalysis = {
+
+        description,
 
         category,
 
@@ -1924,129 +1447,53 @@ function analyzeIncident(){
 
         confidence,
 
-        status:
-            "Aberto",
-
-        responsible:
-            "JM",
-
-        source:
-            "AI Incident Analyzer",
-
         recommendation,
 
-        createdAt:
+        analyzedAt:
             new Date().toISOString()
 
     };
 
 
-    showResult(
-        currentAnalysis
-    );
+    /* =========================
+       ATUALIZAR INTERFACE
+    ========================= */
+
+    categoryElement.textContent =
+        category;
+
+    priorityElement.textContent =
+        priority;
+
+    impactElement.textContent =
+        impact;
+
+    statusElement.textContent =
+        "Analisado";
+
+    confidenceElement.textContent =
+        confidence + "%";
+
+    confidenceBar.style.width =
+        confidence + "%";
+
+    recommendationElement.textContent =
+        recommendation;
 
 
-    saveAnalysis(
-        currentAnalysis
-    );
+    priorityElement.className =
+        "metric-value " +
+        getPriorityClass(priority);
 
+
+    saveHistory(lastAnalysis);
 
     renderHistory();
 
-
-    updateQueueCount();
-
-
     showToast(
-        "Análise concluída com sucesso.",
-        "success"
-    );
-}
-
-
-/* =========================================================
-   MOSTRAR RESULTADO
-========================================================= */
-
-function showResult(
-    data
-){
-
-    emptyState.style.display =
-        "none";
-
-
-    result.classList.add(
-        "visible"
+        "Incidente analisado com sucesso."
     );
 
-
-    const category =
-        document.getElementById(
-            "resultCategory"
-        );
-
-
-    const priority =
-        document.getElementById(
-            "resultPriority"
-        );
-
-
-    const impact =
-        document.getElementById(
-            "resultImpact"
-        );
-
-
-    category.textContent =
-        data.category;
-
-
-    priority.textContent =
-        data.priority;
-
-
-    impact.textContent =
-        data.impact;
-
-
-    priority.className =
-        "metric-value " +
-        getPriorityClass(
-            data.priority
-        );
-
-
-    document.getElementById(
-        "confidenceText"
-    ).textContent =
-        data.confidence + "%";
-
-
-    document.getElementById(
-        "confidenceBar"
-    ).style.width =
-        "0%";
-
-
-    setTimeout(
-        () => {
-
-            document.getElementById(
-                "confidenceBar"
-            ).style.width =
-                data.confidence + "%";
-
-        },
-        100
-    );
-
-
-    document.getElementById(
-        "recommendation"
-    ).textContent =
-        data.recommendation;
 }
 
 
@@ -2054,176 +1501,19 @@ function showResult(
    CLASSE DE PRIORIDADE
 ========================================================= */
 
-function getPriorityClass(
-    priority
-){
+function getPriorityClass(priority){
 
-    if(
-        priority === "Crítico"
-    ){
-
+    if(priority === "Crítico")
         return "priority-critical";
 
-    }
-
-
-    if(
-        priority === "Alto"
-    ){
-
+    if(priority === "Alto")
         return "priority-high";
 
-    }
-
-
-    if(
-        priority === "Médio"
-    ){
-
+    if(priority === "Médio")
         return "priority-medium";
 
-    }
-
-
     return "priority-low";
-}
 
-
-/* =========================================================
-   SALVAR ANÁLISE
-========================================================= */
-
-function saveAnalysis(
-    data
-){
-
-    let history =
-        JSON.parse(
-            localStorage.getItem(
-                AI_HISTORY_KEY
-            )
-        ) || [];
-
-
-    history.unshift(
-        data
-    );
-
-
-    history =
-        history.slice(
-            0,
-            20
-        );
-
-
-    localStorage.setItem(
-        AI_HISTORY_KEY,
-        JSON.stringify(
-            history
-        )
-    );
-}
-
-
-/* =========================================================
-   HISTÓRICO
-========================================================= */
-
-function renderHistory(){
-
-    const history =
-        JSON.parse(
-            localStorage.getItem(
-                AI_HISTORY_KEY
-            )
-        ) || [];
-
-
-    historyCount.textContent =
-        history.length +
-        (
-            history.length === 1
-                ? " análise"
-                : " análises"
-        );
-
-
-    if(
-        history.length === 0
-    ){
-
-        historyList.innerHTML = `
-            <div style="
-                color:var(--muted);
-                font-size:12px;
-                text-align:center;
-                padding:20px;
-            ">
-                Nenhuma análise realizada ainda.
-            </div>
-        `;
-
-        return;
-    }
-
-
-    historyList.innerHTML =
-        history
-            .slice(0,8)
-            .map(
-                item => {
-
-                    const date =
-                        new Date(
-                            item.createdAt
-                        ).toLocaleString(
-                            "pt-BR",
-                            {
-                                day:"2-digit",
-                                month:"2-digit",
-                                year:"numeric",
-                                hour:"2-digit",
-                                minute:"2-digit"
-                            }
-                        );
-
-
-                    return `
-                        <div class="history-item">
-
-                            <div>
-
-                                <div class="history-title">
-                                    ${escapeHtml(
-                                        item.title
-                                    )}
-                                </div>
-
-                                <div class="history-date">
-                                    ${date}
-                                    •
-                                    ${escapeHtml(
-                                        item.category
-                                    )}
-                                    •
-                                    ${escapeHtml(
-                                        item.priority
-                                    )}
-                                </div>
-
-                            </div>
-
-                            <span class="badge badge-ai">
-                                AI
-                            </span>
-
-                        </div>
-                    `;
-
-                }
-            )
-            .join("");
 }
 
 
@@ -2233,190 +1523,277 @@ function renderHistory(){
 
 function createIncident(){
 
-    if(
-        !currentAnalysis
-    ){
+    if(!lastAnalysis){
 
         showToast(
-            "Faça uma análise primeiro.",
-            "error"
+            "Analise um incidente antes de criar o registro."
         );
 
         return;
     }
 
-
-    let queue =
-        JSON.parse(
-            localStorage.getItem(
-                AI_QUEUE_KEY
-            )
-        ) || [];
-
-
-    const payload = {
-
-        aiId:
-            currentAnalysis.aiId,
-
-        title:
-            currentAnalysis.title,
-
-        description:
-            currentAnalysis.description,
-
-        category:
-            currentAnalysis.category,
-
-        priority:
-            currentAnalysis.priority,
-
-        impact:
-            currentAnalysis.impact,
-
-        confidence:
-            currentAnalysis.confidence,
-
-        status:
-            "Aberto",
-
-        responsible:
-            "JM",
-
-        source:
-            "AI Incident Analyzer",
-
-        createdAt:
-            currentAnalysis.createdAt
-
-    };
-
-
-    const exists =
-        queue.some(
-            item =>
-                item.aiId ===
-                payload.aiId
-        );
-
-
-    if(
-        !exists
-    ){
-
-        queue.push(
-            payload
-        );
-
-    }
-
-
-    localStorage.setItem(
-        AI_QUEUE_KEY,
-        JSON.stringify(
-            queue
-        )
-    );
-
-
-    updateQueueCount();
-
-
-    showToast(
-        "Incidente enviado para o Incident Manager.",
-        "success"
-    );
-
-
-    /*
-        IMPORTANTE:
-
-        O Analyzer está dentro de:
-
-        /incident-manager/ai-incident-analyzer/
-
-        Para voltar para:
-
-        /incident-manager/
-
-        precisamos subir dois níveis:
-
-        ../../
-    */
-
-    setTimeout(
-        () => {
-
-            window.location.href =
-                "../../";
-
-        },
-        900
-    );
-}
-
-
-/* =========================================================
-   FILA
-========================================================= */
-
-function updateQueueCount(){
 
     const queue =
         JSON.parse(
-            localStorage.getItem(
-                AI_QUEUE_KEY
-            )
-        ) || [];
+            localStorage.getItem(QUEUE_KEY) || "[]"
+        );
 
 
-    queueCount.textContent =
-        queue.length;
-}
+    const aiId =
+        "AI-" +
+        Date.now();
 
 
-/* =========================================================
-   ARQUITETURA
-========================================================= */
+    const incident =
+        {
 
-function showArchitecture(){
+            aiId,
+
+            title:
+                createTitle(lastAnalysis.description),
+
+            description:
+                lastAnalysis.description,
+
+            category:
+                lastAnalysis.category,
+
+            priority:
+                lastAnalysis.priority,
+
+            impact:
+                lastAnalysis.impact,
+
+            confidence:
+                lastAnalysis.confidence,
+
+            status:
+                "Aberto",
+
+            responsible:
+                "JM",
+
+            source:
+                "AI Incident Analyzer",
+
+            createdAt:
+                new Date().toISOString()
+
+        };
+
+
+    queue.push(incident);
+
+
+    localStorage.setItem(
+        QUEUE_KEY,
+        JSON.stringify(queue)
+    );
+
 
     showToast(
-        "AI Analyzer → Queue → Incident Manager",
-        "success"
+        "Incidente enviado para o Incident Manager."
     );
+
+
+    setTimeout(function(){
+
+        window.location.href =
+            "../../";
+
+    },900);
+
 }
 
 
 /* =========================================================
-   LIMPAR HISTÓRICO
+   GERAR TÍTULO
 ========================================================= */
 
-function clearHistory(){
+function createTitle(description){
+
+    const text =
+        description.toLowerCase();
+
 
     if(
-        !confirm(
-            "Deseja limpar o histórico de análises?"
-        )
+        text.includes("servidor") ||
+        text.includes("server")
     ){
 
-        return;
+        return "Indisponibilidade de servidor";
 
     }
 
 
-    localStorage.removeItem(
-        AI_HISTORY_KEY
+    if(
+        text.includes("banco") ||
+        text.includes("database")
+    ){
+
+        return "Falha no banco de dados";
+
+    }
+
+
+    if(
+        text.includes("rede") ||
+        text.includes("internet")
+    ){
+
+        return "Falha de conectividade de rede";
+
+    }
+
+
+    if(
+        text.includes("login") ||
+        text.includes("senha") ||
+        text.includes("autenticação") ||
+        text.includes("autenticacao")
+    ){
+
+        return "Falha de autenticação";
+
+    }
+
+
+    if(
+        text.includes("api") ||
+        text.includes("integração") ||
+        text.includes("integracao")
+    ){
+
+        return "Falha de integração";
+
+    }
+
+
+    return "Incidente identificado pelo AI Analyzer";
+
+}
+
+
+/* =========================================================
+   HISTÓRICO
+========================================================= */
+
+function saveHistory(analysis){
+
+    const history =
+        JSON.parse(
+            localStorage.getItem(HISTORY_KEY) || "[]"
+        );
+
+
+    history.unshift(
+        analysis
     );
 
 
-    renderHistory();
+    const limited =
+        history.slice(0,10);
 
 
-    showToast(
-        "Histórico limpo.",
-        "success"
+    localStorage.setItem(
+        HISTORY_KEY,
+        JSON.stringify(limited)
     );
+
+}
+
+
+/* =========================================================
+   RENDER HISTÓRICO
+========================================================= */
+
+function renderHistory(){
+
+    const history =
+        JSON.parse(
+            localStorage.getItem(HISTORY_KEY) || "[]"
+        );
+
+
+    if(!history.length){
+
+        historyList.innerHTML =
+            `<div class="empty">
+                Nenhuma análise realizada ainda.
+            </div>`;
+
+        return;
+    }
+
+
+    historyList.innerHTML =
+        history.map(function(item){
+
+            return `
+
+                <div class="history-item">
+
+                    <div class="history-title">
+                        ${escapeHTML(
+                            item.description.substring(0,90)
+                        )}
+                    </div>
+
+                    <div class="history-meta">
+
+                        ${escapeHTML(item.category)}
+                        •
+                        ${escapeHTML(item.priority)}
+                        •
+                        ${item.confidence}% confiança
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================================================
+   LIMPAR
+========================================================= */
+
+function clearAnalyzer(){
+
+    descriptionInput.value =
+        "";
+
+    categoryElement.textContent =
+        "—";
+
+    priorityElement.textContent =
+        "—";
+
+    impactElement.textContent =
+        "—";
+
+    statusElement.textContent =
+        "Aguardando";
+
+    confidenceElement.textContent =
+        "0%";
+
+    confidenceBar.style.width =
+        "0%";
+
+    recommendationElement.textContent =
+        "Aguardando análise do incidente.";
+
+    priorityElement.className =
+        "metric-value";
+
+    lastAnalysis =
+        null;
+
 }
 
 
@@ -2424,73 +1801,41 @@ function clearHistory(){
    TOAST
 ========================================================= */
 
-function showToast(
-    message,
-    type = ""
-){
+function showToast(message){
 
     const toast =
-        document.getElementById(
-            "toast"
-        );
+        document.getElementById("toast");
 
 
     toast.textContent =
         message;
 
 
-    toast.className =
-        "toast show " +
-        type;
+    toast.classList.add("show");
 
 
-    clearTimeout(
-        window.toastTimer
-    );
+    setTimeout(function(){
 
+        toast.classList.remove("show");
 
-    window.toastTimer =
-        setTimeout(
-            () => {
+    },3000);
 
-                toast.className =
-                    "toast";
-
-            },
-            3000
-        );
 }
 
 
 /* =========================================================
-   ESCAPE HTML
+   SEGURANÇA BÁSICA PARA HISTÓRICO
 ========================================================= */
 
-function escapeHtml(
-    value
-){
+function escapeHTML(text){
 
-    return String(value)
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
+    return String(text)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
 }
 
 
@@ -2500,23 +1845,21 @@ function escapeHtml(
 
 renderHistory();
 
-updateQueueCount();
-
 
 /* =========================================================
-   STORAGE EVENT
+   ENTER NO TEXTAREA
 ========================================================= */
 
-window.addEventListener(
-    "storage",
+descriptionInput.addEventListener(
+    "keydown",
     function(event){
 
         if(
-            event.key ===
-            AI_QUEUE_KEY
+            event.ctrlKey &&
+            event.key === "Enter"
         ){
 
-            updateQueueCount();
+            analyzeIncident();
 
         }
 
@@ -2527,4 +1870,3 @@ window.addEventListener(
 
 </body>
 </html>
-```
