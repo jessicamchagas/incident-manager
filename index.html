@@ -20,20 +20,23 @@
 }
 
 :root {
-    --bg: #07090d;
-    --sidebar: #0b0e13;
-    --card: #0e1218;
-    --card2: #11161e;
-    --border: #1c232d;
-    --text: #f1f5f9;
-    --muted: #7f8a9a;
-    --muted2: #5f6978;
-    --accent: #7c5cff;
-    --accent2: #9b82ff;
+    --bg: #05080d;
+    --sidebar: #070b11;
+    --card: #0a1018;
+    --card2: #0e1620;
+    --border: #172433;
+    --text: #f2f8ff;
+    --muted: #7f91a5;
+    --muted2: #526477;
+
+    --accent: #00d9ff;
+    --accent2: #38e8ff;
+
     --danger: #ff5d73;
     --warning: #f5b84b;
     --success: #45d483;
-    --info: #4da3ff;
+    --info: #168bff;
+
     --radius: 14px;
 }
 
@@ -61,7 +64,9 @@ button {
     min-height: 100vh;
 }
 
-/* SIDEBAR */
+/* =========================================================
+   SIDEBAR
+========================================================= */
 
 .sidebar {
     width: 250px;
@@ -90,9 +95,22 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--accent), #4b35b7);
+
+    background: linear-gradient(
+        135deg,
+        #00d9ff,
+        #0878ff
+    );
+
+    color: #021017;
     font-weight: 800;
-    box-shadow: 0 8px 25px rgba(124,92,255,.25);
+
+    box-shadow:
+        0 8px 30px rgba(0,217,255,.28),
+        0 0 18px rgba(0,217,255,.12);
+
+    position: relative;
+    overflow: hidden;
 }
 
 .brand-text h1 {
@@ -139,13 +157,13 @@ button {
 }
 
 .nav-item:hover {
-    background: #11151c;
+    background: #0c151f;
     color: var(--text);
 }
 
 .nav-item.active {
-    background: rgba(124,92,255,.13);
-    color: #b7a9ff;
+    background: rgba(0,217,255,.10);
+    color: #5cecff;
 }
 
 .nav-icon {
@@ -162,7 +180,7 @@ button {
 
 .developer-card {
     border: 1px solid var(--border);
-    background: #0e1117;
+    background: #080e15;
     border-radius: 12px;
     padding: 14px;
 }
@@ -186,7 +204,9 @@ button {
     font-size: 9px;
 }
 
-/* MAIN */
+/* =========================================================
+   MAIN
+========================================================= */
 
 .main {
     width: calc(100% - 250px);
@@ -201,7 +221,7 @@ button {
     justify-content: space-between;
     padding: 0 32px;
     border-bottom: 1px solid var(--border);
-    background: rgba(7,9,13,.9);
+    background: rgba(5,8,13,.92);
     backdrop-filter: blur(14px);
     position: sticky;
     top: 0;
@@ -229,7 +249,7 @@ button {
     display: flex;
     align-items: center;
     gap: 7px;
-    color: var(--muted);
+    color: #8194a8;
     font-size: 10px;
 }
 
@@ -238,7 +258,10 @@ button {
     height: 7px;
     border-radius: 50%;
     background: var(--success);
-    box-shadow: 0 0 10px rgba(69,212,131,.8);
+
+    box-shadow:
+        0 0 8px rgba(69,212,131,.8),
+        0 0 18px rgba(69,212,131,.25);
 }
 
 .notification {
@@ -246,12 +269,18 @@ button {
     height: 34px;
     border: 1px solid var(--border);
     border-radius: 8px;
-    background: #0c1016;
+    background: #0a1018;
     color: var(--muted);
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+    transition: .2s;
+}
+
+.notification:hover {
+    border-color: rgba(0,217,255,.30);
+    color: var(--accent2);
 }
 
 .notification-count {
@@ -273,15 +302,31 @@ button {
     width: 34px;
     height: 34px;
     border-radius: 50%;
-    background: linear-gradient(135deg,#8d74ff,#4936a9);
+
+    background: linear-gradient(
+        135deg,
+        #00d9ff,
+        #0878ff
+    );
+
+    color: #021017;
+
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 10px;
     font-weight: 800;
+
+    box-shadow:
+        0 0 18px rgba(0,217,255,.18);
+
+    position: relative;
+    overflow: hidden;
 }
 
-/* CONTENT */
+/* =========================================================
+   CONTENT
+========================================================= */
 
 .content {
     padding: 32px;
@@ -319,20 +364,42 @@ button {
     border: 0;
     border-radius: 9px;
     padding: 11px 16px;
-    background: var(--accent);
-    color: white;
+
+    background: linear-gradient(
+        135deg,
+        #00d9ff,
+        #0878ff
+    );
+
+    color: #021017;
     font-size: 12px;
-    font-weight: 700;
-    box-shadow: 0 8px 22px rgba(124,92,255,.2);
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 25px rgba(0,217,255,.20);
+
     transition: .2s;
+
+    position: relative;
+    overflow: hidden;
 }
 
 .primary-button:hover {
     transform: translateY(-1px);
-    background: var(--accent2);
+
+    background: linear-gradient(
+        135deg,
+        #38e8ff,
+        #1595ff
+    );
+
+    box-shadow:
+        0 10px 30px rgba(0,217,255,.28);
 }
 
-/* METRICS */
+/* =========================================================
+   METRICS
+========================================================= */
 
 .metrics {
     display: grid;
@@ -351,7 +418,9 @@ button {
 
 .metric-card:hover {
     background: var(--card2);
-    border-color: #29313d;
+    border-color: rgba(0,217,255,.20);
+    box-shadow:
+        0 0 25px rgba(0,217,255,.04);
 }
 
 .metric-top {
@@ -370,7 +439,12 @@ button {
     width: 32px;
     height: 32px;
     border-radius: 8px;
-    background: #17131f;
+
+    background: rgba(0,217,255,.07);
+    border: 1px solid rgba(0,217,255,.08);
+
+    color: var(--accent2);
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -399,7 +473,9 @@ button {
     color: var(--muted);
 }
 
-/* PANELS */
+/* =========================================================
+   PANELS
+========================================================= */
 
 .dashboard-grid {
     display: grid;
@@ -413,6 +489,11 @@ button {
     border: 1px solid var(--border);
     border-radius: var(--radius);
     overflow: hidden;
+    transition: .2s;
+}
+
+.panel:hover {
+    border-color: rgba(0,217,255,.10);
 }
 
 .panel-header {
@@ -438,12 +519,20 @@ button {
     color: var(--muted);
     font-size: 10px;
     border: 1px solid var(--border);
-    background: #0b0f14;
+    background: #080e15;
     padding: 6px 9px;
     border-radius: 6px;
+    transition: .2s;
 }
 
-/* CHART */
+.period:hover {
+    border-color: rgba(0,217,255,.25);
+    color: var(--accent2);
+}
+
+/* =========================================================
+   CHART
+========================================================= */
 
 .chart {
     height: 240px;
@@ -465,7 +554,7 @@ button {
 .grid-line {
     height: 1px;
     width: 100%;
-    background: #171d25;
+    background: #14202c;
 }
 
 .bars {
@@ -489,7 +578,16 @@ button {
 .bar {
     width: 25px;
     border-radius: 5px 5px 2px 2px;
-    background: linear-gradient(to top,#4936a9,var(--accent2));
+
+    background: linear-gradient(
+        to top,
+        #0878ff,
+        #38e8ff
+    );
+
+    box-shadow:
+        0 0 12px rgba(0,217,255,.15);
+
     min-height: 4px;
     transition: .4s;
 }
@@ -503,7 +601,9 @@ button {
     font-size: 9px;
 }
 
-/* DONUT */
+/* =========================================================
+   DONUT
+========================================================= */
 
 .distribution {
     padding: 22px 20px;
@@ -523,12 +623,16 @@ button {
     justify-content: center;
     align-items: center;
     position: relative;
+
     background: conic-gradient(
         var(--danger) 0 18%,
         var(--warning) 18% 43%,
         var(--info) 43% 68%,
         var(--success) 68% 100%
     );
+
+    box-shadow:
+        0 0 25px rgba(0,217,255,.05);
 }
 
 .donut::after {
@@ -585,7 +689,9 @@ button {
     font-weight: 600;
 }
 
-/* TABLE */
+/* =========================================================
+   TABLE
+========================================================= */
 
 .table-panel {
     margin-bottom: 18px;
@@ -607,18 +713,18 @@ th {
     font-size: 9px;
     text-transform: uppercase;
     letter-spacing: .8px;
-    background: #0c1015;
+    background: #080e15;
 }
 
 td {
     padding: 14px 20px;
-    border-top: 1px solid #171d25;
+    border-top: 1px solid #14202c;
     font-size: 11px;
     white-space: nowrap;
 }
 
 tbody tr:hover {
-    background: #11161d;
+    background: #0b141e;
 }
 
 .incident-id {
@@ -670,8 +776,8 @@ tbody tr:hover {
 }
 
 .status-progress {
-    color: #b7a9ff;
-    background: rgba(124,92,255,.1);
+    color: var(--accent2);
+    background: rgba(0,217,255,.09);
 }
 
 .status-resolved {
@@ -686,12 +792,14 @@ tbody tr:hover {
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    background: #242b35;
+    background: #182534;
     font-size: 8px;
     font-weight: 700;
 }
 
-/* ACTIONS */
+/* =========================================================
+   ACTIONS
+========================================================= */
 
 .actions {
     display: flex;
@@ -703,13 +811,16 @@ tbody tr:hover {
     height: 28px;
     border: 1px solid var(--border);
     border-radius: 6px;
-    background: #0b0f14;
+    background: #080e15;
     color: var(--muted);
+    transition: .2s;
 }
 
 .action-btn:hover {
-    color: white;
+    color: var(--accent2);
     border-color: var(--accent);
+    box-shadow:
+        0 0 10px rgba(0,217,255,.10);
 }
 
 .action-btn.delete:hover {
@@ -717,7 +828,9 @@ tbody tr:hover {
     color: var(--danger);
 }
 
-/* BOTTOM */
+/* =========================================================
+   BOTTOM
+========================================================= */
 
 .bottom-grid {
     display: grid;
@@ -734,7 +847,7 @@ tbody tr:hover {
     gap: 13px;
     padding-bottom: 18px;
     margin-bottom: 18px;
-    border-bottom: 1px solid #171d25;
+    border-bottom: 1px solid #14202c;
 }
 
 .activity-item:last-child {
@@ -751,7 +864,12 @@ tbody tr:hover {
     justify-content: center;
     align-items: center;
     border-radius: 7px;
-    background: #17131f;
+
+    background: rgba(0,217,255,.07);
+    color: var(--accent2);
+
+    border: 1px solid rgba(0,217,255,.08);
+
     font-size: 10px;
 }
 
@@ -778,7 +896,7 @@ tbody tr:hover {
     display: flex;
     justify-content: space-between;
     padding: 13px 0;
-    border-bottom: 1px solid #171d25;
+    border-bottom: 1px solid #14202c;
     font-size: 11px;
 }
 
@@ -795,7 +913,13 @@ tbody tr:hover {
     font-size: 10px;
 }
 
-/* INCIDENTS VIEW */
+.info-value:not(.positive) {
+    color: var(--accent2);
+}
+
+/* =========================================================
+   INCIDENTS VIEW
+========================================================= */
 
 .toolbar {
     display: flex;
@@ -823,6 +947,9 @@ tbody tr:hover {
 .search-box input:focus,
 .form-control:focus {
     border-color: var(--accent);
+
+    box-shadow:
+        0 0 0 2px rgba(0,217,255,.08);
 }
 
 .filter {
@@ -835,14 +962,16 @@ tbody tr:hover {
 }
 
 .filter option {
-    background: #0e1218;
+    background: #0a1018;
 }
 
 .table-full {
     width: 100%;
 }
 
-/* REPORTS */
+/* =========================================================
+   REPORTS
+========================================================= */
 
 .report-grid {
     display: grid;
@@ -856,6 +985,11 @@ tbody tr:hover {
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 22px;
+    transition: .2s;
+}
+
+.report-card:hover {
+    border-color: rgba(0,217,255,.15);
 }
 
 .report-card h3 {
@@ -882,13 +1016,13 @@ tbody tr:hover {
     display: flex;
     justify-content: space-between;
     padding: 12px 0;
-    border-bottom: 1px solid #171d25;
+    border-bottom: 1px solid #14202c;
     font-size: 11px;
 }
 
 .progress {
     height: 6px;
-    background: #171d25;
+    background: #14202c;
     border-radius: 10px;
     margin-top: 7px;
     overflow: hidden;
@@ -897,10 +1031,20 @@ tbody tr:hover {
 .progress span {
     display: block;
     height: 100%;
-    background: var(--accent);
+
+    background: linear-gradient(
+        90deg,
+        #0878ff,
+        #00d9ff
+    );
+
+    box-shadow:
+        0 0 10px rgba(0,217,255,.25);
 }
 
-/* MODAL */
+/* =========================================================
+   MODAL
+========================================================= */
 
 .modal-overlay {
     position: fixed;
@@ -921,10 +1065,14 @@ tbody tr:hover {
 .modal {
     width: 100%;
     max-width: 580px;
-    background: #0c1016;
+    background: #090f16;
     border: 1px solid var(--border);
     border-radius: 16px;
-    box-shadow: 0 30px 80px rgba(0,0,0,.55);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.65),
+        0 0 40px rgba(0,217,255,.035);
+
     max-height: 90vh;
     overflow-y: auto;
 }
@@ -948,6 +1096,12 @@ tbody tr:hover {
     border-radius: 7px;
     background: transparent;
     color: var(--muted);
+    transition: .2s;
+}
+
+.close-modal:hover {
+    color: var(--accent2);
+    border-color: var(--accent);
 }
 
 .form {
@@ -969,7 +1123,7 @@ tbody tr:hover {
 .form-control {
     width: 100%;
     border: 1px solid var(--border);
-    background: #080b10;
+    background: #060a10;
     color: white;
     border-radius: 8px;
     padding: 11px 12px;
@@ -1003,13 +1157,17 @@ textarea.form-control {
     background: transparent;
     color: var(--muted);
     font-size: 11px;
+    transition: .2s;
 }
 
 .secondary-button:hover {
-    color: white;
+    color: var(--accent2);
+    border-color: rgba(0,217,255,.25);
 }
 
-/* TOAST */
+/* =========================================================
+   TOAST
+========================================================= */
 
 .toast-container {
     position: fixed;
@@ -1024,7 +1182,7 @@ textarea.form-control {
 .toast {
     min-width: 280px;
     padding: 14px 16px;
-    background: #10151c;
+    background: #091019;
     border: 1px solid var(--border);
     border-left: 3px solid var(--success);
     border-radius: 9px;
@@ -1042,13 +1200,16 @@ textarea.form-control {
         opacity: 0;
         transform: translateX(30px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
     }
 }
 
-/* EMPTY */
+/* =========================================================
+   EMPTY
+========================================================= */
 
 .empty {
     text-align: center;
@@ -1059,9 +1220,12 @@ textarea.form-control {
 .empty-icon {
     font-size: 30px;
     margin-bottom: 10px;
+    color: var(--accent2);
 }
 
-/* FOOTER */
+/* =========================================================
+   FOOTER
+========================================================= */
 
 .footer {
     padding: 28px 0 8px;
@@ -1071,9 +1235,39 @@ textarea.form-control {
     font-size: 9px;
 }
 
-/* MOBILE */
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: #05080d;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #173247;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00a9cc;
+}
+
+::selection {
+    background: rgba(0,217,255,.25);
+    color: white;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media(max-width:1100px) {
+
     .metrics {
         grid-template-columns: repeat(2,1fr);
     }
@@ -1089,6 +1283,7 @@ textarea.form-control {
 }
 
 @media(max-width:760px) {
+
     .sidebar {
         width: 70px;
         padding: 20px 10px;
@@ -1109,6 +1304,10 @@ textarea.form-control {
     .nav-item {
         justify-content: center;
         padding: 12px;
+    }
+
+    .nav-item.active {
+        background: rgba(0,217,255,.13);
     }
 
     .main {
@@ -1154,20 +1353,24 @@ textarea.form-control {
 
 <div class="app">
 
-<!-- SIDEBAR -->
-
 <aside class="sidebar">
 
     <div class="brand">
-        <div class="brand-icon">IM</div>
+
+        <div class="brand-icon">
+            IM
+        </div>
 
         <div class="brand-text">
             <h1>Incident Manager</h1>
             <span>v2.0.0 • SYSTEM</span>
         </div>
+
     </div>
 
-    <div class="menu-label">Workspace</div>
+    <div class="menu-label">
+        Workspace
+    </div>
 
     <nav class="nav">
 
@@ -1193,16 +1396,24 @@ textarea.form-control {
 
     </nav>
 
-    <div class="menu-label">Sistema</div>
+    <div class="menu-label">
+        Sistema
+    </div>
 
     <nav class="nav">
 
-        <button class="nav-item" onclick="showToast('Configurações disponíveis na próxima versão.')">
+        <button
+            class="nav-item"
+            onclick="showToast('Configurações disponíveis na próxima versão.')"
+        >
             <div class="nav-icon">⚙</div>
             <span>Configurações</span>
         </button>
 
-        <button class="nav-item" onclick="showToast('Documentação do projeto em construção.')">
+        <button
+            class="nav-item"
+            onclick="showToast('Documentação do projeto em construção.')"
+        >
             <div class="nav-icon">?</div>
             <span>Documentação</span>
         </button>
@@ -1212,9 +1423,19 @@ textarea.form-control {
     <div class="sidebar-bottom">
 
         <div class="developer-card">
-            <div class="developer-title">Desenvolvido por</div>
-            <div class="developer-name">Jessica Monteiro</div>
-            <div class="developer-role">Tecnologia • IA • Automação</div>
+
+            <div class="developer-title">
+                Desenvolvido por
+            </div>
+
+            <div class="developer-name">
+                Jessica Monteiro
+            </div>
+
+            <div class="developer-role">
+                Tecnologia • IA • Automação
+            </div>
+
         </div>
 
     </div>
@@ -1222,31 +1443,48 @@ textarea.form-control {
 </aside>
 
 
-<!-- MAIN -->
-
 <main class="main">
 
 <header class="topbar">
 
     <div class="breadcrumb">
+
         Incident Manager
+
         <span>/</span>
-        <strong id="breadcrumb">Dashboard</strong>
+
+        <strong id="breadcrumb">
+            Dashboard
+        </strong>
+
     </div>
 
     <div class="top-actions">
 
         <div class="system-status">
+
             <span class="status-dot"></span>
+
             Sistema operacional
+
         </div>
 
         <div class="notification">
+
             ♢
-            <span class="notification-count" id="notificationCount">0</span>
+
+            <span
+                class="notification-count"
+                id="notificationCount"
+            >
+                0
+            </span>
+
         </div>
 
-        <div class="profile">JM</div>
+        <div class="profile">
+            JM
+        </div>
 
     </div>
 
@@ -1265,11 +1503,21 @@ textarea.form-control {
     <div class="page-heading">
 
         <div>
-            <h2>Dashboard</h2>
-            <p>Visão geral dos incidentes e operações do sistema.</p>
+
+            <h2>
+                Dashboard
+            </h2>
+
+            <p>
+                Visão geral dos incidentes e operações do sistema.
+            </p>
+
         </div>
 
-        <button class="primary-button" onclick="openModal()">
+        <button
+            class="primary-button"
+            onclick="openModal()"
+        >
             + Novo incidente
         </button>
 
@@ -1279,58 +1527,111 @@ textarea.form-control {
     <div class="metrics">
 
         <div class="metric-card">
+
             <div class="metric-top">
-                <span class="metric-label">Total de incidentes</span>
-                <div class="metric-icon">◈</div>
+
+                <span class="metric-label">
+                    Total de incidentes
+                </span>
+
+                <div class="metric-icon">
+                    ◈
+                </div>
+
             </div>
 
-            <div class="metric-value" id="totalIncidents">0</div>
+            <div
+                class="metric-value"
+                id="totalIncidents"
+            >
+                0
+            </div>
 
             <div class="metric-footer neutral">
                 registros no sistema
             </div>
+
         </div>
 
 
         <div class="metric-card">
+
             <div class="metric-top">
-                <span class="metric-label">Incidentes abertos</span>
-                <div class="metric-icon">⚠</div>
+
+                <span class="metric-label">
+                    Incidentes abertos
+                </span>
+
+                <div class="metric-icon">
+                    ⚠
+                </div>
+
             </div>
 
-            <div class="metric-value" id="openIncidents">0</div>
+            <div
+                class="metric-value"
+                id="openIncidents"
+            >
+                0
+            </div>
 
             <div class="metric-footer negative">
                 requer atenção
             </div>
+
         </div>
 
 
         <div class="metric-card">
+
             <div class="metric-top">
-                <span class="metric-label">Resolvidos</span>
-                <div class="metric-icon">✓</div>
+
+                <span class="metric-label">
+                    Resolvidos
+                </span>
+
+                <div class="metric-icon">
+                    ✓
+                </div>
+
             </div>
 
-            <div class="metric-value" id="resolvedIncidents">0</div>
+            <div
+                class="metric-value"
+                id="resolvedIncidents"
+            >
+                0
+            </div>
 
             <div class="metric-footer positive">
                 finalizados
             </div>
+
         </div>
 
 
         <div class="metric-card">
+
             <div class="metric-top">
-                <span class="metric-label">Tempo médio</span>
-                <div class="metric-icon">◷</div>
+
+                <span class="metric-label">
+                    Tempo médio
+                </span>
+
+                <div class="metric-icon">
+                    ◷
+                </div>
+
             </div>
 
-            <div class="metric-value">2h 18m</div>
+            <div class="metric-value">
+                2h 18m
+            </div>
 
             <div class="metric-footer positive">
                 tempo de resolução
             </div>
+
         </div>
 
     </div>
@@ -1343,25 +1644,39 @@ textarea.form-control {
             <div class="panel-header">
 
                 <div>
-                    <div class="panel-title">Incidentes por período</div>
-                    <div class="panel-subtitle">Distribuição dos últimos 7 dias</div>
+
+                    <div class="panel-title">
+                        Incidentes por período
+                    </div>
+
+                    <div class="panel-subtitle">
+                        Distribuição dos últimos 7 dias
+                    </div>
+
                 </div>
 
-                <div class="period">Últimos 7 dias</div>
+                <div class="period">
+                    Últimos 7 dias
+                </div>
 
             </div>
 
             <div class="chart">
 
                 <div class="chart-grid">
+
                     <div class="grid-line"></div>
                     <div class="grid-line"></div>
                     <div class="grid-line"></div>
                     <div class="grid-line"></div>
                     <div class="grid-line"></div>
+
                 </div>
 
-                <div class="bars" id="bars"></div>
+                <div
+                    class="bars"
+                    id="bars"
+                ></div>
 
             </div>
 
@@ -1373,8 +1688,15 @@ textarea.form-control {
             <div class="panel-header">
 
                 <div>
-                    <div class="panel-title">Distribuição</div>
-                    <div class="panel-subtitle">Por nível de prioridade</div>
+
+                    <div class="panel-title">
+                        Distribuição
+                    </div>
+
+                    <div class="panel-subtitle">
+                        Por nível de prioridade
+                    </div>
+
                 </div>
 
             </div>
@@ -1383,11 +1705,24 @@ textarea.form-control {
 
                 <div class="donut-area">
 
-                    <div class="donut" id="donut">
+                    <div
+                        class="donut"
+                        id="donut"
+                    >
 
                         <div class="donut-center">
-                            <div class="donut-number" id="donutNumber">0</div>
-                            <div class="donut-text">incidentes</div>
+
+                            <div
+                                class="donut-number"
+                                id="donutNumber"
+                            >
+                                0
+                            </div>
+
+                            <div class="donut-text">
+                                incidentes
+                            </div>
+
                         </div>
 
                     </div>
@@ -1397,35 +1732,94 @@ textarea.form-control {
                 <div class="legend">
 
                     <div class="legend-item">
+
                         <div class="legend-left">
-                            <span class="legend-dot" style="background:var(--danger)"></span>
+
+                            <span
+                                class="legend-dot"
+                                style="background:var(--danger)"
+                            ></span>
+
                             Crítico
+
                         </div>
-                        <span class="legend-value" id="criticalCount">0</span>
+
+                        <span
+                            class="legend-value"
+                            id="criticalCount"
+                        >
+                            0
+                        </span>
+
                     </div>
 
+
                     <div class="legend-item">
+
                         <div class="legend-left">
-                            <span class="legend-dot" style="background:var(--warning)"></span>
+
+                            <span
+                                class="legend-dot"
+                                style="background:var(--warning)"
+                            ></span>
+
                             Alto
+
                         </div>
-                        <span class="legend-value" id="highCount">0</span>
+
+                        <span
+                            class="legend-value"
+                            id="highCount"
+                        >
+                            0
+                        </span>
+
                     </div>
 
+
                     <div class="legend-item">
+
                         <div class="legend-left">
-                            <span class="legend-dot" style="background:var(--info)"></span>
+
+                            <span
+                                class="legend-dot"
+                                style="background:var(--info)"
+                            ></span>
+
                             Médio
+
                         </div>
-                        <span class="legend-value" id="mediumCount">0</span>
+
+                        <span
+                            class="legend-value"
+                            id="mediumCount"
+                        >
+                            0
+                        </span>
+
                     </div>
 
+
                     <div class="legend-item">
+
                         <div class="legend-left">
-                            <span class="legend-dot" style="background:var(--success)"></span>
+
+                            <span
+                                class="legend-dot"
+                                style="background:var(--success)"
+                            ></span>
+
                             Baixo
+
                         </div>
-                        <span class="legend-value" id="lowCount">0</span>
+
+                        <span
+                            class="legend-value"
+                            id="lowCount"
+                        >
+                            0
+                        </span>
+
                     </div>
 
                 </div>
@@ -1442,11 +1836,21 @@ textarea.form-control {
         <div class="panel-header">
 
             <div>
-                <div class="panel-title">Incidentes recentes</div>
-                <div class="panel-subtitle">Últimos eventos registrados no sistema</div>
+
+                <div class="panel-title">
+                    Incidentes recentes
+                </div>
+
+                <div class="panel-subtitle">
+                    Últimos eventos registrados no sistema
+                </div>
+
             </div>
 
-            <button class="secondary-button" onclick="changeView('incidents')">
+            <button
+                class="secondary-button"
+                onclick="changeView('incidents')"
+            >
                 Ver todos
             </button>
 
@@ -1457,6 +1861,7 @@ textarea.form-control {
             <table>
 
                 <thead>
+
                     <tr>
                         <th>ID</th>
                         <th>Incidente</th>
@@ -1465,6 +1870,7 @@ textarea.form-control {
                         <th>Responsável</th>
                         <th>Data</th>
                     </tr>
+
                 </thead>
 
                 <tbody id="recentTable"></tbody>
@@ -1481,13 +1887,25 @@ textarea.form-control {
         <div class="panel">
 
             <div class="panel-header">
+
                 <div>
-                    <div class="panel-title">Atividade recente</div>
-                    <div class="panel-subtitle">Últimas ações realizadas</div>
+
+                    <div class="panel-title">
+                        Atividade recente
+                    </div>
+
+                    <div class="panel-subtitle">
+                        Últimas ações realizadas
+                    </div>
+
                 </div>
+
             </div>
 
-            <div class="activity" id="activityList"></div>
+            <div
+                class="activity"
+                id="activityList"
+            ></div>
 
         </div>
 
@@ -1495,37 +1913,85 @@ textarea.form-control {
         <div class="panel">
 
             <div class="panel-header">
+
                 <div>
-                    <div class="panel-title">Status do sistema</div>
-                    <div class="panel-subtitle">Informações técnicas</div>
+
+                    <div class="panel-title">
+                        Status do sistema
+                    </div>
+
+                    <div class="panel-subtitle">
+                        Informações técnicas
+                    </div>
+
                 </div>
+
             </div>
 
             <div class="quick-info">
 
                 <div class="info-row">
-                    <span class="info-label">API</span>
-                    <span class="info-value positive">ONLINE</span>
+
+                    <span class="info-label">
+                        API
+                    </span>
+
+                    <span class="info-value positive">
+                        ONLINE
+                    </span>
+
                 </div>
 
-                <div class="info-row">
-                    <span class="info-label">Database</span>
-                    <span class="info-value positive">ONLINE</span>
-                </div>
 
                 <div class="info-row">
-                    <span class="info-label">AI Engine</span>
-                    <span class="info-value positive">READY</span>
+
+                    <span class="info-label">
+                        Database
+                    </span>
+
+                    <span class="info-value positive">
+                        ONLINE
+                    </span>
+
                 </div>
 
-                <div class="info-row">
-                    <span class="info-label">Uptime</span>
-                    <span class="info-value">99.98%</span>
-                </div>
 
                 <div class="info-row">
-                    <span class="info-label">Version</span>
-                    <span class="info-value">2.0.0</span>
+
+                    <span class="info-label">
+                        AI Engine
+                    </span>
+
+                    <span class="info-value positive">
+                        READY
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Uptime
+                    </span>
+
+                    <span class="info-value">
+                        99.98%
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Version
+                    </span>
+
+                    <span class="info-value">
+                        2.0.0
+                    </span>
+
                 </div>
 
             </div>
@@ -1546,11 +2012,21 @@ textarea.form-control {
     <div class="page-heading">
 
         <div>
-            <h2>Incidentes</h2>
-            <p>Gerencie todos os incidentes registrados.</p>
+
+            <h2>
+                Incidentes
+            </h2>
+
+            <p>
+                Gerencie todos os incidentes registrados.
+            </p>
+
         </div>
 
-        <button class="primary-button" onclick="openModal()">
+        <button
+            class="primary-button"
+            onclick="openModal()"
+        >
             + Novo incidente
         </button>
 
@@ -1560,27 +2036,68 @@ textarea.form-control {
     <div class="toolbar">
 
         <div class="search-box">
+
             <input
                 type="text"
                 id="searchInput"
                 placeholder="Pesquisar incidente..."
                 oninput="renderIncidents()"
             >
+
         </div>
 
-        <select class="filter" id="priorityFilter" onchange="renderIncidents()">
-            <option value="">Todas prioridades</option>
-            <option value="Crítico">Crítico</option>
-            <option value="Alto">Alto</option>
-            <option value="Médio">Médio</option>
-            <option value="Baixo">Baixo</option>
+
+        <select
+            class="filter"
+            id="priorityFilter"
+            onchange="renderIncidents()"
+        >
+
+            <option value="">
+                Todas prioridades
+            </option>
+
+            <option value="Crítico">
+                Crítico
+            </option>
+
+            <option value="Alto">
+                Alto
+            </option>
+
+            <option value="Médio">
+                Médio
+            </option>
+
+            <option value="Baixo">
+                Baixo
+            </option>
+
         </select>
 
-        <select class="filter" id="statusFilter" onchange="renderIncidents()">
-            <option value="">Todos status</option>
-            <option value="Aberto">Aberto</option>
-            <option value="Em andamento">Em andamento</option>
-            <option value="Resolvido">Resolvido</option>
+
+        <select
+            class="filter"
+            id="statusFilter"
+            onchange="renderIncidents()"
+        >
+
+            <option value="">
+                Todos status
+            </option>
+
+            <option value="Aberto">
+                Aberto
+            </option>
+
+            <option value="Em andamento">
+                Em andamento
+            </option>
+
+            <option value="Resolvido">
+                Resolvido
+            </option>
+
         </select>
 
     </div>
@@ -1595,6 +2112,7 @@ textarea.form-control {
                 <thead>
 
                     <tr>
+
                         <th>ID</th>
                         <th>Incidente</th>
                         <th>Prioridade</th>
@@ -1602,6 +2120,7 @@ textarea.form-control {
                         <th>Responsável</th>
                         <th>Data</th>
                         <th>Ações</th>
+
                     </tr>
 
                 </thead>
@@ -1626,11 +2145,21 @@ textarea.form-control {
     <div class="page-heading">
 
         <div>
-            <h2>Relatórios</h2>
-            <p>Análise geral dos incidentes registrados.</p>
+
+            <h2>
+                Relatórios
+            </h2>
+
+            <p>
+                Análise geral dos incidentes registrados.
+            </p>
+
         </div>
 
-        <button class="primary-button" onclick="exportCSV()">
+        <button
+            class="primary-button"
+            onclick="exportCSV()"
+        >
             ↓ Exportar CSV
         </button>
 
@@ -1641,33 +2170,60 @@ textarea.form-control {
 
         <div class="report-card">
 
-            <h3>Total de incidentes</h3>
+            <h3>
+                Total de incidentes
+            </h3>
 
-            <div class="big-number" id="reportTotal">0</div>
+            <div
+                class="big-number"
+                id="reportTotal"
+            >
+                0
+            </div>
 
-            <p>Registros armazenados no sistema.</p>
-
-        </div>
-
-
-        <div class="report-card">
-
-            <h3>Taxa de resolução</h3>
-
-            <div class="big-number" id="resolutionRate">0%</div>
-
-            <p>Percentual de incidentes resolvidos.</p>
+            <p>
+                Registros armazenados no sistema.
+            </p>
 
         </div>
 
 
         <div class="report-card">
 
-            <h3>Prioridade crítica</h3>
+            <h3>
+                Taxa de resolução
+            </h3>
 
-            <div class="big-number" id="criticalRate">0%</div>
+            <div
+                class="big-number"
+                id="resolutionRate"
+            >
+                0%
+            </div>
 
-            <p>Percentual de incidentes críticos.</p>
+            <p>
+                Percentual de incidentes resolvidos.
+            </p>
+
+        </div>
+
+
+        <div class="report-card">
+
+            <h3>
+                Prioridade crítica
+            </h3>
+
+            <div
+                class="big-number"
+                id="criticalRate"
+            >
+                0%
+            </div>
+
+            <p>
+                Percentual de incidentes críticos.
+            </p>
 
         </div>
 
@@ -1679,50 +2235,102 @@ textarea.form-control {
         <div class="panel-header">
 
             <div>
-                <div class="panel-title">Análise por prioridade</div>
-                <div class="panel-subtitle">Distribuição atual</div>
+
+                <div class="panel-title">
+                    Análise por prioridade
+                </div>
+
+                <div class="panel-subtitle">
+                    Distribuição atual
+                </div>
+
             </div>
 
         </div>
 
-        <div class="quick-info" id="reportPriority"></div>
+        <div
+            class="quick-info"
+            id="reportPriority"
+        ></div>
 
     </div>
 
 </div>
 
 
-<!-- MONITORING -->
+<!-- =====================================================
+     MONITORING
+===================================================== -->
 
 <div id="monitoring" class="view">
 
     <div class="page-heading">
 
         <div>
-            <h2>Monitoramento</h2>
-            <p>Visão técnica dos serviços do sistema.</p>
+
+            <h2>
+                Monitoramento
+            </h2>
+
+            <p>
+                Visão técnica dos serviços do sistema.
+            </p>
+
         </div>
 
     </div>
 
+
     <div class="report-grid">
 
         <div class="report-card">
-            <h3>API Gateway</h3>
-            <div class="big-number positive">ONLINE</div>
-            <p>Latência média: 42ms</p>
+
+            <h3>
+                API Gateway
+            </h3>
+
+            <div class="big-number positive">
+                ONLINE
+            </div>
+
+            <p>
+                Latência média: 42ms
+            </p>
+
         </div>
 
-        <div class="report-card">
-            <h3>Database</h3>
-            <div class="big-number positive">ONLINE</div>
-            <p>Conexões ativas: 18</p>
-        </div>
 
         <div class="report-card">
-            <h3>AI Engine</h3>
-            <div class="big-number positive">READY</div>
-            <p>Classificação automática disponível.</p>
+
+            <h3>
+                Database
+            </h3>
+
+            <div class="big-number positive">
+                ONLINE
+            </div>
+
+            <p>
+                Conexões ativas: 18
+            </p>
+
+        </div>
+
+
+        <div class="report-card">
+
+            <h3>
+                AI Engine
+            </h3>
+
+            <div class="big-number positive">
+                READY
+            </div>
+
+            <p>
+                Classificação automática disponível.
+            </p>
+
         </div>
 
     </div>
@@ -1749,24 +2357,43 @@ textarea.form-control {
 </div>
 
 
-<!-- MODAL -->
+<!-- =====================================================
+     MODAL
+===================================================== -->
 
-<div class="modal-overlay" id="modal">
+<div
+    class="modal-overlay"
+    id="modal"
+>
 
     <div class="modal">
 
         <div class="modal-header">
 
-            <h3 id="modalTitle">Novo incidente</h3>
+            <h3 id="modalTitle">
+                Novo incidente
+            </h3>
 
-            <button class="close-modal" onclick="closeModal()">×</button>
+            <button
+                class="close-modal"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
 
         </div>
 
 
-        <form class="form" id="incidentForm">
+        <form
+            class="form"
+            id="incidentForm"
+        >
 
-            <input type="hidden" id="editId">
+            <input
+                type="hidden"
+                id="editId"
+            >
+
 
             <div class="form-group">
 
@@ -1808,12 +2435,30 @@ textarea.form-control {
                         Prioridade
                     </label>
 
-                    <select class="form-control" id="priority" required>
+                    <select
+                        class="form-control"
+                        id="priority"
+                        required
+                    >
 
-                        <option value="Crítico">Crítico</option>
-                        <option value="Alto">Alto</option>
-                        <option value="Médio" selected>Médio</option>
-                        <option value="Baixo">Baixo</option>
+                        <option value="Crítico">
+                            Crítico
+                        </option>
+
+                        <option value="Alto">
+                            Alto
+                        </option>
+
+                        <option
+                            value="Médio"
+                            selected
+                        >
+                            Médio
+                        </option>
+
+                        <option value="Baixo">
+                            Baixo
+                        </option>
 
                     </select>
 
@@ -1826,11 +2471,23 @@ textarea.form-control {
                         Status
                     </label>
 
-                    <select class="form-control" id="status" required>
+                    <select
+                        class="form-control"
+                        id="status"
+                        required
+                    >
 
-                        <option value="Aberto">Aberto</option>
-                        <option value="Em andamento">Em andamento</option>
-                        <option value="Resolvido">Resolvido</option>
+                        <option value="Aberto">
+                            Aberto
+                        </option>
+
+                        <option value="Em andamento">
+                            Em andamento
+                        </option>
+
+                        <option value="Resolvido">
+                            Resolvido
+                        </option>
 
                     </select>
 
@@ -1845,12 +2502,26 @@ textarea.form-control {
                     Responsável
                 </label>
 
-                <select class="form-control" id="responsible">
+                <select
+                    class="form-control"
+                    id="responsible"
+                >
 
-                    <option value="JM">Jessica Monteiro</option>
-                    <option value="RC">Rafael Costa</option>
-                    <option value="AS">Ana Silva</option>
-                    <option value="LG">Lucas Gomes</option>
+                    <option value="JM">
+                        Jessica Monteiro
+                    </option>
+
+                    <option value="RC">
+                        Rafael Costa
+                    </option>
+
+                    <option value="AS">
+                        Ana Silva
+                    </option>
+
+                    <option value="LG">
+                        Lucas Gomes
+                    </option>
 
                 </select>
 
@@ -1861,11 +2532,17 @@ textarea.form-control {
 
         <div class="modal-footer">
 
-            <button class="secondary-button" onclick="closeModal()">
+            <button
+                class="secondary-button"
+                onclick="closeModal()"
+            >
                 Cancelar
             </button>
 
-            <button class="primary-button" onclick="saveIncident()">
+            <button
+                class="primary-button"
+                onclick="saveIncident()"
+            >
                 Salvar incidente
             </button>
 
@@ -1876,7 +2553,10 @@ textarea.form-control {
 </div>
 
 
-<div class="toast-container" id="toastContainer"></div>
+<div
+    class="toast-container"
+    id="toastContainer"
+></div>
 
 
 <script>
@@ -1886,6 +2566,7 @@ textarea.form-control {
 ========================================================= */
 
 const defaultIncidents = [
+
     {
         id: "INC-00128",
         title: "Servidor de aplicação indisponível",
@@ -1895,6 +2576,7 @@ const defaultIncidents = [
         responsible: "JM",
         date: "Hoje, 10:42"
     },
+
     {
         id: "INC-00127",
         title: "Falha de autenticação",
@@ -1904,6 +2586,7 @@ const defaultIncidents = [
         responsible: "RC",
         date: "Hoje, 09:17"
     },
+
     {
         id: "INC-00126",
         title: "Erro de conexão com banco de dados",
@@ -1913,6 +2596,7 @@ const defaultIncidents = [
         responsible: "AS",
         date: "Ontem, 18:31"
     },
+
     {
         id: "INC-00125",
         title: "Lentidão no serviço de API",
@@ -1922,6 +2606,7 @@ const defaultIncidents = [
         responsible: "JM",
         date: "Ontem, 16:04"
     },
+
     {
         id: "INC-00124",
         title: "Falha de integração externa",
@@ -1931,33 +2616,39 @@ const defaultIncidents = [
         responsible: "LG",
         date: "04 Set, 14:22"
     }
+
 ];
 
 let incidents = JSON.parse(
     localStorage.getItem("incidentManagerData")
 ) || defaultIncidents;
 
+
 let activities = JSON.parse(
     localStorage.getItem("incidentManagerActivities")
 ) || [
+
     {
         icon: "+",
         text: "Sistema inicializado",
         detail: "— Incident Manager pronto para operação.",
         time: "agora"
     },
+
     {
         icon: "AI",
         text: "AI Engine preparado",
         detail: "— Classificação automática disponível.",
         time: "agora"
     },
+
     {
         icon: "✓",
         text: "Database conectado",
         detail: "— Armazenamento local operacional.",
         time: "agora"
     }
+
 ];
 
 
@@ -1966,6 +2657,7 @@ let activities = JSON.parse(
 ========================================================= */
 
 function saveDatabase() {
+
     localStorage.setItem(
         "incidentManagerData",
         JSON.stringify(incidents)
@@ -1975,51 +2667,67 @@ function saveDatabase() {
         "incidentManagerActivities",
         JSON.stringify(activities)
     );
+
 }
 
 
 function escapeHTML(text) {
-    const div = document.createElement("div");
-    div.textContent = text || "";
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        text || "";
+
     return div.innerHTML;
+
 }
 
 
 function getResponsibleName(code) {
 
     const names = {
+
         JM: "Jessica Monteiro",
         RC: "Rafael Costa",
         AS: "Ana Silva",
         LG: "Lucas Gomes"
+
     };
 
     return names[code] || code;
+
 }
 
 
 function getPriorityClass(priority) {
 
     const classes = {
+
         "Crítico": "priority-critical",
         "Alto": "priority-high",
         "Médio": "priority-medium",
         "Baixo": "priority-low"
+
     };
 
     return classes[priority] || "";
+
 }
 
 
 function getStatusClass(status) {
 
     const classes = {
+
         "Aberto": "status-open",
         "Em andamento": "status-progress",
         "Resolvido": "status-resolved"
+
     };
 
     return classes[status] || "";
+
 }
 
 
@@ -2027,53 +2735,87 @@ function getStatusClass(status) {
    NAVIGATION
 ========================================================= */
 
-document.querySelectorAll(".nav-item[data-view]").forEach(button => {
+document
+    .querySelectorAll(".nav-item[data-view]")
+    .forEach(button => {
 
-    button.addEventListener("click", () => {
+        button.addEventListener("click", () => {
 
-        changeView(button.dataset.view);
+            changeView(
+                button.dataset.view
+            );
+
+        });
 
     });
-
-});
 
 
 function changeView(view) {
 
-    document.querySelectorAll(".view").forEach(item => {
-        item.classList.remove("active");
-    });
+    document
+        .querySelectorAll(".view")
+        .forEach(item => {
 
-    const target = document.getElementById(view);
+            item.classList.remove("active");
+
+        });
+
+
+    const target =
+        document.getElementById(view);
+
 
     if (target) {
+
         target.classList.add("active");
+
     }
 
-    document.querySelectorAll(".nav-item[data-view]").forEach(item => {
-        item.classList.remove("active");
 
-        if (item.dataset.view === view) {
-            item.classList.add("active");
-        }
-    });
+    document
+        .querySelectorAll(".nav-item[data-view]")
+        .forEach(item => {
+
+            item.classList.remove("active");
+
+            if (
+                item.dataset.view === view
+            ) {
+
+                item.classList.add("active");
+
+            }
+
+        });
+
 
     const names = {
+
         dashboard: "Dashboard",
         incidents: "Incidentes",
         reports: "Relatórios",
         monitoring: "Monitoramento"
+
     };
 
-    document.getElementById("breadcrumb").textContent =
+
+    document
+        .getElementById("breadcrumb")
+        .textContent =
         names[view] || "Dashboard";
 
+
     if (view === "incidents") {
+
         renderIncidents();
+
     }
 
+
     if (view === "reports") {
+
         renderReports();
+
     }
 
 }
@@ -2085,49 +2827,92 @@ function changeView(view) {
 
 function updateDashboard() {
 
-    const total = incidents.length;
+    const total =
+        incidents.length;
 
-    const open = incidents.filter(
-        item => item.status !== "Resolvido"
-    ).length;
 
-    const resolved = incidents.filter(
-        item => item.status === "Resolvido"
-    ).length;
+    const open =
+        incidents.filter(
+            item => item.status !== "Resolvido"
+        ).length;
 
-    document.getElementById("totalIncidents").textContent = total;
 
-    document.getElementById("openIncidents").textContent = open;
+    const resolved =
+        incidents.filter(
+            item => item.status === "Resolvido"
+        ).length;
 
-    document.getElementById("resolvedIncidents").textContent = resolved;
 
-    document.getElementById("donutNumber").textContent = total;
+    document
+        .getElementById("totalIncidents")
+        .textContent =
+        total;
+
+
+    document
+        .getElementById("openIncidents")
+        .textContent =
+        open;
+
+
+    document
+        .getElementById("resolvedIncidents")
+        .textContent =
+        resolved;
+
+
+    document
+        .getElementById("donutNumber")
+        .textContent =
+        total;
+
 
     const priorities = {
+
         "Crítico": 0,
         "Alto": 0,
         "Médio": 0,
         "Baixo": 0
+
     };
 
+
     incidents.forEach(item => {
+
         priorities[item.priority]++;
+
     });
 
-    document.getElementById("criticalCount").textContent =
+
+    document
+        .getElementById("criticalCount")
+        .textContent =
         priorities["Crítico"];
 
-    document.getElementById("highCount").textContent =
+
+    document
+        .getElementById("highCount")
+        .textContent =
         priorities["Alto"];
 
-    document.getElementById("mediumCount").textContent =
+
+    document
+        .getElementById("mediumCount")
+        .textContent =
         priorities["Médio"];
 
-    document.getElementById("lowCount").textContent =
+
+    document
+        .getElementById("lowCount")
+        .textContent =
         priorities["Baixo"];
 
 
-    updateDonut(priorities, total);
+    updateDonut(
+        priorities,
+        total
+    );
+
 
     renderRecentTable();
 
@@ -2135,7 +2920,11 @@ function updateDashboard() {
 
     renderBars();
 
-    document.getElementById("notificationCount").textContent = open;
+
+    document
+        .getElementById("notificationCount")
+        .textContent =
+        open;
 
 }
 
@@ -2144,33 +2933,61 @@ function updateDashboard() {
    DONUT
 ========================================================= */
 
-function updateDonut(data, total) {
+function updateDonut(data,total) {
 
     if (!total) {
 
-        document.getElementById("donut").style.background =
-            "#1c232d";
+        document
+            .getElementById("donut")
+            .style.background =
+            "#172433";
 
         return;
+
     }
 
-    const critical = data["Crítico"] / total * 100;
-    const high = data["Alto"] / total * 100;
-    const medium = data["Médio"] / total * 100;
 
-    const first = critical;
+    const critical =
+        data["Crítico"] /
+        total *
+        100;
 
-    const second = first + high;
 
-    const third = second + medium;
+    const high =
+        data["Alto"] /
+        total *
+        100;
 
-    document.getElementById("donut").style.background =
+
+    const medium =
+        data["Médio"] /
+        total *
+        100;
+
+
+    const first =
+        critical;
+
+
+    const second =
+        first + high;
+
+
+    const third =
+        second + medium;
+
+
+    document
+        .getElementById("donut")
+        .style.background =
+
         `conic-gradient(
             var(--danger) 0 ${first}%,
             var(--warning) ${first}% ${second}%,
             var(--info) ${second}% ${third}%,
             var(--success) ${third}% 100%
         )`;
+
 }
 
 
@@ -2180,11 +2997,16 @@ function updateDonut(data, total) {
 
 function renderBars() {
 
-    const container = document.getElementById("bars");
+    const container =
+        document.getElementById("bars");
 
-    const values = [12,18,14,25,20,9,15];
+
+    const values =
+        [12,18,14,25,20,9,15];
+
 
     const labels = [
+
         "SEG",
         "TER",
         "QUA",
@@ -2192,34 +3014,47 @@ function renderBars() {
         "SEX",
         "SÁB",
         "DOM"
+
     ];
+
 
     container.innerHTML = "";
 
-    const max = Math.max(...values);
 
-    values.forEach((value,index) => {
+    const max =
+        Math.max(...values);
 
-        const height = Math.max(
-            10,
-            (value / max) * 80
-        );
 
-        container.innerHTML += `
-            <div class="bar-wrapper">
-                <div
-                    class="bar"
-                    style="height:${height}%"
-                    title="${value} incidentes"
-                ></div>
+    values.forEach(
+        (value,index) => {
 
-                <div class="bar-label">
-                    ${labels[index]}
+            const height =
+                Math.max(
+                    10,
+                    (value / max) * 80
+                );
+
+
+            container.innerHTML += `
+
+                <div class="bar-wrapper">
+
+                    <div
+                        class="bar"
+                        style="height:${height}%"
+                        title="${value} incidentes"
+                    ></div>
+
+                    <div class="bar-label">
+                        ${labels[index]}
+                    </div>
+
                 </div>
-            </div>
-        `;
 
-    });
+            `;
+
+        }
+    );
 
 }
 
@@ -2233,70 +3068,129 @@ function renderRecentTable() {
     const tbody =
         document.getElementById("recentTable");
 
+
     tbody.innerHTML = "";
 
-    const recent = incidents.slice(0,5);
+
+    const recent =
+        incidents.slice(0,5);
+
 
     if (!recent.length) {
 
         tbody.innerHTML = `
+
             <tr>
+
                 <td colspan="6">
+
                     <div class="empty">
                         Nenhum incidente registrado.
                     </div>
+
                 </td>
+
             </tr>
+
         `;
 
         return;
+
     }
+
 
     recent.forEach(item => {
 
         tbody.innerHTML += `
+
             <tr>
 
                 <td>
+
                     <span class="incident-id">
+
                         ${escapeHTML(item.id)}
+
                     </span>
+
                 </td>
 
+
                 <td>
+
                     <span class="incident-name">
+
                         ${escapeHTML(item.title)}
+
                     </span>
+
                 </td>
 
-                <td>
-                    <span class="priority ${getPriorityClass(item.priority)}">
-                        ${escapeHTML(item.priority).toUpperCase()}
-                    </span>
-                </td>
 
                 <td>
-                    <span class="status ${getStatusClass(item.status)}">
-                        ${escapeHTML(item.status).toUpperCase()}
+
+                    <span
+                        class="priority ${getPriorityClass(item.priority)}"
+                    >
+
+                        ${escapeHTML(
+                            item.priority
+                        ).toUpperCase()}
+
                     </span>
+
                 </td>
 
+
                 <td>
+
+                    <span
+                        class="status ${getStatusClass(item.status)}"
+                    >
+
+                        ${escapeHTML(
+                            item.status
+                        ).toUpperCase()}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
                     <span
                         class="avatar"
-                        title="${escapeHTML(getResponsibleName(item.responsible))}"
+                        title="${escapeHTML(
+                            getResponsibleName(
+                                item.responsible
+                            )
+                        )}"
                     >
-                        ${escapeHTML(item.responsible)}
+
+                        ${escapeHTML(
+                            item.responsible
+                        )}
+
                     </span>
+
                 </td>
 
+
                 <td>
+
                     <span class="incident-date">
-                        ${escapeHTML(item.date)}
+
+                        ${escapeHTML(
+                            item.date
+                        )}
+
                     </span>
+
                 </td>
 
             </tr>
+
         `;
 
     });
@@ -2313,41 +3207,80 @@ function renderIncidents() {
     const tbody =
         document.getElementById("incidentTable");
 
+
     const search =
-        (document.getElementById("searchInput")?.value || "")
-        .toLowerCase();
+        (
+            document
+                .getElementById("searchInput")
+                ?.value ||
+            ""
+        ).toLowerCase();
+
 
     const priority =
-        document.getElementById("priorityFilter")?.value || "";
+        document
+            .getElementById("priorityFilter")
+            ?.value ||
+        "";
+
 
     const status =
-        document.getElementById("statusFilter")?.value || "";
+        document
+            .getElementById("statusFilter")
+            ?.value ||
+        "";
 
-    const filtered = incidents.filter(item => {
 
-        const matchesSearch =
-            item.title.toLowerCase().includes(search) ||
-            item.id.toLowerCase().includes(search) ||
-            item.description.toLowerCase().includes(search);
+    const filtered =
+        incidents.filter(item => {
 
-        const matchesPriority =
-            !priority || item.priority === priority;
+            const matchesSearch =
 
-        const matchesStatus =
-            !status || item.status === status;
+                item.title
+                    .toLowerCase()
+                    .includes(search)
 
-        return matchesSearch &&
-               matchesPriority &&
-               matchesStatus;
+                ||
 
-    });
+                item.id
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                item.description
+                    .toLowerCase()
+                    .includes(search);
+
+
+            const matchesPriority =
+                !priority ||
+                item.priority === priority;
+
+
+            const matchesStatus =
+                !status ||
+                item.status === status;
+
+
+            return (
+                matchesSearch &&
+                matchesPriority &&
+                matchesStatus
+            );
+
+        });
+
 
     tbody.innerHTML = "";
+
 
     if (!filtered.length) {
 
         tbody.innerHTML = `
+
             <tr>
+
                 <td colspan="7">
 
                     <div class="empty">
@@ -2361,55 +3294,111 @@ function renderIncidents() {
                     </div>
 
                 </td>
+
             </tr>
+
         `;
 
         return;
+
     }
+
 
     filtered.forEach(item => {
 
         tbody.innerHTML += `
+
             <tr>
 
                 <td>
+
                     <span class="incident-id">
+
                         ${escapeHTML(item.id)}
+
                     </span>
+
                 </td>
 
+
                 <td>
+
                     <span
                         class="incident-name"
-                        title="${escapeHTML(item.description)}"
+                        title="${escapeHTML(
+                            item.description
+                        )}"
                     >
+
                         ${escapeHTML(item.title)}
+
                     </span>
+
                 </td>
 
-                <td>
-                    <span class="priority ${getPriorityClass(item.priority)}">
-                        ${escapeHTML(item.priority).toUpperCase()}
-                    </span>
-                </td>
 
                 <td>
-                    <span class="status ${getStatusClass(item.status)}">
-                        ${escapeHTML(item.status).toUpperCase()}
+
+                    <span
+                        class="priority ${getPriorityClass(item.priority)}"
+                    >
+
+                        ${escapeHTML(
+                            item.priority
+                        ).toUpperCase()}
+
                     </span>
+
                 </td>
 
-                <td>
-                    <span class="avatar" title="${escapeHTML(getResponsibleName(item.responsible))}">
-                        ${escapeHTML(item.responsible)}
-                    </span>
-                </td>
 
                 <td>
+
+                    <span
+                        class="status ${getStatusClass(item.status)}"
+                    >
+
+                        ${escapeHTML(
+                            item.status
+                        ).toUpperCase()}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span
+                        class="avatar"
+                        title="${escapeHTML(
+                            getResponsibleName(
+                                item.responsible
+                            )
+                        )}"
+                    >
+
+                        ${escapeHTML(
+                            item.responsible
+                        )}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
                     <span class="incident-date">
-                        ${escapeHTML(item.date)}
+
+                        ${escapeHTML(
+                            item.date
+                        )}
+
                     </span>
+
                 </td>
+
 
                 <td>
 
@@ -2444,6 +3433,7 @@ function renderIncidents() {
                 </td>
 
             </tr>
+
         `;
 
     });
@@ -2460,52 +3450,90 @@ function openModal(id = null) {
     const modal =
         document.getElementById("modal");
 
+
     const form =
         document.getElementById("incidentForm");
 
+
     form.reset();
 
-    document.getElementById("editId").value = "";
 
-    document.getElementById("modalTitle").textContent =
+    document
+        .getElementById("editId")
+        .value = "";
+
+
+    document
+        .getElementById("modalTitle")
+        .textContent =
         "Novo incidente";
+
 
     if (id) {
 
         const item =
             incidents.find(
-                incident => incident.id === id
+                incident =>
+                    incident.id === id
             );
+
 
         if (!item) return;
 
-        document.getElementById("editId").value =
+
+        document
+            .getElementById("editId")
+            .value =
             item.id;
 
-        document.getElementById("title").value =
+
+        document
+            .getElementById("title")
+            .value =
             item.title;
 
-        document.getElementById("description").value =
+
+        document
+            .getElementById("description")
+            .value =
             item.description;
 
-        document.getElementById("priority").value =
+
+        document
+            .getElementById("priority")
+            .value =
             item.priority;
 
-        document.getElementById("status").value =
+
+        document
+            .getElementById("status")
+            .value =
             item.status;
 
-        document.getElementById("responsible").value =
+
+        document
+            .getElementById("responsible")
+            .value =
             item.responsible;
 
-        document.getElementById("modalTitle").textContent =
+
+        document
+            .getElementById("modalTitle")
+            .textContent =
             "Editar incidente";
 
     }
 
+
     modal.classList.add("active");
 
+
     setTimeout(() => {
-        document.getElementById("title").focus();
+
+        document
+            .getElementById("title")
+            .focus();
+
     },100);
 
 }
@@ -2520,14 +3548,22 @@ function closeModal() {
 }
 
 
-document.getElementById("modal")
-    .addEventListener("click", function(event) {
+document
+    .getElementById("modal")
+    .addEventListener(
+        "click",
+        function(event) {
 
-        if (event.target === this) {
-            closeModal();
+            if (
+                event.target === this
+            ) {
+
+                closeModal();
+
+            }
+
         }
-
-    });
+    );
 
 
 /* =========================================================
@@ -2537,22 +3573,41 @@ document.getElementById("modal")
 function saveIncident() {
 
     const title =
-        document.getElementById("title").value.trim();
+        document
+            .getElementById("title")
+            .value
+            .trim();
+
 
     const description =
-        document.getElementById("description").value.trim();
+        document
+            .getElementById("description")
+            .value
+            .trim();
+
 
     const priority =
-        document.getElementById("priority").value;
+        document
+            .getElementById("priority")
+            .value;
+
 
     const status =
-        document.getElementById("status").value;
+        document
+            .getElementById("status")
+            .value;
+
 
     const responsible =
-        document.getElementById("responsible").value;
+        document
+            .getElementById("responsible")
+            .value;
+
 
     const editId =
-        document.getElementById("editId").value;
+        document
+            .getElementById("editId")
+            .value;
 
 
     if (!title) {
@@ -2563,6 +3618,7 @@ function saveIncident() {
         );
 
         return;
+
     }
 
 
@@ -2570,26 +3626,41 @@ function saveIncident() {
 
         const index =
             incidents.findIndex(
-                item => item.id === editId
+                item =>
+                    item.id === editId
             );
+
 
         if (index !== -1) {
 
             incidents[index] = {
+
                 ...incidents[index],
+
                 title,
                 description,
                 priority,
                 status,
                 responsible
+
             };
 
+
             activities.unshift({
+
                 icon: "✎",
-                text: "Incidente atualizado",
-                detail: `— ${editId} foi atualizado.`,
-                time: "agora"
+
+                text:
+                    "Incidente atualizado",
+
+                detail:
+                    `— ${editId} foi atualizado.`,
+
+                time:
+                    "agora"
+
             });
+
 
             showToast(
                 "Incidente atualizado com sucesso."
@@ -2602,18 +3673,24 @@ function saveIncident() {
         const number =
             incidents.length + 129;
 
+
         const id =
             "INC-" +
-            String(number).padStart(5,"0");
+            String(number)
+                .padStart(5,"0");
+
 
         const now =
             new Date();
 
+
         const date =
             now.toLocaleDateString(
                 "pt-BR"
-            ) +
-            " • " +
+            )
+            +
+            " • "
+            +
             now.toLocaleTimeString(
                 "pt-BR",
                 {
@@ -2639,9 +3716,17 @@ function saveIncident() {
         activities.unshift({
 
             icon: "+",
-            text: "Novo incidente registrado",
-            detail: `— ${id} criado por ${getResponsibleName(responsible)}.`,
-            time: "agora"
+
+            text:
+                "Novo incidente registrado",
+
+            detail:
+                `— ${id} criado por ${getResponsibleName(
+                    responsible
+                )}.`,
+
+            time:
+                "agora"
 
         });
 
@@ -2655,6 +3740,7 @@ function saveIncident() {
 
     activities =
         activities.slice(0,6);
+
 
     saveDatabase();
 
@@ -2686,8 +3772,10 @@ function deleteIncident(id) {
 
     const item =
         incidents.find(
-            incident => incident.id === id
+            incident =>
+                incident.id === id
         );
+
 
     if (!item) return;
 
@@ -2703,16 +3791,23 @@ function deleteIncident(id) {
 
     incidents =
         incidents.filter(
-            incident => incident.id !== id
+            incident =>
+                incident.id !== id
         );
 
 
     activities.unshift({
 
         icon: "×",
-        text: "Incidente removido",
-        detail: `— ${id} foi excluído do sistema.`,
-        time: "agora"
+
+        text:
+            "Incidente removido",
+
+        detail:
+            `— ${id} foi excluído do sistema.`,
+
+        time:
+            "agora"
 
     });
 
@@ -2726,6 +3821,7 @@ function deleteIncident(id) {
     updateDashboard();
 
     renderIncidents();
+
 
     showToast(
         "Incidente excluído.",
@@ -2743,24 +3839,32 @@ function cycleStatus(id) {
 
     const item =
         incidents.find(
-            incident => incident.id === id
+            incident =>
+                incident.id === id
         );
+
 
     if (!item) return;
 
 
     const statuses = [
+
         "Aberto",
         "Em andamento",
         "Resolvido"
+
     ];
 
 
     const current =
-        statuses.indexOf(item.status);
+        statuses.indexOf(
+            item.status
+        );
+
 
     const next =
-        (current + 1) % statuses.length;
+        (current + 1) %
+        statuses.length;
 
 
     item.status =
@@ -2770,9 +3874,15 @@ function cycleStatus(id) {
     activities.unshift({
 
         icon: "↻",
-        text: "Status atualizado",
-        detail: `— ${id} agora está ${item.status}.`,
-        time: "agora"
+
+        text:
+            "Status atualizado",
+
+        detail:
+            `— ${id} agora está ${item.status}.`,
+
+        time:
+            "agora"
 
     });
 
@@ -2786,6 +3896,7 @@ function cycleStatus(id) {
     updateDashboard();
 
     renderIncidents();
+
 
     showToast(
         `Status alterado para ${item.status}.`
@@ -2801,42 +3912,66 @@ function cycleStatus(id) {
 function renderActivities() {
 
     const container =
-        document.getElementById("activityList");
+        document.getElementById(
+            "activityList"
+        );
+
 
     container.innerHTML = "";
 
 
-    activities.slice(0,5).forEach(item => {
+    activities
+        .slice(0,5)
+        .forEach(item => {
 
-        container.innerHTML += `
+            container.innerHTML += `
 
-            <div class="activity-item">
+                <div class="activity-item">
 
-                <div class="activity-icon">
-                    ${escapeHTML(item.icon)}
+                    <div class="activity-icon">
+
+                        ${escapeHTML(
+                            item.icon
+                        )}
+
+                    </div>
+
+
+                    <div class="activity-text">
+
+                        <strong>
+
+                            ${escapeHTML(
+                                item.text
+                            )}
+
+                        </strong>
+
+
+                        <span>
+
+                            ${escapeHTML(
+                                item.detail
+                            )}
+
+                        </span>
+
+
+                        <span class="activity-time">
+
+                            ${escapeHTML(
+                                item.time
+                            )}
+
+                        </span>
+
+                    </div>
+
                 </div>
 
-                <div class="activity-text">
+            `;
 
-                    <strong>
-                        ${escapeHTML(item.text)}
-                    </strong>
-
-                    <span>
-                        ${escapeHTML(item.detail)}
-                    </span>
-
-                    <span class="activity-time">
-                        ${escapeHTML(item.time)}
-                    </span>
-
-                </div>
-
-            </div>
-
-        `;
-
-    });
+        });
 
 }
 
@@ -2850,53 +3985,77 @@ function renderReports() {
     const total =
         incidents.length;
 
+
     const resolved =
         incidents.filter(
-            item => item.status === "Resolvido"
+            item =>
+                item.status === "Resolvido"
         ).length;
+
 
     const critical =
         incidents.filter(
-            item => item.priority === "Crítico"
+            item =>
+                item.priority === "Crítico"
         ).length;
 
 
     const resolutionRate =
         total
-        ? Math.round(
-            resolved / total * 100
+        ?
+        Math.round(
+            resolved /
+            total *
+            100
         )
-        : 0;
+        :
+        0;
 
 
     const criticalRate =
         total
-        ? Math.round(
-            critical / total * 100
+        ?
+        Math.round(
+            critical /
+            total *
+            100
         )
-        : 0;
+        :
+        0;
 
 
-    document.getElementById("reportTotal")
-        .textContent = total;
+    document
+        .getElementById("reportTotal")
+        .textContent =
+        total;
 
-    document.getElementById("resolutionRate")
-        .textContent = resolutionRate + "%";
 
-    document.getElementById("criticalRate")
-        .textContent = criticalRate + "%";
+    document
+        .getElementById("resolutionRate")
+        .textContent =
+        resolutionRate + "%";
+
+
+    document
+        .getElementById("criticalRate")
+        .textContent =
+        criticalRate + "%";
 
 
     const priorities = [
+
         "Crítico",
         "Alto",
         "Médio",
         "Baixo"
+
     ];
 
 
     const container =
-        document.getElementById("reportPriority");
+        document.getElementById(
+            "reportPriority"
+        );
 
 
     container.innerHTML = "";
@@ -2906,16 +4065,21 @@ function renderReports() {
 
         const count =
             incidents.filter(
-                item => item.priority === priority
+                item =>
+                    item.priority === priority
             ).length;
 
 
         const percentage =
             total
-            ? Math.round(
-                count / total * 100
+            ?
+            Math.round(
+                count /
+                total *
+                100
             )
-            : 0;
+            :
+            0;
 
 
         container.innerHTML += `
@@ -2937,6 +4101,7 @@ function renderReports() {
                     </div>
 
                 </div>
+
 
                 <strong>
                     ${count}
@@ -2965,6 +4130,7 @@ function exportCSV() {
         );
 
         return;
+
     }
 
 
@@ -2981,38 +4147,55 @@ function exportCSV() {
             item.description,
             item.priority,
             item.status,
-            getResponsibleName(item.responsible),
+            getResponsibleName(
+                item.responsible
+            ),
             item.date
 
-        ].map(value =>
-            `"${String(value || "")
-                .replace(/"/g,'""')}"`
-        ).join(",");
+        ]
+        .map(
+            value =>
+                `"${String(value || "")
+                    .replace(/"/g,'""')}"`
+        )
+        .join(",");
 
 
-        csv += row + "\n";
+        csv +=
+            row +
+            "\n";
 
     });
 
 
     const blob =
         new Blob(
+
             [csv],
+
             {
-                type:"text/csv;charset=utf-8;"
+                type:
+                    "text/csv;charset=utf-8;"
             }
+
         );
 
 
     const url =
-        URL.createObjectURL(blob);
+        URL.createObjectURL(
+            blob
+        );
 
 
     const link =
-        document.createElement("a");
+        document.createElement(
+            "a"
+        );
 
 
-    link.href = url;
+    link.href =
+        url;
+
 
     link.download =
         "incident-manager-relatorio.csv";
@@ -3021,7 +4204,9 @@ function exportCSV() {
     link.click();
 
 
-    URL.revokeObjectURL(url);
+    URL.revokeObjectURL(
+        url
+    );
 
 
     showToast(
@@ -3035,26 +4220,41 @@ function exportCSV() {
    TOAST
 ========================================================= */
 
-function showToast(message,error=false) {
+function showToast(
+    message,
+    error = false
+) {
 
     const container =
-        document.getElementById("toastContainer");
+        document.getElementById(
+            "toastContainer"
+        );
 
 
     const toast =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     toast.className =
         "toast" +
-        (error ? " error" : "");
+        (
+            error
+            ?
+            " error"
+            :
+            ""
+        );
 
 
     toast.textContent =
         message;
 
 
-    container.appendChild(toast);
+    container.appendChild(
+        toast
+    );
 
 
     setTimeout(() => {
