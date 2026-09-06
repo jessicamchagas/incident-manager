@@ -1,0 +1,2015 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Incident Manager | Jessica Monteiro</title>
+
+    <meta
+        name="description"
+        content="Incident Manager — sistema de gerenciamento, monitoramento e análise de incidentes desenvolvido por Jessica Monteiro."
+    >
+
+    <meta name="author" content="Jessica Monteiro">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #07090d;
+            --sidebar: #0b0e13;
+            --card: #0e1218;
+            --card-hover: #11161e;
+            --border: #1c232d;
+
+            --text: #f1f5f9;
+            --muted: #7f8a9a;
+            --muted-2: #5f6978;
+
+            --accent: #7c5cff;
+            --accent-light: #9b82ff;
+
+            --danger: #ff5d73;
+            --warning: #f5b84b;
+            --success: #45d483;
+            --info: #4da3ff;
+
+            --radius: 14px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Inter", sans-serif;
+            overflow-x: hidden;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* =====================================================
+           LAYOUT
+        ===================================================== */
+
+        .app {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .sidebar {
+            width: 250px;
+            min-height: 100vh;
+            background: var(--sidebar);
+            border-right: 1px solid var(--border);
+            padding: 24px 16px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 20;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 4px 10px 28px;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                var(--accent),
+                #4b35b7
+            );
+
+            font-size: 18px;
+            font-weight: 800;
+
+            box-shadow: 0 8px 25px rgba(124, 92, 255, .22);
+        }
+
+        .brand-text h1 {
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: -.2px;
+        }
+
+        .brand-text span {
+            color: var(--muted);
+            font-size: 10px;
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        .menu-label {
+            padding: 0 10px;
+            margin: 10px 0 9px;
+
+            color: var(--muted-2);
+
+            font-size: 10px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            width: 100%;
+            padding: 11px 12px;
+
+            border-radius: 9px;
+
+            color: var(--muted);
+
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 500;
+
+            transition: .2s ease;
+        }
+
+        .nav-item:hover {
+            background: #11151c;
+            color: var(--text);
+        }
+
+        .nav-item.active {
+            background: rgba(124, 92, 255, .13);
+            color: #b7a9ff;
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .sidebar-bottom {
+            position: absolute;
+            left: 16px;
+            right: 16px;
+            bottom: 22px;
+        }
+
+        .developer-card {
+            border: 1px solid var(--border);
+            background: #0e1117;
+            border-radius: 12px;
+            padding: 14px;
+        }
+
+        .developer-title {
+            font-size: 10px;
+            color: var(--muted-2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .developer-name {
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .developer-role {
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .main {
+            width: calc(100% - 250px);
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        /* =====================================================
+           TOPBAR
+        ===================================================== */
+
+        .topbar {
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 32px;
+
+            border-bottom: 1px solid var(--border);
+
+            background: rgba(7, 9, 13, .88);
+
+            backdrop-filter: blur(14px);
+
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+        .breadcrumb strong {
+            color: var(--text);
+        }
+
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            color: var(--muted);
+
+            font-size: 11px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 10px rgba(69, 212, 131, .8);
+        }
+
+        .notification {
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid var(--border);
+            border-radius: 8px;
+
+            color: var(--muted);
+
+            background: #0c1016;
+
+            font-size: 14px;
+        }
+
+        .profile {
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #8d74ff,
+                #4936a9
+            );
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        /* =====================================================
+           CONTENT
+        ===================================================== */
+
+        .content {
+            padding: 32px;
+            max-width: 1600px;
+            margin: auto;
+        }
+
+        .page-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            margin-bottom: 28px;
+        }
+
+        .page-heading h2 {
+            font-size: 25px;
+            letter-spacing: -.8px;
+        }
+
+        .page-heading p {
+            margin-top: 7px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .primary-button {
+            border: 0;
+            border-radius: 9px;
+
+            padding: 11px 16px;
+
+            background: var(--accent);
+            color: white;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow: 0 8px 22px rgba(124, 92, 255, .2);
+
+            transition: .2s ease;
+        }
+
+        .primary-button:hover {
+            transform: translateY(-1px);
+            background: var(--accent-light);
+        }
+
+        /* =====================================================
+           METRICS
+        ===================================================== */
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .metric-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            padding: 20px;
+
+            transition: .2s ease;
+        }
+
+        .metric-card:hover {
+            background: var(--card-hover);
+            border-color: #29313d;
+        }
+
+        .metric-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 18px;
+        }
+
+        .metric-label {
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .metric-icon {
+            width: 32px;
+            height: 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 8px;
+
+            background: #17131f;
+
+            font-size: 14px;
+        }
+
+        .metric-value {
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .metric-footer {
+            margin-top: 9px;
+
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            font-size: 10px;
+        }
+
+        .positive {
+            color: var(--success);
+        }
+
+        .negative {
+            color: var(--danger);
+        }
+
+        .neutral {
+            color: var(--muted);
+        }
+
+        /* =====================================================
+           GRID
+        ===================================================== */
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.7fr 1fr;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+
+        .panel {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 18px 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .panel-title {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .panel-subtitle {
+            color: var(--muted);
+            font-size: 10px;
+            margin-top: 4px;
+        }
+
+        .period {
+            color: var(--muted);
+            font-size: 10px;
+
+            border: 1px solid var(--border);
+            background: #0b0f14;
+
+            padding: 6px 9px;
+            border-radius: 6px;
+        }
+
+        /* =====================================================
+           CHART
+        ===================================================== */
+
+        .chart {
+            height: 230px;
+            padding: 20px;
+
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+
+            position: relative;
+        }
+
+        .chart-grid {
+            position: absolute;
+            inset: 20px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            pointer-events: none;
+        }
+
+        .grid-line {
+            width: 100%;
+            height: 1px;
+            background: #171d25;
+        }
+
+        .bars {
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .bar-wrapper {
+            height: 100%;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+
+            gap: 8px;
+        }
+
+        .bar {
+            width: 22px;
+
+            border-radius: 5px 5px 2px 2px;
+
+            background: linear-gradient(
+                to top,
+                #4936a9,
+                var(--accent-light)
+            );
+
+            opacity: .9;
+
+            transition: .3s ease;
+        }
+
+        .bar:hover {
+            opacity: 1;
+            transform: scaleY(1.03);
+        }
+
+        .bar-label {
+            color: var(--muted-2);
+            font-size: 9px;
+        }
+
+        /* =====================================================
+           DISTRIBUTION
+        ===================================================== */
+
+        .distribution {
+            padding: 22px 20px;
+        }
+
+        .donut-area {
+            display: flex;
+            justify-content: center;
+            padding: 10px 0 24px;
+        }
+
+        .donut {
+            width: 145px;
+            height: 145px;
+
+            border-radius: 50%;
+
+            background:
+                conic-gradient(
+                    var(--danger) 0 18%,
+                    var(--warning) 18% 43%,
+                    var(--info) 43% 68%,
+                    var(--success) 68% 100%
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+        }
+
+        .donut::after {
+            content: "";
+
+            width: 92px;
+            height: 92px;
+
+            border-radius: 50%;
+
+            background: var(--card);
+
+            position: absolute;
+        }
+
+        .donut-center {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .donut-number {
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .donut-text {
+            color: var(--muted);
+            font-size: 9px;
+        }
+
+        .legend {
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            font-size: 11px;
+        }
+
+        .legend-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            color: var(--muted);
+        }
+
+        .legend-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+        }
+
+        .legend-value {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* =====================================================
+           INCIDENT TABLE
+        ===================================================== */
+
+        .table-panel {
+            margin-bottom: 18px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+
+            padding: 13px 20px;
+
+            color: var(--muted-2);
+
+            font-size: 9px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: .8px;
+
+            background: #0c1015;
+        }
+
+        td {
+            padding: 15px 20px;
+
+            border-top: 1px solid #171d25;
+
+            font-size: 11px;
+            white-space: nowrap;
+        }
+
+        tbody tr {
+            transition: .2s ease;
+        }
+
+        tbody tr:hover {
+            background: #11161d;
+        }
+
+        .incident-id {
+            color: var(--accent-light);
+            font-family: "JetBrains Mono", monospace;
+            font-size: 10px;
+        }
+
+        .incident-name {
+            font-weight: 600;
+        }
+
+        .incident-date {
+            color: var(--muted);
+        }
+
+        .priority,
+        .status {
+            display: inline-flex;
+            align-items: center;
+
+            padding: 5px 8px;
+
+            border-radius: 5px;
+
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .priority-critical {
+            color: #ff8293;
+            background: rgba(255, 93, 115, .09);
+        }
+
+        .priority-high {
+            color: #ffc86c;
+            background: rgba(245, 184, 75, .09);
+        }
+
+        .priority-medium {
+            color: #6eb6ff;
+            background: rgba(77, 163, 255, .09);
+        }
+
+        .priority-low {
+            color: #65dda0;
+            background: rgba(69, 212, 131, .09);
+        }
+
+        .status-open {
+            color: #ff8293;
+            background: rgba(255, 93, 115, .08);
+        }
+
+        .status-progress {
+            color: #b7a9ff;
+            background: rgba(124, 92, 255, .1);
+        }
+
+        .status-resolved {
+            color: #65dda0;
+            background: rgba(69, 212, 131, .08);
+        }
+
+        .avatar {
+            width: 25px;
+            height: 25px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #242b35;
+
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        /* =====================================================
+           ACTIVITY
+        ===================================================== */
+
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 18px;
+        }
+
+        .activity {
+            padding: 20px;
+        }
+
+        .activity-item {
+            display: flex;
+            gap: 13px;
+
+            padding-bottom: 18px;
+            margin-bottom: 18px;
+
+            border-bottom: 1px solid #171d25;
+        }
+
+        .activity-item:last-child {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        .activity-icon {
+            width: 28px;
+            height: 28px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 7px;
+
+            background: #17131f;
+
+            font-size: 11px;
+        }
+
+        .activity-text {
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .activity-text strong {
+            color: var(--text);
+        }
+
+        .activity-text span {
+            color: var(--muted);
+        }
+
+        .activity-time {
+            display: block;
+            margin-top: 4px;
+
+            color: var(--muted-2);
+            font-size: 9px;
+        }
+
+        /* =====================================================
+           QUICK INFO
+        ===================================================== */
+
+        .quick-info {
+            padding: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 13px 0;
+
+            border-bottom: 1px solid #171d25;
+
+            font-size: 11px;
+        }
+
+        .info-row:last-child {
+            border: 0;
+        }
+
+        .info-label {
+            color: var(--muted);
+        }
+
+        .info-value {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 10px;
+        }
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .footer {
+            padding: 28px 0 8px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            color: var(--muted-2);
+
+            font-size: 9px;
+        }
+
+        .footer a {
+            color: var(--accent-light);
+            text-decoration: none;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-grid,
+            .bottom-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 760px) {
+
+            .sidebar {
+                width: 70px;
+                padding: 20px 10px;
+            }
+
+            .brand {
+                justify-content: center;
+                padding: 4px 0 28px;
+            }
+
+            .brand-text,
+            .menu-label,
+            .nav-item span,
+            .developer-card {
+                display: none;
+            }
+
+            .nav-item {
+                justify-content: center;
+                padding: 12px;
+            }
+
+            .main {
+                width: calc(100% - 70px);
+                margin-left: 70px;
+            }
+
+            .topbar {
+                padding: 0 18px;
+            }
+
+            .system-status {
+                display: none;
+            }
+
+            .content {
+                padding: 20px 16px;
+            }
+
+            .page-heading {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            .metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .chart {
+                height: 200px;
+            }
+
+            .bar {
+                width: 14px;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 8px;
+                align-items: flex-start;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                IM
+            </div>
+
+            <div class="brand-text">
+                <h1>Incident Manager</h1>
+                <span>v1.0.0 • SYSTEM</span>
+            </div>
+
+        </div>
+
+
+        <div class="menu-label">
+            Workspace
+        </div>
+
+
+        <nav class="nav">
+
+            <a href="#" class="nav-item active">
+                <div class="nav-icon">▦</div>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <div class="nav-icon">⚠</div>
+                <span>Incidentes</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <div class="nav-icon">◫</div>
+                <span>Relatórios</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <div class="nav-icon">◌</div>
+                <span>Monitoramento</span>
+            </a>
+
+        </nav>
+
+
+        <div class="menu-label">
+            Sistema
+        </div>
+
+
+        <nav class="nav">
+
+            <a href="#" class="nav-item">
+                <div class="nav-icon">⚙</div>
+                <span>Configurações</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <div class="nav-icon">?</div>
+                <span>Documentação</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="developer-card">
+
+                <div class="developer-title">
+                    Desenvolvido por
+                </div>
+
+                <div class="developer-name">
+                    Jessica Monteiro
+                </div>
+
+                <div class="developer-role">
+                    Tecnologia • IA • Automação
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="breadcrumb">
+                Workspace
+                <span>/</span>
+                <strong>Dashboard</strong>
+            </div>
+
+
+            <div class="top-actions">
+
+                <div class="system-status">
+                    <span class="status-dot"></span>
+                    Sistema operacional
+                </div>
+
+                <div class="notification">
+                    ♢
+                </div>
+
+                <div class="profile">
+                    JM
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- CONTENT -->
+
+        <section class="content">
+
+
+            <!-- PAGE HEADING -->
+
+            <div class="page-heading">
+
+                <div>
+
+                    <h2>Dashboard</h2>
+
+                    <p>
+                        Visão geral dos incidentes e operações do sistema.
+                    </p>
+
+                </div>
+
+
+                <button class="primary-button">
+                    + Novo incidente
+                </button>
+
+            </div>
+
+
+
+            <!-- METRICS -->
+
+            <div class="metrics">
+
+
+                <div class="metric-card">
+
+                    <div class="metric-top">
+
+                        <span class="metric-label">
+                            Total de incidentes
+                        </span>
+
+                        <div class="metric-icon">
+                            ◈
+                        </div>
+
+                    </div>
+
+                    <div class="metric-value">
+                        128
+                    </div>
+
+                    <div class="metric-footer positive">
+                        ↑ 12,4%
+                        <span class="neutral">
+                            vs. mês anterior
+                        </span>
+                    </div>
+
+                </div>
+
+
+
+                <div class="metric-card">
+
+                    <div class="metric-top">
+
+                        <span class="metric-label">
+                            Incidentes abertos
+                        </span>
+
+                        <div class="metric-icon">
+                            ⚠
+                        </div>
+
+                    </div>
+
+                    <div class="metric-value">
+                        24
+                    </div>
+
+                    <div class="metric-footer negative">
+                        ↑ 4,2%
+                        <span class="neutral">
+                            requer atenção
+                        </span>
+                    </div>
+
+                </div>
+
+
+
+                <div class="metric-card">
+
+                    <div class="metric-top">
+
+                        <span class="metric-label">
+                            Resolvidos
+                        </span>
+
+                        <div class="metric-icon">
+                            ✓
+                        </div>
+
+                    </div>
+
+                    <div class="metric-value">
+                        91
+                    </div>
+
+                    <div class="metric-footer positive">
+                        ↑ 18,7%
+                        <span class="neutral">
+                            este mês
+                        </span>
+                    </div>
+
+                </div>
+
+
+
+                <div class="metric-card">
+
+                    <div class="metric-top">
+
+                        <span class="metric-label">
+                            Tempo médio
+                        </span>
+
+                        <div class="metric-icon">
+                            ◷
+                        </div>
+
+                    </div>
+
+                    <div class="metric-value">
+                        2h 18m
+                    </div>
+
+                    <div class="metric-footer positive">
+                        ↓ 14,8%
+                        <span class="neutral">
+                            tempo de resolução
+                        </span>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- CHART + DISTRIBUTION -->
+
+            <div class="dashboard-grid">
+
+
+                <!-- CHART -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <div class="panel-title">
+                                Incidentes por período
+                            </div>
+
+                            <div class="panel-subtitle">
+                                Volume registrado nos últimos 7 dias
+                            </div>
+                        </div>
+
+                        <div class="period">
+                            Últimos 7 dias
+                        </div>
+
+                    </div>
+
+
+                    <div class="chart">
+
+                        <div class="chart-grid">
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                        </div>
+
+
+                        <div class="bars">
+
+                            <div class="bar-wrapper">
+                                <div class="bar" style="height: 38%;"></div>
+                                <div class="bar-label">SEG</div>
+                            </div>
+
+                            <div class="bar-wrapper">
+                                <div class="bar" style="height: 57%;"></div>
+                                <div class="bar-label">TER</div>
+                            </div>
+
+                            <div class="bar-wrapper">
+                                <div class="bar" style="height: 43%;"></div>
+                                <div class="bar-label">QUA</div>
+                            </div>
+
+                            <div class="bar-wrapper">
+                                <div class="bar" style="height: 78%;"></div>
+                                <div class="bar-label">QUI</div>
+                            </div>
+
+                            <div class="bar-wrapper">
+                                <div class="bar" style="height: 61%;"></div>
+                                <div class="bar-label">SEX</div>
+                            </div>
+
+                            <div class="bar-wrapper">
+                                <div class="bar" style="height: 32%;"></div>
+                                <div class="bar-label">SÁB</div>
+                            </div>
+
+                            <div class="bar-wrapper">
+                                <div class="bar" style="height: 49%;"></div>
+                                <div class="bar-label">DOM</div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- DISTRIBUTION -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <div class="panel-title">
+                                Distribuição
+                            </div>
+
+                            <div class="panel-subtitle">
+                                Por nível de prioridade
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="distribution">
+
+                        <div class="donut-area">
+
+                            <div class="donut">
+
+                                <div class="donut-center">
+
+                                    <div class="donut-number">
+                                        128
+                                    </div>
+
+                                    <div class="donut-text">
+                                        incidentes
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="legend">
+
+                            <div class="legend-item">
+
+                                <div class="legend-left">
+                                    <span
+                                        class="legend-dot"
+                                        style="background: var(--danger);"
+                                    ></span>
+
+                                    Crítico
+                                </div>
+
+                                <span class="legend-value">23</span>
+
+                            </div>
+
+
+                            <div class="legend-item">
+
+                                <div class="legend-left">
+                                    <span
+                                        class="legend-dot"
+                                        style="background: var(--warning);"
+                                    ></span>
+
+                                    Alto
+                                </div>
+
+                                <span class="legend-value">32</span>
+
+                            </div>
+
+
+                            <div class="legend-item">
+
+                                <div class="legend-left">
+                                    <span
+                                        class="legend-dot"
+                                        style="background: var(--info);"
+                                    ></span>
+
+                                    Médio
+                                </div>
+
+                                <span class="legend-value">32</span>
+
+                            </div>
+
+
+                            <div class="legend-item">
+
+                                <div class="legend-left">
+                                    <span
+                                        class="legend-dot"
+                                        style="background: var(--success);"
+                                    ></span>
+
+                                    Baixo
+                                </div>
+
+                                <span class="legend-value">41</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- INCIDENT TABLE -->
+
+            <div class="panel table-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <div class="panel-title">
+                            Incidentes recentes
+                        </div>
+
+                        <div class="panel-subtitle">
+                            Últimos eventos registrados no sistema
+                        </div>
+
+                    </div>
+
+                    <div class="period">
+                        Ver todos
+                    </div>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>ID</th>
+                                <th>Incidente</th>
+                                <th>Prioridade</th>
+                                <th>Status</th>
+                                <th>Responsável</th>
+                                <th>Data</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                            <tr>
+
+                                <td>
+                                    <span class="incident-id">
+                                        INC-00128
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="incident-name">
+                                        Servidor de aplicação indisponível
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="priority priority-critical">
+                                        CRÍTICO
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="status status-open">
+                                        ABERTO
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="avatar">JM</span>
+                                </td>
+
+                                <td>
+                                    <span class="incident-date">
+                                        Hoje, 10:42
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+
+                            <tr>
+
+                                <td>
+                                    <span class="incident-id">
+                                        INC-00127
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="incident-name">
+                                        Falha de autenticação
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="priority priority-high">
+                                        ALTO
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="status status-progress">
+                                        EM ANDAMENTO
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="avatar">RC</span>
+                                </td>
+
+                                <td>
+                                    <span class="incident-date">
+                                        Hoje, 09:17
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+
+                            <tr>
+
+                                <td>
+                                    <span class="incident-id">
+                                        INC-00126
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="incident-name">
+                                        Erro de conexão com banco de dados
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="priority priority-high">
+                                        ALTO
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="status status-resolved">
+                                        RESOLVIDO
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="avatar">AS</span>
+                                </td>
+
+                                <td>
+                                    <span class="incident-date">
+                                        Ontem, 18:31
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+
+                            <tr>
+
+                                <td>
+                                    <span class="incident-id">
+                                        INC-00125
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="incident-name">
+                                        Lentidão no serviço de API
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="priority priority-medium">
+                                        MÉDIO
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="status status-resolved">
+                                        RESOLVIDO
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="avatar">JM</span>
+                                </td>
+
+                                <td>
+                                    <span class="incident-date">
+                                        Ontem, 16:04
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+
+                            <tr>
+
+                                <td>
+                                    <span class="incident-id">
+                                        INC-00124
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="incident-name">
+                                        Falha de integração externa
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="priority priority-low">
+                                        BAIXO
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="status status-resolved">
+                                        RESOLVIDO
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="avatar">LG</span>
+                                </td>
+
+                                <td>
+                                    <span class="incident-date">
+                                        04 Set, 14:22
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ACTIVITY + SYSTEM INFO -->
+
+            <div class="bottom-grid">
+
+
+                <!-- ACTIVITY -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <div class="panel-title">
+                                Atividade recente
+                            </div>
+
+                            <div class="panel-subtitle">
+                                Últimas ações realizadas
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity">
+
+
+                        <div class="activity-item">
+
+                            <div class="activity-icon">
+                                +
+                            </div>
+
+                            <div class="activity-text">
+
+                                <strong>
+                                    Novo incidente registrado
+                                </strong>
+
+                                <span>
+                                    — INC-00128 criado por Jessica Monteiro.
+                                </span>
+
+                                <span class="activity-time">
+                                    há 18 minutos
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="activity-item">
+
+                            <div class="activity-icon">
+                                ✓
+                            </div>
+
+                            <div class="activity-text">
+
+                                <strong>
+                                    Incidente resolvido
+                                </strong>
+
+                                <span>
+                                    — INC-00126 foi marcado como resolvido.
+                                </span>
+
+                                <span class="activity-time">
+                                    há 1 hora
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="activity-item">
+
+                            <div class="activity-icon">
+                                AI
+                            </div>
+
+                            <div class="activity-text">
+
+                                <strong>
+                                    Análise automática executada
+                                </strong>
+
+                                <span>
+                                    — Sistema classificou um incidente como prioridade alta.
+                                </span>
+
+                                <span class="activity-time">
+                                    há 2 horas
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SYSTEM -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <div class="panel-title">
+                                Status do sistema
+                            </div>
+
+                            <div class="panel-subtitle">
+                                Informações técnicas
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="quick-info">
+
+                        <div class="info-row">
+
+                            <span class="info-label">
+                                API
+                            </span>
+
+                            <span class="info-value positive">
+                                ONLINE
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-label">
+                                Database
+                            </span>
+
+                            <span class="info-value positive">
+                                ONLINE
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-label">
+                                AI Engine
+                            </span>
+
+                            <span class="info-value positive">
+                                READY
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-label">
+                                Uptime
+                            </span>
+
+                            <span class="info-value">
+                                99.98%
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-label">
+                                Version
+                            </span>
+
+                            <span class="info-value">
+                                1.0.0
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FOOTER -->
+
+            <footer class="footer">
+
+                <span>
+                    Incident Manager • Projeto desenvolvido por Jessica Monteiro
+                </span>
+
+                <span>
+                    Tecnologia • IA • Automação
+                </span>
+
+            </footer>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>
+```
