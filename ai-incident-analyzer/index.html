@@ -1,756 +1,677 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>AI Incident Analyzer | Jessica Monteiro</title>
-
-<meta name="description" content="AI Incident Analyzer - análise inteligente de incidentes.">
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-:root{
-    --bg:#070b12;
-    --panel:#0d131d;
-    --panel2:#111a26;
-    --border:#1d2a3a;
-    --text:#f1f5f9;
-    --muted:#7f8da3;
-    --cyan:#22d3ee;
-    --blue:#3b82f6;
-    --green:#22c55e;
-    --yellow:#f59e0b;
-    --red:#ef4444;
-}
-
-body{
-    font-family:Inter,Segoe UI,Arial,sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    min-height:100vh;
-}
-
-button,
-textarea{
-    font-family:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-/* SIDEBAR */
-
-.sidebar{
-    position:fixed;
-    left:0;
-    top:0;
-    bottom:0;
-    width:250px;
-    background:#080d15;
-    border-right:1px solid var(--border);
-    padding:25px 18px;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin-bottom:40px;
-}
-
-.logo-icon{
-    width:42px;
-    height:42px;
-    border-radius:12px;
-    background:linear-gradient(135deg,var(--cyan),var(--blue));
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:20px;
-    font-weight:800;
-    color:#041019;
-}
-
-.logo strong{
-    display:block;
-    font-size:15px;
-}
-
-.logo span{
-    display:block;
-    color:var(--muted);
-    font-size:11px;
-    margin-top:3px;
-}
-
-.nav-title{
-    color:#4f6075;
-    font-size:10px;
-    font-weight:700;
-    letter-spacing:1.5px;
-    margin:20px 10px 10px;
-    text-transform:uppercase;
-}
-
-.nav{
-    display:flex;
-    flex-direction:column;
-    gap:5px;
-}
-
-.nav a{
-    text-decoration:none;
-    color:#8b9ab0;
-    padding:12px 13px;
-    border-radius:9px;
-    display:flex;
-    align-items:center;
-    gap:11px;
-    font-size:13px;
-    transition:.2s;
-}
-
-.nav a:hover{
-    background:#101925;
-    color:#fff;
-}
-
-.nav a.active{
-    background:rgba(34,211,238,.10);
-    color:var(--cyan);
-    border:1px solid rgba(34,211,238,.15);
-}
-
-/* MAIN */
-
-.main{
-    margin-left:250px;
-    min-height:100vh;
-}
-
-/* TOPBAR */
-
-.topbar{
-    height:72px;
-    border-bottom:1px solid var(--border);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 34px;
-    background:rgba(7,11,18,.92);
-}
-
-.topbar-title{
-    font-size:14px;
-    color:#dce5ef;
-}
-
-.topbar-right{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.status{
-    display:flex;
-    align-items:center;
-    gap:7px;
-    font-size:12px;
-    color:#8ea0b5;
-}
-
-.status-dot{
-    width:7px;
-    height:7px;
-    background:var(--green);
-    border-radius:50%;
-    box-shadow:0 0 10px rgba(34,197,94,.8);
-}
-
-.avatar{
-    width:35px;
-    height:35px;
-    border-radius:50%;
-    background:linear-gradient(135deg,#26364a,#162334);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--cyan);
-    font-size:12px;
-    font-weight:700;
-    border:1px solid var(--border);
-}
-
-/* CONTENT */
-
-.content{
-    padding:34px;
-    max-width:1450px;
-}
-
-.hero{
-    margin-bottom:28px;
-}
-
-.badge{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-    padding:6px 10px;
-    border:1px solid rgba(34,211,238,.2);
-    background:rgba(34,211,238,.07);
-    color:var(--cyan);
-    border-radius:999px;
-    font-size:10px;
-    font-weight:700;
-    letter-spacing:.8px;
-    margin-bottom:14px;
-}
-
-.hero h1{
-    font-size:32px;
-    margin-bottom:9px;
-    letter-spacing:-1px;
-}
-
-.hero p{
-    color:var(--muted);
-    max-width:760px;
-    font-size:14px;
-    line-height:1.7;
-}
-
-/* GRID */
-
-.grid{
-    display:grid;
-    grid-template-columns:1.4fr .8fr;
-    gap:20px;
-}
-
-.card{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:24px;
-    box-shadow:0 15px 40px rgba(0,0,0,.15);
-}
-
-.card-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-
-.card-title{
-    font-size:15px;
-    font-weight:700;
-}
-
-.card-subtitle{
-    color:var(--muted);
-    font-size:11px;
-    margin-top:4px;
-}
-
-/* INPUT */
-
-textarea{
-    width:100%;
-    min-height:190px;
-    resize:vertical;
-    background:#080e17;
-    color:#e7eef7;
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:17px;
-    outline:none;
-    font-size:14px;
-    line-height:1.7;
-}
-
-textarea:focus{
-    border-color:rgba(34,211,238,.55);
-    box-shadow:0 0 0 3px rgba(34,211,238,.07);
-}
-
-textarea::placeholder{
-    color:#56667a;
-}
-
-.actions{
-    display:flex;
-    gap:10px;
-    margin-top:14px;
-}
-
-.btn{
-    border:none;
-    border-radius:9px;
-    padding:12px 17px;
-    font-weight:700;
-    font-size:12px;
-    transition:.2s;
-}
-
-.btn-primary{
-    color:#031018;
-    background:linear-gradient(135deg,var(--cyan),#38bdf8);
-}
-
-.btn-primary:hover{
-    transform:translateY(-1px);
-}
-
-.btn-secondary{
-    background:#111a26;
-    border:1px solid var(--border);
-    color:#9aabc0;
-}
-
-.btn-secondary:hover{
-    color:#fff;
-}
-
-/* RESULTS */
-
-.results{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:10px;
-    margin-top:20px;
-}
-
-.metric{
-    background:#0a111b;
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:14px;
-}
-
-.metric-label{
-    font-size:9px;
-    text-transform:uppercase;
-    color:#687a90;
-    letter-spacing:1px;
-    margin-bottom:8px;
-}
-
-.metric-value{
-    font-size:14px;
-    font-weight:700;
-}
-
-.category{
-    color:var(--cyan);
-}
-
-.priority-critical{
-    color:var(--red);
-}
-
-.priority-high{
-    color:#fb7185;
-}
-
-.priority-medium{
-    color:var(--yellow);
-}
-
-.priority-low{
-    color:var(--green);
-}
-
-/* CONFIDENCE */
-
-.confidence{
-    margin-top:18px;
-}
-
-.confidence-top{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:8px;
-    font-size:11px;
-    color:#8a9aae;
-}
-
-.progress{
-    height:7px;
-    background:#172231;
-    border-radius:20px;
-    overflow:hidden;
-}
-
-.progress-bar{
-    height:100%;
-    width:0%;
-    background:linear-gradient(90deg,var(--blue),var(--cyan));
-    border-radius:20px;
-    transition:width .5s ease;
-}
-
-/* RECOMMENDATION */
-
-.recommendation{
-    margin-top:20px;
-    background:rgba(34,211,238,.045);
-    border:1px solid rgba(34,211,238,.13);
-    border-radius:10px;
-    padding:16px;
-}
-
-.recommendation-title{
-    color:var(--cyan);
-    font-size:11px;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:1px;
-    margin-bottom:8px;
-}
-
-.recommendation-text{
-    color:#aab7c8;
-    font-size:12px;
-    line-height:1.7;
-}
-
-/* CREATE */
-
-.create-area{
-    margin-top:20px;
-    padding-top:20px;
-    border-top:1px solid var(--border);
-}
-
-.create-btn{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:9px;
-    background:linear-gradient(135deg,#2563eb,#06b6d4);
-    color:white;
-    font-weight:800;
-    font-size:12px;
-    transition:.2s;
-}
-
-.create-btn:hover{
-    transform:translateY(-1px);
-    box-shadow:0 10px 30px rgba(37,99,235,.22);
-}
-
-/* SIDE */
-
-.flow{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
-
-.flow-item{
-    background:#0a111b;
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:15px;
-    display:flex;
-    align-items:center;
-    gap:13px;
-}
-
-.flow-number{
-    width:28px;
-    height:28px;
-    border-radius:8px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#111d2c;
-    color:var(--cyan);
-    font-size:11px;
-    font-weight:800;
-}
-
-.flow-text strong{
-    display:block;
-    font-size:12px;
-    margin-bottom:3px;
-}
-
-.flow-text span{
-    display:block;
-    color:#65758a;
-    font-size:10px;
-}
-
-.arrow{
-    text-align:center;
-    color:#33475e;
-    font-size:15px;
-}
-
-/* HISTORY */
-
-.history{
-    margin-top:20px;
-}
-
-.history-list{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-}
-
-.history-item{
-    background:#0a111b;
-    border:1px solid var(--border);
-    border-radius:9px;
-    padding:13px;
-}
-
-.history-title{
-    font-size:12px;
-    font-weight:700;
-    margin-bottom:5px;
-}
-
-.history-meta{
-    color:#687a90;
-    font-size:10px;
-}
-
-.empty{
-    color:#617188;
-    font-size:12px;
-    line-height:1.6;
-}
-
-/* FOOTER */
-
-.footer{
-    padding:30px 34px;
-    color:#536276;
-    font-size:10px;
-    text-align:center;
-}
-
-/* TOAST */
-
-.toast{
-    position:fixed;
-    right:25px;
-    bottom:25px;
-    background:#111a26;
-    border:1px solid #26374b;
-    color:#e8eef6;
-    padding:13px 17px;
-    border-radius:9px;
-    font-size:12px;
-    box-shadow:0 15px 40px rgba(0,0,0,.35);
-    opacity:0;
-    transform:translateY(15px);
-    pointer-events:none;
-    transition:.25s;
-    z-index:100;
-}
-
-.toast.show{
-    opacity:1;
-    transform:translateY(0);
-}
-
-/* RESPONSIVE */
-
-@media(max-width:1000px){
-
-    .sidebar{
-        width:210px;
-    }
-
-    .main{
-        margin-left:210px;
-    }
-
-    .grid{
-        grid-template-columns:1fr;
-    }
-
-}
-
-@media(max-width:700px){
-
-    .sidebar{
-        position:relative;
-        width:100%;
-        height:auto;
-        border-right:none;
-        border-bottom:1px solid var(--border);
-    }
-
-    .main{
-        margin-left:0;
-    }
-
-    .topbar{
-        padding:0 18px;
-    }
-
-    .content{
-        padding:22px 16px;
-    }
-
-    .hero h1{
-        font-size:25px;
-    }
-
-    .results{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Incident Analyzer | Jessica Monteiro</title>
+
+    <meta
+        name="description"
+        content="AI Incident Analyzer — análise inteligente, classificação e gerenciamento de incidentes."
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #070b12;
+            --sidebar: #0b111b;
+            --panel: #0f1724;
+            --panel2: #111c2b;
+            --border: #1c2a3c;
+            --text: #f1f5f9;
+            --muted: #7f8da3;
+            --cyan: #00d9ff;
+            --blue: #1677ff;
+            --green: #22c55e;
+            --yellow: #f59e0b;
+            --red: #ef4444;
+            --purple: #8b5cf6;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 250px;
+            background: var(--sidebar);
+            border-right: 1px solid var(--border);
+            padding: 24px 16px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 12px 28px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 22px;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--cyan), var(--blue));
+            color: #00131a;
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+        .logo-text strong {
+            display: block;
+            font-size: 15px;
+        }
+
+        .logo-text span {
+            display: block;
+            font-size: 10px;
+            color: var(--muted);
+            margin-top: 3px;
+            letter-spacing: 1px;
+        }
+
+        .nav-title {
+            color: #526176;
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            margin: 22px 12px 8px;
+            text-transform: uppercase;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 9px;
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 4px;
+            transition: .2s;
+        }
+
+        .nav a:hover {
+            background: #111c2b;
+            color: white;
+        }
+
+        .nav a.active {
+            background: rgba(0, 217, 255, .10);
+            color: var(--cyan);
+            border: 1px solid rgba(0, 217, 255, .12);
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* MAIN */
+
+        .main {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+        }
+
+        .topbar {
+            height: 70px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            background: rgba(7, 11, 18, .92);
+        }
+
+        .breadcrumb {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .breadcrumb strong {
+            color: white;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--green);
+            font-size: 12px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 12px rgba(34, 197, 94, .8);
+        }
+
+        .content {
+            padding: 34px;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .hero {
+            margin-bottom: 28px;
+        }
+
+        .hero-label {
+            color: var(--cyan);
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            margin-bottom: 9px;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 14px;
+            max-width: 800px;
+            line-height: 1.7;
+        }
+
+        /* ANALYZER */
+
+        .analyzer {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .card-header h2 {
+            font-size: 16px;
+        }
+
+        .badge {
+            padding: 5px 9px;
+            border-radius: 6px;
+            background: rgba(0, 217, 255, .08);
+            border: 1px solid rgba(0, 217, 255, .15);
+            color: var(--cyan);
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        textarea {
+            width: 100%;
+            height: 220px;
+            resize: vertical;
+            background: #080e17;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            color: white;
+            outline: none;
+            font-family: inherit;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        textarea:focus {
+            border-color: var(--cyan);
+            box-shadow: 0 0 0 3px rgba(0, 217, 255, .07);
+        }
+
+        .example {
+            margin-top: 10px;
+            color: #627086;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .btn {
+            width: 100%;
+            border: none;
+            border-radius: 9px;
+            padding: 14px;
+            margin-top: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+            transition: .2s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--cyan), var(--blue));
+            color: #00131a;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 30px rgba(0, 217, 255, .16);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 30px rgba(34, 197, 94, .15);
+        }
+
+        /* RESULTS */
+
+        .results {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .metric {
+            background: #0b121d;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .metric-label {
+            color: var(--muted);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .critical {
+            color: var(--red);
+        }
+
+        .high {
+            color: #fb923c;
+        }
+
+        .medium {
+            color: var(--yellow);
+        }
+
+        .low {
+            color: var(--green);
+        }
+
+        .neutral {
+            color: var(--cyan);
+        }
+
+        .confidence {
+            margin: 20px 0;
+        }
+
+        .confidence-head {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 11px;
+        }
+
+        .confidence-head span:first-child {
+            color: var(--muted);
+        }
+
+        .confidence-head span:last-child {
+            color: var(--cyan);
+            font-weight: bold;
+        }
+
+        .progress {
+            height: 7px;
+            background: #09111c;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--blue), var(--cyan));
+            transition: width .5s;
+        }
+
+        .recommendation {
+            background: #0b121d;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 18px;
+        }
+
+        .recommendation-title {
+            color: var(--cyan);
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .recommendation-text {
+            color: #b9c4d2;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* HISTORY */
+
+        .history {
+            margin-top: 22px;
+        }
+
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .history-item {
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #0b121d;
+        }
+
+        .history-item strong {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .history-item span {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .empty {
+            color: #526176;
+            font-size: 12px;
+            padding: 15px 0;
+        }
+
+        /* FLOW */
+
+        .flow {
+            margin-top: 22px;
+        }
+
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .flow-item {
+            background: #0b121d;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 12px;
+            text-align: center;
+        }
+
+        .flow-number {
+            width: 30px;
+            height: 30px;
+            margin: auto auto 10px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 217, 255, .1);
+            color: var(--cyan);
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .flow-item strong {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .flow-item span {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        /* TOAST */
+
+        .toast {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            padding: 14px 18px;
+            border-radius: 9px;
+            background: #101b29;
+            border: 1px solid var(--border);
+            color: white;
+            font-size: 12px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, .4);
+            transform: translateY(120px);
+            opacity: 0;
+            transition: .3s;
+            z-index: 100;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 950px) {
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+                width: calc(100% - 210px);
+            }
+
+            .analyzer {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .layout {
+                display: block;
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .results,
+            .flow-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<aside class="sidebar">
+<div class="layout">
 
-    <div class="logo">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
 
-        <div class="logo-icon">
-            AI
+        <div class="logo">
+            <div class="logo-icon">AI</div>
+
+            <div class="logo-text">
+                <strong>AI SYSTEM</strong>
+                <span>INCIDENT ANALYZER</span>
+            </div>
         </div>
 
-        <div>
-            <strong>Incident AI</strong>
-            <span>Analyzer System</span>
-        </div>
+        <div class="nav-title">Sistema</div>
 
-    </div>
+        <nav class="nav">
 
-    <div class="nav-title">
-        Navegação
-    </div>
+            <!-- LINK CORRETO PARA O INCIDENT MANAGER -->
+            <a href="https://jessicamchagas.github.io/incident-manager/">
+                <span class="nav-icon">🖥️</span>
+                <span>Incident Manager</span>
+            </a>
 
-    <nav class="nav">
+            <a href="#" class="active">
+                <span class="nav-icon">🤖</span>
+                <span>AI Analyzer</span>
+            </a>
 
-        <!-- LINK ABSOLUTO PARA O INCIDENT MANAGER -->
-        <a href="/incident-manager/">
-            🖥️
-            <span>Incident Manager</span>
-        </a>
+        </nav>
 
-        <a href="#" class="active">
-            ⚡
-            <span>AI Analyzer</span>
-        </a>
+        <div class="nav-title">Status</div>
 
-    </nav>
+        <nav class="nav">
 
-    <div class="nav-title">
-        Sistema
-    </div>
+            <a href="#">
+                <span class="nav-icon">🟢</span>
+                <span>AI Engine Online</span>
+            </a>
 
-    <nav class="nav">
+            <a href="#">
+                <span class="nav-icon">⚡</span>
+                <span>Classification Ready</span>
+            </a>
 
-        <a href="#history">
-            🧠
-            <span>Histórico de análises</span>
-        </a>
+        </nav>
 
-        <a href="#flow">
-            🔗
-            <span>Fluxo do sistema</span>
-        </a>
-
-    </nav>
-
-</aside>
+    </aside>
 
 
-<main class="main">
+    <!-- MAIN -->
+    <main class="main">
 
-    <header class="topbar">
+        <header class="topbar">
 
-        <div class="topbar-title">
-            AI Incident Analyzer
-        </div>
-
-        <div class="topbar-right">
+            <div class="breadcrumb">
+                AI SYSTEM / <strong>Incident Analyzer</strong>
+            </div>
 
             <div class="status">
                 <span class="status-dot"></span>
-                AI Engine Online
+                SYSTEM ONLINE
             </div>
 
-            <div class="avatar">
-                JM
-            </div>
-
-        </div>
-
-    </header>
+        </header>
 
 
-    <section class="content">
+        <section class="content">
 
-        <div class="hero">
+            <div class="hero">
 
-            <div class="badge">
-                ⚡ INTELLIGENT INCIDENT ANALYSIS
-            </div>
-
-            <h1>
-                AI Incident Analyzer
-            </h1>
-
-            <p>
-                Analise automaticamente uma descrição de incidente,
-                classifique sua categoria, prioridade e impacto,
-                receba uma recomendação e envie o resultado
-                diretamente para o Incident Manager.
-            </p>
-
-        </div>
-
-
-        <div class="grid">
-
-            <div class="card">
-
-                <div class="card-header">
-
-                    <div>
-                        <div class="card-title">
-                            Analisar incidente
-                        </div>
-
-                        <div class="card-subtitle">
-                            Descreva o problema identificado no ambiente.
-                        </div>
-                    </div>
-
+                <div class="hero-label">
+                    ARTIFICIAL INTELLIGENCE
                 </div>
 
+                <h1>AI Incident Analyzer</h1>
 
-                <textarea
-                    id="incidentDescription"
-                    placeholder="Exemplo:
+                <p>
+                    Analise descrições de incidentes, classifique automaticamente
+                    categoria, prioridade e impacto e envie o resultado diretamente
+                    para o Incident Manager.
+                </p>
 
-O servidor principal está indisponível e todos os usuários estão sem acesso ao sistema desde 14h."
-                ></textarea>
+            </div>
 
 
-                <div class="actions">
+            <div class="analyzer">
+
+                <!-- INPUT -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h2>Descrição do incidente</h2>
+
+                        <span class="badge">
+                            AI ENGINE
+                        </span>
+
+                    </div>
+
+                    <textarea
+                        id="incidentDescription"
+                        placeholder="Descreva o incidente ocorrido..."
+                    ></textarea>
+
+                    <div class="example">
+                        Exemplo: "O servidor principal está indisponível e todos
+                        os usuários estão sem acesso ao sistema desde 14h."
+                    </div>
 
                     <button
                         class="btn btn-primary"
@@ -759,130 +680,123 @@ O servidor principal está indisponível e todos os usuários estão sem acesso 
                         ⚡ ANALISAR INCIDENTE
                     </button>
 
-                    <button
-                        class="btn btn-secondary"
-                        onclick="clearAnalyzer()"
-                    >
-                        LIMPAR
-                    </button>
-
                 </div>
 
 
-                <div class="results">
+                <!-- RESULT -->
 
-                    <div class="metric">
+                <div class="card">
 
-                        <div class="metric-label">
-                            Categoria
-                        </div>
+                    <div class="card-header">
 
-                        <div
-                            id="category"
-                            class="metric-value category"
+                        <h2>Resultado da análise</h2>
+
+                        <span
+                            class="badge"
+                            id="analysisStatus"
                         >
-                            —
-                        </div>
-
-                    </div>
-
-
-                    <div class="metric">
-
-                        <div class="metric-label">
-                            Prioridade
-                        </div>
-
-                        <div
-                            id="priority"
-                            class="metric-value"
-                        >
-                            —
-                        </div>
-
-                    </div>
-
-
-                    <div class="metric">
-
-                        <div class="metric-label">
-                            Impacto
-                        </div>
-
-                        <div
-                            id="impact"
-                            class="metric-value"
-                        >
-                            —
-                        </div>
-
-                    </div>
-
-
-                    <div class="metric">
-
-                        <div class="metric-label">
-                            Status
-                        </div>
-
-                        <div
-                            id="status"
-                            class="metric-value"
-                        >
-                            Aguardando
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="confidence">
-
-                    <div class="confidence-top">
-
-                        <span>
-                            Confiança da análise
+                            AGUARDANDO
                         </span>
 
-                        <strong id="confidence">
-                            0%
-                        </strong>
+                    </div>
+
+
+                    <div class="results">
+
+                        <div class="metric">
+
+                            <div class="metric-label">
+                                Categoria
+                            </div>
+
+                            <div
+                                class="metric-value neutral"
+                                id="category"
+                            >
+                                —
+                            </div>
+
+                        </div>
+
+
+                        <div class="metric">
+
+                            <div class="metric-label">
+                                Prioridade
+                            </div>
+
+                            <div
+                                class="metric-value"
+                                id="priority"
+                            >
+                                —
+                            </div>
+
+                        </div>
+
+
+                        <div class="metric">
+
+                            <div class="metric-label">
+                                Impacto
+                            </div>
+
+                            <div
+                                class="metric-value"
+                                id="impact"
+                            >
+                                —
+                            </div>
+
+                        </div>
 
                     </div>
 
-                    <div class="progress">
+
+                    <div class="confidence">
+
+                        <div class="confidence-head">
+
+                            <span>
+                                Confiança da análise
+                            </span>
+
+                            <span id="confidence">
+                                0%
+                            </span>
+
+                        </div>
+
+                        <div class="progress">
+
+                            <div
+                                class="progress-bar"
+                                id="confidenceBar"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="recommendation">
+
+                        <div class="recommendation-title">
+                            Recomendação
+                        </div>
 
                         <div
-                            id="confidenceBar"
-                            class="progress-bar"
-                        ></div>
+                            class="recommendation-text"
+                            id="recommendation"
+                        >
+                            Execute uma análise para receber uma recomendação.
+                        </div>
 
                     </div>
 
-                </div>
-
-
-                <div class="recommendation">
-
-                    <div class="recommendation-title">
-                        Recomendação
-                    </div>
-
-                    <div
-                        id="recommendation"
-                        class="recommendation-text"
-                    >
-                        Aguardando análise do incidente.
-                    </div>
-
-                </div>
-
-
-                <div class="create-area">
 
                     <button
-                        class="create-btn"
+                        class="btn btn-success"
                         onclick="createIncident()"
                     >
                         ⚡ CRIAR INCIDENTE NO INCIDENT MANAGER
@@ -893,162 +807,104 @@ O servidor principal está indisponível e todos os usuários estão sem acesso 
             </div>
 
 
-            <div>
+            <!-- HISTORY -->
 
-                <div class="card" id="flow">
+            <div class="card history">
 
-                    <div class="card-header">
+                <div class="card-header">
 
-                        <div>
+                    <h2>Histórico de análises</h2>
 
-                            <div class="card-title">
-                                Fluxo inteligente
-                            </div>
-
-                            <div class="card-subtitle">
-                                Pipeline de análise
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="flow">
-
-                        <div class="flow-item">
-
-                            <div class="flow-number">
-                                01
-                            </div>
-
-                            <div class="flow-text">
-
-                                <strong>
-                                    Entrada
-                                </strong>
-
-                                <span>
-                                    Descrição do incidente
-                                </span>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="arrow">
-                            ↓
-                        </div>
-
-
-                        <div class="flow-item">
-
-                            <div class="flow-number">
-                                02
-                            </div>
-
-                            <div class="flow-text">
-
-                                <strong>
-                                    Análise
-                                </strong>
-
-                                <span>
-                                    Classificação inteligente
-                                </span>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="arrow">
-                            ↓
-                        </div>
-
-
-                        <div class="flow-item">
-
-                            <div class="flow-number">
-                                03
-                            </div>
-
-                            <div class="flow-text">
-
-                                <strong>
-                                    Decisão
-                                </strong>
-
-                                <span>
-                                    Prioridade e impacto
-                                </span>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="arrow">
-                            ↓
-                        </div>
-
-
-                        <div class="flow-item">
-
-                            <div class="flow-number">
-                                04
-                            </div>
-
-                            <div class="flow-text">
-
-                                <strong>
-                                    Incident Manager
-                                </strong>
-
-                                <span>
-                                    Registro automático
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </div>
+                    <span class="badge">
+                        LOCAL STORAGE
+                    </span>
 
                 </div>
 
-
                 <div
-                    class="card history"
-                    id="history"
+                    class="history-list"
+                    id="historyList"
                 >
+                    <div class="empty">
+                        Nenhuma análise realizada ainda.
+                    </div>
+                </div>
 
-                    <div class="card-header">
+            </div>
 
-                        <div>
 
-                            <div class="card-title">
-                                Histórico
-                            </div>
+            <!-- FLOW -->
 
-                            <div class="card-subtitle">
-                                Últimas análises realizadas
-                            </div>
+            <div class="card flow">
 
+                <div class="card-header">
+
+                    <h2>Fluxo do sistema</h2>
+
+                    <span class="badge">
+                        AI PIPELINE
+                    </span>
+
+                </div>
+
+                <div class="flow-grid">
+
+                    <div class="flow-item">
+
+                        <div class="flow-number">
+                            01
                         </div>
+
+                        <strong>Descrição</strong>
+
+                        <span>
+                            Entrada do incidente
+                        </span>
 
                     </div>
 
 
-                    <div
-                        id="historyList"
-                        class="history-list"
-                    >
+                    <div class="flow-item">
 
-                        <div class="empty">
-                            Nenhuma análise realizada ainda.
+                        <div class="flow-number">
+                            02
                         </div>
+
+                        <strong>Análise IA</strong>
+
+                        <span>
+                            Classificação automática
+                        </span>
+
+                    </div>
+
+
+                    <div class="flow-item">
+
+                        <div class="flow-number">
+                            03
+                        </div>
+
+                        <strong>Decisão</strong>
+
+                        <span>
+                            Prioridade e impacto
+                        </span>
+
+                    </div>
+
+
+                    <div class="flow-item">
+
+                        <div class="flow-number">
+                            04
+                        </div>
+
+                        <strong>Incident Manager</strong>
+
+                        <span>
+                            Criação do incidente
+                        </span>
 
                     </div>
 
@@ -1056,661 +912,533 @@ O servidor principal está indisponível e todos os usuários estão sem acesso 
 
             </div>
 
-        </div>
+        </section>
 
-    </section>
+    </main>
 
-
-    <div class="footer">
-        AI Incident Analyzer • Jessica Monteiro • Technology & Automation
-    </div>
-
-</main>
+</div>
 
 
 <div
-    id="toast"
     class="toast"
+    id="toast"
 ></div>
 
 
 <script>
 
-const QUEUE_KEY = "incidentManagerAIQueue";
-const HISTORY_KEY = "incidentAnalyzerHistory";
-
-let lastAnalysis = null;
-
-const descriptionInput =
-    document.getElementById("incidentDescription");
-
-const categoryElement =
-    document.getElementById("category");
-
-const priorityElement =
-    document.getElementById("priority");
-
-const impactElement =
-    document.getElementById("impact");
-
-const statusElement =
-    document.getElementById("status");
-
-const confidenceElement =
-    document.getElementById("confidence");
-
-const confidenceBar =
-    document.getElementById("confidenceBar");
-
-const recommendationElement =
-    document.getElementById("recommendation");
-
-const historyList =
-    document.getElementById("historyList");
+    let currentAnalysis = null;
 
 
-function analyzeIncident(){
+    /* =========================
+       TOAST
+    ========================= */
 
-    const description =
-        descriptionInput.value.trim();
+    function showToast(message) {
 
-    if(!description){
+        const toast = document.getElementById("toast");
 
-        showToast(
-            "Digite uma descrição para analisar o incidente."
-        );
+        toast.textContent = message;
 
-        descriptionInput.focus();
+        toast.classList.add("show");
 
-        return;
-    }
+        setTimeout(() => {
 
-    const text =
-        description.toLowerCase();
+            toast.classList.remove("show");
 
-
-    let category = "Aplicação";
-
-
-    if(
-        text.includes("servidor") ||
-        text.includes("server") ||
-        text.includes("infraestrutura") ||
-        text.includes("máquina") ||
-        text.includes("indisponível") ||
-        text.includes("indisponivel")
-    ){
-
-        category = "Infraestrutura";
-
-    }
-
-    else if(
-        text.includes("banco") ||
-        text.includes("database") ||
-        text.includes("sql") ||
-        text.includes("query")
-    ){
-
-        category = "Banco de Dados";
-
-    }
-
-    else if(
-        text.includes("senha") ||
-        text.includes("login") ||
-        text.includes("autenticação") ||
-        text.includes("autenticacao") ||
-        text.includes("segurança")
-    ){
-
-        category = "Segurança";
-
-    }
-
-    else if(
-        text.includes("rede") ||
-        text.includes("internet") ||
-        text.includes("conexão") ||
-        text.includes("conexao") ||
-        text.includes("vpn") ||
-        text.includes("wi-fi") ||
-        text.includes("wifi")
-    ){
-
-        category = "Rede";
-
-    }
-
-    else if(
-        text.includes("integração") ||
-        text.includes("integracao") ||
-        text.includes("api") ||
-        text.includes("webhook")
-    ){
-
-        category = "Integração";
-
+        }, 3000);
     }
 
 
-    let priority = "Baixo";
+    /* =========================
+       ANALYSIS ENGINE
+    ========================= */
+
+    function analyzeIncident() {
+
+        const description =
+            document
+                .getElementById("incidentDescription")
+                .value
+                .trim();
+
+        if (!description) {
+
+            showToast("Digite uma descrição de incidente.");
+
+            return;
+        }
 
 
-    if(
-        text.includes("todos os usuários") ||
-        text.includes("todos os usuarios") ||
-        text.includes("sistema indisponível") ||
-        text.includes("sistema indisponivel") ||
-        text.includes("servidor principal") ||
-        text.includes("produção parada") ||
-        text.includes("producao parada") ||
-        text.includes("crítico") ||
-        text.includes("critico") ||
-        text.includes("urgente")
-    ){
-
-        priority = "Crítico";
-
-    }
-
-    else if(
-        text.includes("muitos usuários") ||
-        text.includes("muitos usuarios") ||
-        text.includes("erro grave") ||
-        text.includes("falha grave") ||
-        text.includes("impacto alto") ||
-        text.includes("indisponibilidade")
-    ){
-
-        priority = "Alto";
-
-    }
-
-    else if(
-        text.includes("lentidão") ||
-        text.includes("lentidao") ||
-        text.includes("erro") ||
-        text.includes("falha") ||
-        text.includes("problema")
-    ){
-
-        priority = "Médio";
-
-    }
+        const text = description.toLowerCase();
 
 
-    let impact = "Baixo";
+        let category = "Aplicação";
+
+        let priority = "Médio";
+
+        let impact = "Médio";
+
+        let confidence = 78;
+
+        let recommendation =
+            "Investigar o incidente, identificar a causa raiz e acompanhar o comportamento do serviço.";
 
 
-    if(
-        priority === "Crítico" ||
-        text.includes("todos os usuários") ||
-        text.includes("todos os usuarios")
-    ){
+        /* CATEGORY */
 
-        impact = "Alto";
+        if (
+            text.includes("servidor") ||
+            text.includes("server") ||
+            text.includes("indisponível") ||
+            text.includes("indisponivel") ||
+            text.includes("cpu") ||
+            text.includes("memória") ||
+            text.includes("memoria") ||
+            text.includes("disco")
+        ) {
 
-    }
+            category = "Infraestrutura";
 
-    else if(
-        priority === "Alto" ||
-        priority === "Médio"
-    ){
-
-        impact = "Médio";
-
-    }
-
-
-    let confidence = 76;
+            confidence = 90;
+        }
 
 
-    if(
-        category === "Infraestrutura" &&
-        priority === "Crítico"
-    ){
+        if (
+            text.includes("banco") ||
+            text.includes("database") ||
+            text.includes("sql") ||
+            text.includes("oracle") ||
+            text.includes("postgres")
+        ) {
 
-        confidence = 96;
+            category = "Banco de Dados";
 
-    }
-
-    else if(
-        category === "Infraestrutura"
-    ){
-
-        confidence = 91;
-
-    }
-
-    else if(
-        category === "Banco de Dados" ||
-        category === "Segurança"
-    ){
-
-        confidence = 89;
-
-    }
-
-    else if(
-        category === "Rede" ||
-        category === "Integração"
-    ){
-
-        confidence = 86;
-
-    }
+            confidence = 92;
+        }
 
 
-    let recommendation =
-        "Investigue o incidente, valide os logs e registre todas as ações realizadas.";
+        if (
+            text.includes("senha") ||
+            text.includes("login") ||
+            text.includes("autenticação") ||
+            text.includes("autenticacao") ||
+            text.includes("acesso não autorizado") ||
+            text.includes("segurança") ||
+            text.includes("seguranca")
+        ) {
+
+            category = "Segurança";
+
+            confidence = 94;
+        }
 
 
-    if(category === "Infraestrutura"){
+        if (
+            text.includes("rede") ||
+            text.includes("internet") ||
+            text.includes("wifi") ||
+            text.includes("wi-fi") ||
+            text.includes("conexão") ||
+            text.includes("conexao")
+        ) {
 
-        recommendation =
-            "Verifique disponibilidade dos servidores, CPU, memória, serviços ativos, logs do sistema e conectividade.";
+            category = "Rede";
 
-    }
+            confidence = 91;
+        }
 
-    else if(category === "Banco de Dados"){
 
-        recommendation =
-            "Verifique disponibilidade do banco, conexões, queries em execução, locks, capacidade e logs.";
+        if (
+            text.includes("integração") ||
+            text.includes("integracao") ||
+            text.includes("api") ||
+            text.includes("webhook")
+        ) {
 
-    }
+            category = "Integração";
 
-    else if(category === "Segurança"){
+            confidence = 89;
+        }
 
-        recommendation =
-            "Verifique logs de autenticação, permissões, tentativas de acesso e possíveis eventos de segurança.";
 
-    }
+        /* PRIORITY */
 
-    else if(category === "Rede"){
+        if (
+            text.includes("indisponível") ||
+            text.includes("indisponivel") ||
+            text.includes("todos os usuários") ||
+            text.includes("todos os usuarios") ||
+            text.includes("produção") ||
+            text.includes("producao") ||
+            text.includes("crítico") ||
+            text.includes("critico") ||
+            text.includes("parado")
+        ) {
 
-        recommendation =
-            "Verifique conectividade, DNS, firewall, VPN, switches, roteadores e disponibilidade do serviço.";
+            priority = "Crítico";
 
-    }
+            impact = "Alto";
 
-    else if(category === "Integração"){
+            confidence = Math.max(confidence, 96);
 
-        recommendation =
-            "Verifique APIs, endpoints, autenticação, respostas HTTP, logs e disponibilidade do serviço externo.";
+            recommendation =
+                "Acionar imediatamente a equipe responsável, validar a disponibilidade do serviço e iniciar análise de causa raiz.";
+        }
+
+        else if (
+            text.includes("erro") ||
+            text.includes("falha") ||
+            text.includes("lentidão") ||
+            text.includes("lentidao") ||
+            text.includes("usuários") ||
+            text.includes("usuarios")
+        ) {
+
+            priority = "Alto";
+
+            impact = "Médio";
+
+            confidence = Math.max(confidence, 91);
+
+            recommendation =
+                "Investigar o erro, verificar logs e métricas do serviço e avaliar o impacto nos usuários.";
+        }
+
+        else if (
+            text.includes("alerta") ||
+            text.includes("atenção") ||
+            text.includes("atencao")
+        ) {
+
+            priority = "Médio";
+
+            impact = "Baixo";
+
+            confidence = Math.max(confidence, 84);
+        }
+
+        else {
+
+            priority = "Baixo";
+
+            impact = "Baixo";
+        }
+
+
+        currentAnalysis = {
+
+            aiId:
+                "AI-" +
+                Date.now(),
+
+            title:
+                description.length > 70
+                    ? description.substring(0, 70) + "..."
+                    : description,
+
+            description,
+
+            category,
+
+            priority,
+
+            impact,
+
+            confidence,
+
+            status:
+                "Aberto",
+
+            responsible:
+                "JM",
+
+            source:
+                "AI Incident Analyzer",
+
+            createdAt:
+                new Date().toISOString(),
+
+            recommendation
+
+        };
+
+
+        updateResults(currentAnalysis);
+
+        saveHistory(currentAnalysis);
+
+        showToast("Incidente analisado com sucesso.");
 
     }
 
 
-    if(priority === "Crítico"){
+    /* =========================
+       UPDATE RESULTS
+    ========================= */
 
-        recommendation +=
-            " Devido à prioridade crítica, recomenda-se atuação imediata e escalonamento da equipe responsável.";
+    function updateResults(result) {
+
+        document.getElementById("category").textContent =
+            result.category;
+
+        const priorityElement =
+            document.getElementById("priority");
+
+        priorityElement.textContent =
+            result.priority;
+
+        priorityElement.className =
+            "metric-value " +
+            getPriorityClass(result.priority);
+
+
+        const impactElement =
+            document.getElementById("impact");
+
+        impactElement.textContent =
+            result.impact;
+
+        impactElement.className =
+            "metric-value " +
+            getImpactClass(result.impact);
+
+
+        document.getElementById("confidence").textContent =
+            result.confidence + "%";
+
+
+        document.getElementById("confidenceBar").style.width =
+            result.confidence + "%";
+
+
+        document.getElementById("recommendation").textContent =
+            result.recommendation;
+
+
+        document.getElementById("analysisStatus").textContent =
+            "ANALISADO";
 
     }
 
 
-    lastAnalysis = {
+    function getPriorityClass(priority) {
 
-        description,
-        category,
-        priority,
-        impact,
-        confidence,
-        recommendation,
-        analyzedAt: new Date().toISOString()
+        if (priority === "Crítico")
+            return "critical";
 
-    };
+        if (priority === "Alto")
+            return "high";
 
+        if (priority === "Médio")
+            return "medium";
 
-    categoryElement.textContent =
-        category;
-
-    priorityElement.textContent =
-        priority;
-
-    impactElement.textContent =
-        impact;
-
-    statusElement.textContent =
-        "Analisado";
-
-    confidenceElement.textContent =
-        confidence + "%";
-
-    confidenceBar.style.width =
-        confidence + "%";
-
-    recommendationElement.textContent =
-        recommendation;
-
-    priorityElement.className =
-        "metric-value " +
-        getPriorityClass(priority);
-
-    saveHistory(lastAnalysis);
-
-    renderHistory();
-
-    showToast(
-        "Incidente analisado com sucesso."
-    );
-
-}
-
-
-function getPriorityClass(priority){
-
-    if(priority === "Crítico")
-        return "priority-critical";
-
-    if(priority === "Alto")
-        return "priority-high";
-
-    if(priority === "Médio")
-        return "priority-medium";
-
-    return "priority-low";
-
-}
-
-
-function createIncident(){
-
-    if(!lastAnalysis){
-
-        showToast(
-            "Analise um incidente antes de criar o registro."
-        );
-
-        return;
-    }
-
-
-    const queue =
-        JSON.parse(
-            localStorage.getItem(QUEUE_KEY) || "[]"
-        );
-
-
-    const aiId =
-        "AI-" + Date.now();
-
-
-    const incident = {
-
-        aiId,
-
-        title:
-            createTitle(lastAnalysis.description),
-
-        description:
-            lastAnalysis.description,
-
-        category:
-            lastAnalysis.category,
-
-        priority:
-            lastAnalysis.priority,
-
-        impact:
-            lastAnalysis.impact,
-
-        confidence:
-            lastAnalysis.confidence,
-
-        status:
-            "Aberto",
-
-        responsible:
-            "JM",
-
-        source:
-            "AI Incident Analyzer",
-
-        createdAt:
-            new Date().toISOString()
-
-    };
-
-
-    queue.push(incident);
-
-
-    localStorage.setItem(
-        QUEUE_KEY,
-        JSON.stringify(queue)
-    );
-
-
-    showToast(
-        "Incidente enviado para o Incident Manager."
-    );
-
-
-    setTimeout(function(){
-
-        /*
-         * CAMINHO ABSOLUTO
-         * Volta diretamente para:
-         * https://jessicamchagas.github.io/incident-manager/
-         */
-        window.location.href =
-            "/incident-manager/";
-
-    },900);
-
-}
-
-
-function createTitle(description){
-
-    const text =
-        description.toLowerCase();
-
-
-    if(
-        text.includes("servidor") ||
-        text.includes("server")
-    ){
-
-        return "Indisponibilidade de servidor";
+        return "low";
 
     }
 
 
-    if(
-        text.includes("banco") ||
-        text.includes("database")
-    ){
+    function getImpactClass(impact) {
 
-        return "Falha no banco de dados";
+        if (impact === "Alto")
+            return "critical";
 
-    }
+        if (impact === "Médio")
+            return "medium";
 
-
-    if(
-        text.includes("rede") ||
-        text.includes("internet")
-    ){
-
-        return "Falha de conectividade de rede";
+        return "low";
 
     }
 
 
-    if(
-        text.includes("login") ||
-        text.includes("senha") ||
-        text.includes("autenticação") ||
-        text.includes("autenticacao")
-    ){
+    /* =========================
+       CREATE INCIDENT
+    ========================= */
 
-        return "Falha de autenticação";
+    function createIncident() {
 
-    }
+        if (!currentAnalysis) {
 
+            showToast(
+                "Faça uma análise antes de criar o incidente."
+            );
 
-    if(
-        text.includes("api") ||
-        text.includes("integração") ||
-        text.includes("integracao")
-    ){
+            return;
+        }
 
-        return "Falha de integração";
 
-    }
+        const queueKey =
+            "incidentManagerAIQueue";
 
 
-    return "Incidente identificado pelo AI Analyzer";
+        const queue =
+            JSON.parse(
+                localStorage.getItem(queueKey) || "[]"
+            );
 
-}
 
+        const alreadyExists =
+            queue.some(
+                item =>
+                    item.aiId === currentAnalysis.aiId
+            );
 
-function saveHistory(analysis){
 
-    const history =
-        JSON.parse(
-            localStorage.getItem(HISTORY_KEY) || "[]"
-        );
+        if (!alreadyExists) {
 
+            queue.push(currentAnalysis);
 
-    history.unshift(analysis);
-
-
-    localStorage.setItem(
-        HISTORY_KEY,
-        JSON.stringify(history.slice(0,10))
-    );
-
-}
-
-
-function renderHistory(){
-
-    const history =
-        JSON.parse(
-            localStorage.getItem(HISTORY_KEY) || "[]"
-        );
-
-
-    if(!history.length){
-
-        historyList.innerHTML =
-            `<div class="empty">
-                Nenhuma análise realizada ainda.
-            </div>`;
-
-        return;
-    }
-
-
-    historyList.innerHTML =
-        history.map(function(item){
-
-            return `
-
-                <div class="history-item">
-
-                    <div class="history-title">
-                        ${escapeHTML(
-                            item.description.substring(0,90)
-                        )}
-                    </div>
-
-                    <div class="history-meta">
-                        ${escapeHTML(item.category)}
-                        •
-                        ${escapeHTML(item.priority)}
-                        •
-                        ${item.confidence}% confiança
-                    </div>
-
-                </div>
-
-            `;
-
-        }).join("");
-
-}
-
-
-function clearAnalyzer(){
-
-    descriptionInput.value = "";
-
-    categoryElement.textContent = "—";
-
-    priorityElement.textContent = "—";
-
-    impactElement.textContent = "—";
-
-    statusElement.textContent = "Aguardando";
-
-    confidenceElement.textContent = "0%";
-
-    confidenceBar.style.width = "0%";
-
-    recommendationElement.textContent =
-        "Aguardando análise do incidente.";
-
-    priorityElement.className =
-        "metric-value";
-
-    lastAnalysis = null;
-
-}
-
-
-function showToast(message){
-
-    const toast =
-        document.getElementById("toast");
-
-    toast.textContent =
-        message;
-
-    toast.classList.add("show");
-
-    setTimeout(function(){
-
-        toast.classList.remove("show");
-
-    },3000);
-
-}
-
-
-function escapeHTML(text){
-
-    return String(text)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-
-}
-
-
-renderHistory();
-
-
-descriptionInput.addEventListener(
-    "keydown",
-    function(event){
-
-        if(
-            event.ctrlKey &&
-            event.key === "Enter"
-        ){
-
-            analyzeIncident();
+            localStorage.setItem(
+                queueKey,
+                JSON.stringify(queue)
+            );
 
         }
 
+
+        showToast(
+            "Incidente enviado para o Incident Manager."
+        );
+
+
+        /*
+         * LINK ABSOLUTO.
+         *
+         * Isso impede que o navegador tente abrir
+         * o seu portfólio.
+         */
+
+        setTimeout(() => {
+
+            window.location.href =
+                "https://jessicamchagas.github.io/incident-manager/";
+
+        }, 700);
+
     }
-);
+
+
+    /* =========================
+       HISTORY
+    ========================= */
+
+    function saveHistory(result) {
+
+        const key =
+            "incidentAnalyzerHistory";
+
+
+        const history =
+            JSON.parse(
+                localStorage.getItem(key) || "[]"
+            );
+
+
+        history.unshift({
+
+            aiId:
+                result.aiId,
+
+            title:
+                result.title,
+
+            category:
+                result.category,
+
+            priority:
+                result.priority,
+
+            confidence:
+                result.confidence,
+
+            createdAt:
+                result.createdAt
+
+        });
+
+
+        const limitedHistory =
+            history.slice(0, 10);
+
+
+        localStorage.setItem(
+            key,
+            JSON.stringify(limitedHistory)
+        );
+
+
+        renderHistory();
+
+    }
+
+
+    function renderHistory() {
+
+        const list =
+            document.getElementById("historyList");
+
+
+        const history =
+            JSON.parse(
+                localStorage.getItem(
+                    "incidentAnalyzerHistory"
+                ) || "[]"
+            );
+
+
+        if (!history.length) {
+
+            list.innerHTML =
+                '<div class="empty">Nenhuma análise realizada ainda.</div>';
+
+            return;
+        }
+
+
+        list.innerHTML =
+            history
+                .map(item => `
+
+                    <div class="history-item">
+
+                        <strong>
+                            ${escapeHtml(item.title)}
+                        </strong>
+
+                        <span>
+                            ${item.category}
+                            •
+                            ${item.priority}
+                            •
+                            Confiança ${item.confidence}%
+                        </span>
+
+                    </div>
+
+                `)
+                .join("");
+
+    }
+
+
+    function escapeHtml(text) {
+
+        const div =
+            document.createElement("div");
+
+        div.textContent =
+            text;
+
+        return div.innerHTML;
+
+    }
+
+
+    /* =========================
+       INITIALIZE
+    ========================= */
+
+    renderHistory();
 
 </script>
 
